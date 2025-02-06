@@ -4,25 +4,48 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private CharacterController characterController;
-
+    private CharacterController characterController;
     private float horizontalInput;
     private float verticalInput;
     private float moveSpeed = 5f;
+    private float verticalVelocity;
+    private float gravity = -9.8f;
     private Vector3 movementVelocity;
+    private PlayerModel playerModel;
+
+    public void Init(CharacterController characterController)
+    {
+        this.characterController = characterController;
+    }
+
+    private void Start()
+    {
+        playerModel = new PlayerModel();
+    }
 
     private void FixedUpdate()
     {
-        CalculateMovement();
-        characterController.Move(movementVelocity);
+        Vector3 movement = playerModel.CalculateMovement(horizontalInput, verticalInput);
+        CalculateRotation();
+        CheckPlayerGrounded();
+
+        characterController.Move(movement);
     }
 
-    private void CalculateMovement()
+    private void CalculateRotation()
     {
-        movementVelocity.Set(horizontalInput, 0, verticalInput);
-        movementVelocity.Normalize();
-        movementVelocity = Quaternion.Euler(0, -45f, 0) * movementVelocity;
-        movementVelocity *= moveSpeed * Time.deltaTime;
+        if(movementVelocity != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(movementVelocity);
+    }
+
+    private void CheckPlayerGrounded()
+    {
+        if (!characterController.isGrounded)
+            verticalVelocity = gravity;
+        else
+            verticalVelocity = gravity * 0.3f;
+
+        movementVelocity += verticalVelocity * Vector3.up * Time.deltaTime;
     }
 
     private void Update()
