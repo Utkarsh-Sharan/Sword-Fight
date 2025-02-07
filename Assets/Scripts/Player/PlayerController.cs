@@ -7,10 +7,6 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     private float horizontalInput;
     private float verticalInput;
-    private float moveSpeed = 5f;
-    private float verticalVelocity;
-    private float gravity = -9.8f;
-    private Vector3 movementVelocity;
     private PlayerModel playerModel;
 
     public void Init(CharacterController characterController)
@@ -25,27 +21,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 movement = playerModel.CalculateMovement(horizontalInput, verticalInput);
-        CalculateRotation();
-        CheckPlayerGrounded();
-
+        Vector3 movement = playerModel.CalculateMovement(horizontalInput, verticalInput, characterController.isGrounded);
         characterController.Move(movement);
-    }
 
-    private void CalculateRotation()
-    {
-        if(movementVelocity != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(movementVelocity);
-    }
-
-    private void CheckPlayerGrounded()
-    {
-        if (!characterController.isGrounded)
-            verticalVelocity = gravity;
-        else
-            verticalVelocity = gravity * 0.3f;
-
-        movementVelocity += verticalVelocity * Vector3.up * Time.deltaTime;
+        Quaternion targetRotation = playerModel.GetTargetRotation();
+        if(targetRotation != Quaternion.identity)
+            transform.rotation = targetRotation;
     }
 
     private void Update()
