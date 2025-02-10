@@ -7,6 +7,7 @@ public class GameService : MonoBehaviour
     [Header("Player properties")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private CharacterController characterController;
+    [SerializeField] private Animator playerAnimator;
 
     private PlayerService playerService;
 
@@ -17,6 +18,6 @@ public class GameService : MonoBehaviour
 
     private void CreateServices()
     {
-        playerService = new PlayerService(playerController, characterController);
+        playerService = new PlayerService(playerController, characterController, playerAnimator);
     }
 }

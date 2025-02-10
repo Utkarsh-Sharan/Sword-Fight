@@ -5,13 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController characterController;
+    private Animator playerAnimator;
+    private PlayerModel playerModel;
+    private Vector3 movement;
     private float horizontalInput;
     private float verticalInput;
-    private PlayerModel playerModel;
 
-    public void Init(CharacterController characterController)
+    public void Init(CharacterController characterController, Animator playerAnimator)
     {
         this.characterController = characterController;
+        this.playerAnimator = playerAnimator;
     }
 
     private void Start()
@@ -21,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 movement = playerModel.CalculateMovement(horizontalInput, verticalInput, characterController.isGrounded);
+        movement = playerModel.CalculateMovement(horizontalInput, verticalInput, characterController.isGrounded);
         characterController.Move(movement);
 
         Quaternion targetRotation = playerModel.GetTargetRotation();
@@ -33,6 +36,9 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        playerAnimator.SetFloat(ConstantStrings.PlayerRunParameter, movement.magnitude);
+        playerAnimator.SetBool(ConstantStrings.PlayerAirBourneParameter, !characterController.isGrounded);
     }
 
     private void OnDisable()

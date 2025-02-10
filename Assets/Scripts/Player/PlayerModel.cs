@@ -3,8 +3,8 @@ using UnityEngine;
 public class PlayerModel
 {
     private float moveSpeed = 5f;
+    private float gravity = -20f;
     private float verticalVelocity;
-    private float gravity = -9.8f;
     private Vector3 movementVelocity;
 
     public Vector3 CalculateMovement(float horizontalInput, float verticalInput, bool isGrounded)
