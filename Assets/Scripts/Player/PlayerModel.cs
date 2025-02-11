@@ -14,10 +14,7 @@ public class PlayerModel
         movementVelocity = Quaternion.Euler(0, -45f, 0) * movementVelocity;
         movementVelocity *= moveSpeed * Time.deltaTime;
 
-        if (!isGrounded)
-            verticalVelocity = gravity;
-        else
-            verticalVelocity = gravity * 0.3f;
+        verticalVelocity = isGrounded ? gravity * 0.3f : gravity;
 
         movementVelocity += verticalVelocity * Vector3.up * Time.deltaTime;
 
@@ -28,8 +25,8 @@ public class PlayerModel
     {
         if (movementVelocity != Vector3.zero)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(movementVelocity);
-            return Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+            float targetRotation = Quaternion.LookRotation(movementVelocity).eulerAngles.y;
+            return Quaternion.Euler(0, targetRotation, 0);
         }
 
         return Quaternion.identity;
