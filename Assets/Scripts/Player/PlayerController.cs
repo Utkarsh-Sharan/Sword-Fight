@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     private PlayerModel playerModel;
     private Vector3 movement;
+    private Vector3 direction;
     private float horizontalInput;
     private float verticalInput;
 
@@ -25,17 +26,22 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         movement = playerModel.CalculateMovement(horizontalInput, verticalInput, characterController.isGrounded);
-        characterController.Move(movement);
 
-        Quaternion targetRotation = playerModel.GetTargetRotation();
-        if(targetRotation != Quaternion.identity)
-            transform.rotation = targetRotation;
+        if (direction.magnitude > 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, targetAngle, 0);
+        }
+
+        characterController.Move(movement);
     }
 
     private void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        direction = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
         playerAnimator.SetFloat(ConstantStrings.PlayerRunParameter, movement.magnitude);
         playerAnimator.SetBool(ConstantStrings.PlayerAirBourneParameter, !characterController.isGrounded);
