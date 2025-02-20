@@ -27,11 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         movement = playerModel.CalculateMovement(horizontalInput, verticalInput, characterController.isGrounded);
 
-        if (direction.magnitude > 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, targetAngle, 0);
-        }
+        transform.rotation = playerModel.CalculateRotation(direction, transform.eulerAngles.y);
 
         characterController.Move(movement);
     }
