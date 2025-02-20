@@ -1,4 +1,4 @@
-public enum PlayerStates
+public enum States
 {
     Idle,
     Running,

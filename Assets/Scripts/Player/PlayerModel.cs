@@ -2,24 +2,24 @@ using UnityEngine;
 
 public class PlayerModel
 {
-    private float moveSpeed = 5f;
-    private float gravity = -20f;
-    private float verticalVelocity;
-    private Vector3 movementVelocity;
+    private float _moveSpeed = 5f;
+    private float _gravity = -20f;
+    private float _verticalVelocity;
+    private Vector3 _movementVelocity;
 
-    private float turnSmoothTime = 0.1f;
-    private float turnSmoothVelocity;
+    private float _turnSmoothTime = 0.1f;
+    private float _turnSmoothVelocity;
 
     public Vector3 CalculateMovement(float horizontalInput, float verticalInput, bool isGrounded)
     {
-        movementVelocity.Set(horizontalInput, 0, verticalInput);
-        movementVelocity.Normalize();
-        movementVelocity *= moveSpeed * Time.deltaTime;
+        _movementVelocity.Set(horizontalInput, 0, verticalInput);
+        _movementVelocity.Normalize();
+        _movementVelocity *= _moveSpeed * Time.deltaTime;
 
-        verticalVelocity = isGrounded ? gravity * 0.3f : gravity;
-        movementVelocity += verticalVelocity * Vector3.up * Time.deltaTime;
+        _verticalVelocity = isGrounded ? _gravity * 0.3f : _gravity;
+        _movementVelocity += _verticalVelocity * Vector3.up * Time.deltaTime;
 
-        return movementVelocity;
+        return _movementVelocity;
     }
 
     public Quaternion CalculateRotation(Vector3 direction, float currentYRotation)
@@ -27,7 +27,7 @@ public class PlayerModel
         if(direction.magnitude > 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            float angle = Mathf.SmoothDampAngle(currentYRotation, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            float angle = Mathf.SmoothDampAngle(currentYRotation, targetAngle, ref _turnSmoothVelocity, _turnSmoothTime);
             return Quaternion.Euler(0, angle, 0);
         }
 

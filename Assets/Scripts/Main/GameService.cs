@@ -5,11 +5,11 @@ using UnityEngine;
 public class GameService : MonoBehaviour
 {
     [Header("Player properties")]
-    [SerializeField] private PlayerController playerController;
-    [SerializeField] private CharacterController characterController;
-    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private PlayerController _playerController;
+    [SerializeField] private CharacterController _characterController;
+    [SerializeField] private Animator _playerAnimator;
 
-    private PlayerService playerService;
+    private PlayerService _playerService;
 
     private void Start()
     {
@@ -18,6 +18,6 @@ public class GameService : MonoBehaviour
 
     private void CreateServices()
     {
-        playerService = new PlayerService(playerController, characterController, playerAnimator);
+        _playerService = new PlayerService(_playerController, _characterController, _playerAnimator);
     }
 }

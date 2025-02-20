@@ -4,48 +4,48 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController characterController;
-    private Animator playerAnimator;
-    private PlayerModel playerModel;
-    private Vector3 movement;
-    private Vector3 direction;
-    private float horizontalInput;
-    private float verticalInput;
+    private CharacterController _characterController;
+    private Animator _playerAnimator;
+    private PlayerModel _playerModel;
+    private Vector3 _movement;
+    private Vector3 _direction;
+    private float _horizontalInput;
+    private float _verticalInput;
 
     public void Init(CharacterController characterController, Animator playerAnimator)
     {
-        this.characterController = characterController;
-        this.playerAnimator = playerAnimator;
+        this._characterController = characterController;
+        this._playerAnimator = playerAnimator;
     }
 
     private void Start()
     {
-        playerModel = new PlayerModel();
+        _playerModel = new PlayerModel();
     }
 
     private void FixedUpdate()
     {
-        movement = playerModel.CalculateMovement(horizontalInput, verticalInput, characterController.isGrounded);
+        _movement = _playerModel.CalculateMovement(_horizontalInput, _verticalInput, _characterController.isGrounded);
 
-        transform.rotation = playerModel.CalculateRotation(direction, transform.eulerAngles.y);
+        transform.rotation = _playerModel.CalculateRotation(_direction, transform.eulerAngles.y);
 
-        characterController.Move(movement);
+        _characterController.Move(_movement);
     }
 
     private void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        _horizontalInput = Input.GetAxisRaw("Horizontal");
+        _verticalInput = Input.GetAxisRaw("Vertical");
 
-        direction = new Vector3(horizontalInput, 0, verticalInput).normalized;
+        _direction = new Vector3(_horizontalInput, 0, _verticalInput).normalized;
 
-        playerAnimator.SetFloat(ConstantStrings.PlayerRunParameter, movement.magnitude);
-        playerAnimator.SetBool(ConstantStrings.PlayerAirBourneParameter, !characterController.isGrounded);
+        _playerAnimator.SetFloat(ConstantStrings.PLAYER_RUN_PARAMETER, _movement.magnitude);
+        _playerAnimator.SetBool(ConstantStrings.PLAYER_AIRBOURNE_PARAMETER, !_characterController.isGrounded);
     }
 
     private void OnDisable()
     {
-        horizontalInput = 0f;
-        verticalInput = 0f;
+        _horizontalInput = 0f;
+        _verticalInput = 0f;
     }
 }

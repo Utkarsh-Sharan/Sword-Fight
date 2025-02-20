@@ -1,5 +1,5 @@
 public class ConstantStrings
 {
-    public const string PlayerRunParameter = "Speed";
-    public const string PlayerAirBourneParameter = "AirBourne";
+    public const string PLAYER_RUN_PARAMETER = "Speed";
+    public const string PLAYER_AIRBOURNE_PARAMETER = "AirBourne";
 }
