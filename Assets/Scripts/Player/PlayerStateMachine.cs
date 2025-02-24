@@ -14,7 +14,6 @@ public class PlayerStateMachine : GenericStateMachine<PlayerController>
 
     private void CreateStates()
     {
-        //TODO
-        //states.Add(States.Idle, )
+        states.Add(States.Idle, new IdleState<PlayerController>(this));
     }
 }

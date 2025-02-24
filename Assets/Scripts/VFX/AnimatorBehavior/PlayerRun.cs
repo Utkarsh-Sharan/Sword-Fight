@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerRun : StateMachineBehaviour
 {
-    //[SerializeField] private VFXController _vfxController;
-
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //_vfxController.UpdateFootStep(true);
-        animator.GetComponent<VFXController>().UpdateFootStep(true);
+        animator.TryGetComponent<VFXController>(out VFXController vFXController);
+        vFXController.UpdateFootStep(true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -22,8 +18,8 @@ public class PlayerRun : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //_vfxController.UpdateFootStep(false);
-        animator.GetComponent<VFXController>().UpdateFootStep(false);
+        animator.TryGetComponent<VFXController>(out VFXController vFXController);
+        vFXController.UpdateFootStep(false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
