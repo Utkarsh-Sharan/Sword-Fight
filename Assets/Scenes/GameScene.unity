@@ -942,6 +942,8 @@ MonoBehaviour:
   _enemyController: {fileID: 1227086439}
   _enemyAgent: {fileID: 1227086437}
   _enemyAnimator: {fileID: 1227086436}
+  _enemyVFXController: {fileID: 0}
+  _playerVFXController: {fileID: 0}
 --- !u!4 &927690048
 Transform:
   m_ObjectHideFlags: 0
@@ -2798,8 +2800,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2003669890}
   - component: {fileID: 2003669891}
-  - component: {fileID: 2003669892}
   - component: {fileID: 2003669893}
+  - component: {fileID: 2003669892}
   - component: {fileID: 2003669894}
   m_Layer: 0
   m_Name: Player

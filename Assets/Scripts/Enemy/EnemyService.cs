@@ -11,8 +11,8 @@ public class EnemyService
         _enemyController.Initialze(enemyAgent, enemyAnimator);
     }
 
-    public void Init(PlayerService playerService)
+    public void Dependency(PlayerService playerService)
     {
-        _enemyController.Init(playerService);
+        _enemyController.Dependency(playerService);
     }
 }

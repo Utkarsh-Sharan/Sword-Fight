@@ -5,7 +5,7 @@ public class EnemyController : MonoBehaviour
 {
     private NavMeshAgent _enemyAgent;
     private Animator _enemyAnimator;
-    private Transform _playerTranform;
+    private Transform _playerTransform;
     private float _moveSpeed = 2f;
 
     public void Initialze(NavMeshAgent enemyAgent, Animator enemyAnimator)
@@ -16,9 +16,9 @@ public class EnemyController : MonoBehaviour
         _enemyAgent.speed = _moveSpeed;
     }
 
-    public void Init(PlayerService playerService)
+    public void Dependency(PlayerService playerService)
     {
-        _playerTranform = playerService.GetPlayerTransform();
+        _playerTransform = playerService.GetPlayerTransform();
     }
 
     private void FixedUpdate()
@@ -28,9 +28,9 @@ public class EnemyController : MonoBehaviour
 
     private void CalculateMovement()
     {
-        if(Vector3.Distance(this.transform.position, _playerTranform.position) >= _enemyAgent.stoppingDistance)
+        if(Vector3.Distance(this.transform.position, _playerTransform.position) >= _enemyAgent.stoppingDistance)
         {
-            _enemyAgent.SetDestination(_playerTranform.position);
+            _enemyAgent.SetDestination(_playerTransform.position);
             _enemyAnimator.SetFloat(ConstantStrings.RUN_PARAMETER, _moveSpeed);
         }
         else
