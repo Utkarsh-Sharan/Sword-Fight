@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VFXService
 {
-    public VFXService(EnemyVFXController enemyVFXController, PlayerVFXController playerVFXController, VFXScriptableObject vFXSOList)
+    public VFXService(EnemyVFXController enemyVFXController, PlayerView playerVFXController, VFXScriptableObject vFXSOList)
     {
         enemyVFXController.Initialize(vFXSOList);
     }

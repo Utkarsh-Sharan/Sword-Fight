@@ -19,7 +19,7 @@ public class GameService : MonoBehaviour
 
     [Header("VFX Properties")]
     [SerializeField] private EnemyVFXController _enemyVFXController;
-    [SerializeField] private PlayerVFXController _playerVFXController;
+    [SerializeField] private PlayerView _playerVFXController;
     [SerializeField] private List<VFXScriptableObject> _vFXSOList;
 
     private PlayerService _playerService;

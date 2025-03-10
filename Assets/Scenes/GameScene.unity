@@ -944,6 +944,7 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 1227086436}
   _enemyVFXController: {fileID: 0}
   _playerVFXController: {fileID: 0}
+  _vFXSOList: []
 --- !u!4 &927690048
 Transform:
   m_ObjectHideFlags: 0
@@ -2895,7 +2896,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2003669889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66d06a4c3c44160418fb053ccdaa7b11, type: 3}
+  m_Script: {fileID: 11500000, guid: f63f1060825f2cd49b70f048b123664d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerFootStep: {fileID: 1523289124}
