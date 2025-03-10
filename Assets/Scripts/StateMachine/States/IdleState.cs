@@ -5,9 +5,15 @@ using UnityEngine;
 public class IdleState<T> : IState<T> where T : class
 {
     public T Owner { get; set; }
-    private GenericStateMachine<T> _stateMachine;
 
-    public IdleState(GenericStateMachine<T> stateMachine) => _stateMachine = stateMachine;
+    private GenericStateMachine<T> _stateMachine;
+    private float _movementMagnitude;
+
+    public IdleState(GenericStateMachine<T> stateMachine, float movementMagnitude)
+    {
+        _stateMachine = stateMachine;
+        _movementMagnitude = movementMagnitude;
+    }
 
     public void OnStateEnter()
     {
@@ -16,7 +22,8 @@ public class IdleState<T> : IState<T> where T : class
 
     public void Update()
     {
-
+        if(_movementMagnitude > 0f)
+            _stateMachine.ChangeState(States.Running);
     }
 
     public void OnStateExit()

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _movement, _direction;
     private float _horizontalInput, _verticalInput;
 
-    //private PlayerStateMachine _playerStateMachine;
+    private PlayerStateMachine _playerStateMachine;
 
     public void Init(CharacterController characterController, Animator playerAnimator)
     {
@@ -21,8 +21,10 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _playerModel = new PlayerModel();
-        //_playerStateMachine = new PlayerStateMachine(this);
-        //_playerStateMachine.ChangeState(States.Idle);
+        _playerStateMachine = new PlayerStateMachine(this);
+
+        _playerStateMachine.Initialize(_playerAnimator, _movement.magnitude);
+        _playerStateMachine.ChangeState(States.Idle);
     }
 
     private void FixedUpdate()
@@ -40,11 +42,10 @@ public class PlayerController : MonoBehaviour
 
         _direction = new Vector3(_horizontalInput, 0, _verticalInput).normalized;
 
-        _playerAnimator.SetFloat(ConstantStrings.RUN_PARAMETER, _movement.magnitude);
-        _playerAnimator.SetBool(ConstantStrings.PLAYER_AIRBOURNE_PARAMETER, !_characterController.isGrounded);
+        //_playerAnimator.SetFloat(ConstantStrings.RUN_PARAMETER, _movement.magnitude);
+        //_playerAnimator.SetBool(ConstantStrings.PLAYER_AIRBOURNE_PARAMETER, !_characterController.isGrounded);
 
-        //_playerStateMachine.Update();
-        //_playerStateMachine.ChangeState(States.Running);
+        _playerStateMachine.Update();
     }
 
     public Transform GetPlayerTransform() => this.transform;

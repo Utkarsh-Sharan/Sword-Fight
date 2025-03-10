@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class EnemyVFXController : MonoBehaviour
+public class EnemyView : MonoBehaviour
 {
     [SerializeField] private VisualEffect _footStepVFX;
 

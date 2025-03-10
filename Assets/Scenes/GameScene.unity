@@ -1320,7 +1320,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1227086434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a81b0cf22018ca045af42ae66c94e8db, type: 3}
+  m_Script: {fileID: 11500000, guid: cb60752be42f3ec46b4069a7e376726b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _footStepVFX: {fileID: 1520603001}
