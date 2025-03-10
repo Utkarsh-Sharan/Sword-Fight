@@ -40,12 +40,14 @@ public class PlayerController : MonoBehaviour
 
         _direction = new Vector3(_horizontalInput, 0, _verticalInput).normalized;
 
-        _playerAnimator.SetFloat(ConstantStrings.PLAYER_RUN_PARAMETER, _movement.magnitude);
+        _playerAnimator.SetFloat(ConstantStrings.RUN_PARAMETER, _movement.magnitude);
         _playerAnimator.SetBool(ConstantStrings.PLAYER_AIRBOURNE_PARAMETER, !_characterController.isGrounded);
 
         //_playerStateMachine.Update();
         //_playerStateMachine.ChangeState(States.Running);
     }
+
+    public Transform GetPlayerTransform() => this.transform;
 
     private void OnDisable()
     {

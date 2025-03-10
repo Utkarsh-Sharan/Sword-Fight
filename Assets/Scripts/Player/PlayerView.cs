@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class VFXController : MonoBehaviour
+public class PlayerView : MonoBehaviour
 {
     [SerializeField] private VisualEffect _playerFootStep;
 
