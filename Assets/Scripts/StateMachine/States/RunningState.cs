@@ -5,10 +5,7 @@ public class RunningState<T> : IState<T> where T : class
     private GenericStateMachine<T> _stateMachine;
     private PlayerController _playerController;
 
-    public RunningState(GenericStateMachine<T> stateMachine)
-    {
-        _stateMachine = stateMachine;
-    }
+    public RunningState(GenericStateMachine<T> stateMachine) => _stateMachine = stateMachine;
 
     public void OnStateEnter()
     {
@@ -18,14 +15,16 @@ public class RunningState<T> : IState<T> where T : class
 
     public void Update()
     {
-        if (_playerController.GetPlayerMovement().magnitude <= 0f)
+        if(_playerController.GetPlayerMovement().magnitude <= 0f)
             _stateMachine.ChangeState(States.Idle);
+        if(!_playerController.GetCharacterController().isGrounded)
+            _stateMachine.ChangeState(States.AirBourne);
 
         _playerController.GetPlayerAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, _playerController.GetPlayerMovement().magnitude);
     }
 
     public void OnStateExit()
     {
-        _playerController = null;
+        
     }
 }

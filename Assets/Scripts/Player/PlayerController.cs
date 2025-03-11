@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     public Transform GetPlayerTransform() => this.transform;
     public Vector3 GetPlayerMovement() => this._movement;
     public Animator GetPlayerAnimator() => this._playerAnimator;
+    public CharacterController GetCharacterController() => this._characterController;
 
     private void OnDisable()
     {

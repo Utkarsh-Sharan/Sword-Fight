@@ -5,10 +5,7 @@ public class IdleState<T> : IState<T> where T : class
     private GenericStateMachine<T> _stateMachine;
     private PlayerController _playerController;
 
-    public IdleState(GenericStateMachine<T> stateMachine)
-    {
-        _stateMachine = stateMachine;
-    }
+    public IdleState(GenericStateMachine<T> stateMachine) => _stateMachine = stateMachine;
 
     public void OnStateEnter()
     {
@@ -24,6 +21,6 @@ public class IdleState<T> : IState<T> where T : class
 
     public void OnStateExit()
     {
-        _playerController = null;
+        
     }
 }

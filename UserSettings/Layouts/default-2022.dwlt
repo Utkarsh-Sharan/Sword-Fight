@@ -1159,9 +1159,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f4490000
+      m_SelectedIDs: 146f0000
       m_LastClickedID: 0
-      m_ExpandedIDs: f6faffff
+      m_ExpandedIDs: 02fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1230,7 +1230,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/StateMachine
+    - Assets/Scripts/StateMachine/States
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1246,7 +1246,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b8770000
     m_LastClickedID: 30648
-    m_ExpandedIDs: 00000000c6a20000c8a20000caa20000cca20000cea20000d0a20000d2a20000
+    m_ExpandedIDs: 00000000c6a20000c8a20000caa20000cca20000cea20000d0a20000d2a20000d4a20000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1274,7 +1274,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000c6a20000c8a20000caa20000cca20000cea20000d0a20000d2a2000028a50000
+    m_ExpandedIDs: ffffffff00000000c6a20000c8a20000caa20000cca20000cea20000d0a20000d2a20000d4a20000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

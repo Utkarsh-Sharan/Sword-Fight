@@ -17,5 +17,6 @@ public class PlayerStateMachine : GenericStateMachine<PlayerController>
     {
         states.Add(States.Idle, new IdleState<PlayerController>(this));
         states.Add(States.Running, new RunningState<PlayerController>(this));
+        states.Add(States.AirBourne, new PlayerAirBourneState<PlayerController>(this));
     }
 }
