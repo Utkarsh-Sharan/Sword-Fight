@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerIdleState<T> : IState<T> where T : PlayerController
 {
     public T Owner { get; set; }
@@ -14,7 +16,9 @@ public class PlayerIdleState<T> : IState<T> where T : PlayerController
     public void Update()
     {
         if (Owner.GetPlayerMovement().magnitude > 0f)
-            _stateMachine.ChangeState(States.Running);
+            _stateMachine.ChangeState(PlayerStates.Running);
+        if (Input.GetMouseButtonDown(0))
+            _stateMachine.ChangeState(PlayerStates.Attack);
     }
 
     public void OnStateExit()

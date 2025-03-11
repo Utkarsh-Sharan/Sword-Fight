@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
         _playerModel = new PlayerModel();
         _playerStateMachine = new PlayerStateMachine(this);
 
-        _playerStateMachine.ChangeState(States.Idle);
+        _playerStateMachine.ChangeState(PlayerStates.Idle);
     }
 
     private void FixedUpdate()
@@ -40,16 +40,13 @@ public class PlayerController : MonoBehaviour
         _verticalInput = Input.GetAxisRaw("Vertical");
 
         _direction = new Vector3(_horizontalInput, 0, _verticalInput).normalized;
-
-        //_playerAnimator.SetBool(ConstantStrings.PLAYER_AIRBOURNE_PARAMETER, !_characterController.isGrounded);
-
         _playerStateMachine.Update();
     }
 
     public Transform GetPlayerTransform() => this.transform;
-    public Vector3 GetPlayerMovement() => this._movement;
-    public Animator GetPlayerAnimator() => this._playerAnimator;
-    public CharacterController GetCharacterController() => this._characterController;
+    public Vector3 GetPlayerMovement() => _movement;
+    public Animator GetPlayerAnimator() => _playerAnimator;
+    public CharacterController GetCharacterController() => _characterController;
 
     private void OnDisable()
     {

@@ -1,6 +1,14 @@
-public enum States
+public enum PlayerStates
 {
     Idle,
     Running,
-    AirBourne
+    AirBourne,
+    Attack
+}
+
+public enum EnemyStates
+{
+    Idle,
+    Walking,
+    Attacking
 }

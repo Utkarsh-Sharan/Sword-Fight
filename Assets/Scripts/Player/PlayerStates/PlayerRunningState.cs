@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerRunningState<T> : IState<T> where T : PlayerController
 {
     public T Owner { get; set; }
@@ -14,9 +16,11 @@ public class PlayerRunningState<T> : IState<T> where T : PlayerController
     public void Update()
     {
         if(Owner.GetPlayerMovement().magnitude <= 0f)
-            _stateMachine.ChangeState(States.Idle);
+            _stateMachine.ChangeState(PlayerStates.Idle);
         if(!Owner.GetCharacterController().isGrounded)
-            _stateMachine.ChangeState(States.AirBourne);
+            _stateMachine.ChangeState(PlayerStates.AirBourne);
+        if(Input.GetMouseButtonDown(0))
+            _stateMachine.ChangeState(PlayerStates.Attack);
 
         Owner.GetPlayerAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, Owner.GetPlayerMovement().magnitude);
     }
