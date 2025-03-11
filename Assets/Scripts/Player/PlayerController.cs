@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
         _playerModel = new PlayerModel();
         _playerStateMachine = new PlayerStateMachine(this);
 
-        _playerStateMachine.Initialize(_playerAnimator, _movement.magnitude);
         _playerStateMachine.ChangeState(States.Idle);
     }
 
@@ -42,13 +41,14 @@ public class PlayerController : MonoBehaviour
 
         _direction = new Vector3(_horizontalInput, 0, _verticalInput).normalized;
 
-        //_playerAnimator.SetFloat(ConstantStrings.RUN_PARAMETER, _movement.magnitude);
         //_playerAnimator.SetBool(ConstantStrings.PLAYER_AIRBOURNE_PARAMETER, !_characterController.isGrounded);
 
         _playerStateMachine.Update();
     }
 
     public Transform GetPlayerTransform() => this.transform;
+    public Vector3 GetPlayerMovement() => this._movement;
+    public Animator GetPlayerAnimator() => this._playerAnimator;
 
     private void OnDisable()
     {
