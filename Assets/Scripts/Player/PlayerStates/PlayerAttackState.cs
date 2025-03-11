@@ -14,6 +14,8 @@ public class PlayerAttackState<T> : IState<T> where T : PlayerController
     public void Update()
     {
         Owner.GetPlayerAnimator().SetTrigger(ConstantStrings.PLAYER_ATTACK_PARAMETER);
+        Owner.AttackSlideForward();
+
         _stateMachine.ChangeState(PlayerStates.Idle);
     }
 
