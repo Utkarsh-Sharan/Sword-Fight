@@ -10,5 +10,6 @@ public enum EnemyStates
 {
     Idle,
     Walking,
+    Chasing,
     Attacking
 }
