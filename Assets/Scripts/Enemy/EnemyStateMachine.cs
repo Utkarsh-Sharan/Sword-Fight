@@ -10,6 +10,6 @@ public class EnemyStateMachine : GenericStateMachine<EnemyController>
 
     private void CreateStates()
     {
-
+        states.Add(PlayerStates.Idle, new EnemyIdleState<EnemyController>(this));
     }
 }

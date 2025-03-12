@@ -3,7 +3,8 @@ public enum PlayerStates
     Idle,
     Running,
     AirBourne,
-    Attack
+    Attack,
+    Chasing
 }
 
 public enum EnemyStates

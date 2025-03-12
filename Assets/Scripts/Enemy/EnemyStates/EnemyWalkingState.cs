@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class EnemyWalkingState : MonoBehaviour
+public class EnemyWalkingState<T> : IState<T> where T : EnemyController
 {
-    // Start is called before the first frame update
-    void Start()
+    public T Owner { get; set; }
+
+    public void OnStateEnter()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
+    {
+
+    }
+
+    public void OnStateExit()
     {
         
     }
