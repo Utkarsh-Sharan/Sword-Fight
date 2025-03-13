@@ -832,6 +832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 652550343}
   - component: {fileID: 652550344}
+  - component: {fileID: 652550345}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -875,6 +876,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 15.1, y: 0.3, z: 7.8}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &652550345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652550342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7169f1358416942b205c3677214caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &755402356
 GameObject:
   m_ObjectHideFlags: 3
@@ -1067,9 +1080,6 @@ MonoBehaviour:
   _enemyController: {fileID: 1227086441}
   _enemyAgent: {fileID: 1227086437}
   _enemyAnimator: {fileID: 1227086436}
-  _enemyVFXController: {fileID: 0}
-  _playerVFXController: {fileID: 0}
-  _vFXSOList: []
 --- !u!4 &927690048
 Transform:
   m_ObjectHideFlags: 0
