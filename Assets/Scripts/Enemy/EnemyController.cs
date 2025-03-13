@@ -8,12 +8,16 @@ public class EnemyController : MonoBehaviour
     private Transform _playerTransform;
     private float _moveSpeed = 2f;
 
+    private EnemyStateMachine _stateMachine;
+
     public void Initialze(NavMeshAgent enemyAgent, Animator enemyAnimator)
     {
         _enemyAgent = enemyAgent;
         _enemyAnimator = enemyAnimator;
 
         _enemyAgent.speed = _moveSpeed;
+        _stateMachine = new EnemyStateMachine(this);
+        _stateMachine.ChangeState(PlayerStates.Idle);
     }
 
     public void Dependency(PlayerService playerService)
@@ -24,6 +28,11 @@ public class EnemyController : MonoBehaviour
     private void FixedUpdate()
     {
         CalculateMovement();
+    }
+
+    private void Update()
+    {
+        _stateMachine.Update();
     }
 
     private void CalculateMovement()
@@ -39,4 +48,6 @@ public class EnemyController : MonoBehaviour
             _enemyAnimator.SetFloat(ConstantStrings.RUN_PARAMETER, 0);
         }
     }
+
+    public Animator GetEnemyAnimator() => _enemyAnimator;
 }

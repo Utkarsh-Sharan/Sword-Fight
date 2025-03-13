@@ -4,7 +4,8 @@ public enum PlayerStates
     Running,
     AirBourne,
     Attack,
-    Chasing
+    Chasing,
+    Walking
 }
 
 public enum EnemyStates
