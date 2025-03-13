@@ -21,7 +21,7 @@ public class EnemyPatrollingState<T> : IState<T> where T : EnemyController
     {
         if (ReachedDestination())
             _stateMachine.ChangeState(States.Idle);
-        //if player detected, start chasing.
+        //Will do later: if player detected, start chasing.
     }
 
     public void OnStateExit() { }
@@ -40,6 +40,7 @@ public class EnemyPatrollingState<T> : IState<T> where T : EnemyController
     {
         Owner.GetEnemyAgent().isStopped = false;
         Owner.GetEnemyAgent().SetDestination(destination);
+        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, 2);
     }
 
     private bool ReachedDestination() => Owner.GetEnemyAgent().remainingDistance <= Owner.GetEnemyAgent().stoppingDistance;

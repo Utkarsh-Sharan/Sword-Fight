@@ -12,23 +12,21 @@ public class EnemyIdleState<T> : IState<T> where T : EnemyController
 
     public void OnStateEnter()
     {
-        ResetTime();
+        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, 0);
     }
 
     public void Update()
     {
         _currentTime += Time.deltaTime;
-        if(_currentTime < Time.time + _idleTime)
+        if(_currentTime >= _idleTime)
         {
             _stateMachine.ChangeState(States.Patrolling);
         }
-        //if player detected, start chasing.
+        //Will do later: if player detected, start chasing.
     }
 
     public void OnStateExit()
     {
         _currentTime = 0f;
     }
-
-    private void ResetTime() => _currentTime = Time.time;
 }
