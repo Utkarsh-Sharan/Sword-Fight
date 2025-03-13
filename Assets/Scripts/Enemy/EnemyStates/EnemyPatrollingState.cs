@@ -20,8 +20,10 @@ public class EnemyPatrollingState<T> : IState<T> where T : EnemyController
     public void Update()
     {
         if (ReachedDestination())
-            _stateMachine.ChangeState(States.Idle);
-        //Will do later: if player detected, start chasing.
+            _stateMachine.ChangeState(States.Idle); 
+        
+        if (Owner.IsPlayerInRange)
+            _stateMachine.ChangeState(States.Chasing);
     }
 
     public void OnStateExit() { }

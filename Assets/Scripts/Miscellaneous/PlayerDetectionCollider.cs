@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class PlayerDetectionCollider : MonoBehaviour
 {
-    private EnemyController _enemyController;
-
-    public void Initialize(EnemyController enemyController)
-    {
-        this._enemyController = enemyController;
-    }
+    [SerializeField] private EnemyController _enemyController;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerController>()) { }
-            //send info to THIS enemy controller that player entered range
+        if (other.GetComponent<PlayerController>())
+            this._enemyController.IsPlayerInRange = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerController>()) { }
-            //send info to THIS enemy controller that player exited range
+        if (other.GetComponent<PlayerController>())
+            this._enemyController.IsPlayerInRange = false;
     }
 }

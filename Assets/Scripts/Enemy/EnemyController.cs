@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     protected Animator enemyAnimator;
     protected Transform playerTransform;
 
+    public bool IsPlayerInRange { get; set; }
+
     public virtual void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator)
     {
         this.enemyAgent = enemyAgent;
@@ -25,4 +27,5 @@ public class EnemyController : MonoBehaviour
     public Animator GetEnemyAnimator() => enemyAnimator;
     public NavMeshAgent GetEnemyAgent() => enemyAgent;
     public List<Transform> GetWayPointTransformList() => waypointTransformList;
+    public Vector3 GetPlayerPosition() => playerTransform.position;
 }

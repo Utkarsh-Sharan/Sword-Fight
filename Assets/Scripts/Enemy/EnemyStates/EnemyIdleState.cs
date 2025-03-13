@@ -19,10 +19,10 @@ public class EnemyIdleState<T> : IState<T> where T : EnemyController
     {
         _currentTime += Time.deltaTime;
         if(_currentTime >= _idleTime)
-        {
             _stateMachine.ChangeState(States.Patrolling);
-        }
-        //Will do later: if player detected, start chasing.
+
+        if (Owner.IsPlayerInRange)
+            _stateMachine.ChangeState(States.Chasing);
     }
 
     public void OnStateExit()
