@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +10,8 @@ public class EnemyController : MonoBehaviour
     private float _moveSpeed = 2f;
 
     private EnemyStateMachine _stateMachine;
+    [SerializeField] private List<Transform> _waypointTransformList;
+    [SerializeField] private BoxCollider _playerDetectionCollider;
 
     public void Initialze(NavMeshAgent enemyAgent, Animator enemyAnimator)
     {
@@ -17,7 +20,7 @@ public class EnemyController : MonoBehaviour
 
         _enemyAgent.speed = _moveSpeed;
         _stateMachine = new EnemyStateMachine(this);
-        _stateMachine.ChangeState(PlayerStates.Idle);
+        _stateMachine.ChangeState(States.Idle);
     }
 
     public void Dependency(PlayerService playerService)
@@ -50,4 +53,6 @@ public class EnemyController : MonoBehaviour
     }
 
     public Animator GetEnemyAnimator() => _enemyAnimator;
+    public NavMeshAgent GetEnemyAgent() => _enemyAgent;
+    public List<Transform> GetWayPointTransformList() => _waypointTransformList;
 }

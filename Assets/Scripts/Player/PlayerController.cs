@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
         _playerModel = new PlayerModel();
         _playerStateMachine = new PlayerStateMachine(this);
 
-        _playerStateMachine.ChangeState(PlayerStates.Idle);
+        _playerStateMachine.ChangeState(States.Idle);
     }
 
     private void FixedUpdate()

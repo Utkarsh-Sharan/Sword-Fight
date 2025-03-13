@@ -15,7 +15,7 @@ public class PlayerAttackState<T> : IState<T> where T : PlayerController
     {
         Owner.AttackSlideForward();
 
-        _stateMachine.ChangeState(PlayerStates.Idle);
+        _stateMachine.ChangeState(States.Idle);
     }
 
     public void OnStateExit()

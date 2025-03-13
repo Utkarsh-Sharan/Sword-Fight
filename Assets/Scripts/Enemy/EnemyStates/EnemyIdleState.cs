@@ -20,7 +20,7 @@ public class EnemyIdleState<T> : IState<T> where T : EnemyController
         _currentTime += Time.deltaTime;
         if(_currentTime < Time.time + _idleTime)
         {
-            _stateMachine.ChangeState(PlayerStates.Walking);
+            _stateMachine.ChangeState(States.Patrolling);
         }
         //if player detected, start chasing.
     }

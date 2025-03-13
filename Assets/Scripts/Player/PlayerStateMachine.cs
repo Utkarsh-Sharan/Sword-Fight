@@ -10,9 +10,9 @@ public class PlayerStateMachine : GenericStateMachine<PlayerController>
 
     private void CreateStates()
     {
-        states.Add(PlayerStates.Idle, new PlayerIdleState<PlayerController>(this));
-        states.Add(PlayerStates.Running, new PlayerRunningState<PlayerController>(this));
-        states.Add(PlayerStates.AirBourne, new PlayerAirBourneState<PlayerController>(this));
-        states.Add(PlayerStates.Attack, new PlayerAttackState<PlayerController>(this));
+        states.Add(States.Idle, new PlayerIdleState<PlayerController>(this));
+        states.Add(States.Running, new PlayerRunningState<PlayerController>(this));
+        states.Add(States.AirBourne, new PlayerAirBourneState<PlayerController>(this));
+        states.Add(States.Attack, new PlayerAttackState<PlayerController>(this));
     }
 }

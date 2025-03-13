@@ -16,9 +16,9 @@ public class PlayerIdleState<T> : IState<T> where T : PlayerController
     public void Update()
     {
         if (Owner.GetPlayerMovement().magnitude > 0f)
-            _stateMachine.ChangeState(PlayerStates.Running);
+            _stateMachine.ChangeState(States.Running);
         if (Input.GetMouseButtonDown(0))
-            _stateMachine.ChangeState(PlayerStates.Attack);
+            _stateMachine.ChangeState(States.Attack);
     }
 
     public void OnStateExit()

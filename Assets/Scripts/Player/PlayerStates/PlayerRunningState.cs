@@ -16,11 +16,11 @@ public class PlayerRunningState<T> : IState<T> where T : PlayerController
     public void Update()
     {
         if(Owner.GetPlayerMovement().magnitude <= 0f)
-            _stateMachine.ChangeState(PlayerStates.Idle);
+            _stateMachine.ChangeState(States.Idle);
         if(!Owner.GetCharacterController().isGrounded)
-            _stateMachine.ChangeState(PlayerStates.AirBourne);
+            _stateMachine.ChangeState(States.AirBourne);
         if(Input.GetMouseButtonDown(0))
-            _stateMachine.ChangeState(PlayerStates.Attack);
+            _stateMachine.ChangeState(States.Attack);
 
         Owner.GetPlayerAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, Owner.GetPlayerMovement().magnitude);
     }

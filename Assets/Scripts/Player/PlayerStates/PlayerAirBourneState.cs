@@ -14,7 +14,7 @@ public class PlayerAirBourneState<T> : IState<T> where T : PlayerController
     public void Update()
     {
         if (Owner.GetCharacterController().isGrounded)
-            _stateMachine.ChangeState(PlayerStates.Idle);
+            _stateMachine.ChangeState(States.Idle);
     }
 
     public void OnStateExit()
