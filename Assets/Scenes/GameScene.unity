@@ -1064,7 +1064,7 @@ MonoBehaviour:
   _playerController: {fileID: 2003669892}
   _characterController: {fileID: 2003669891}
   _playerAnimator: {fileID: 2003669893}
-  _enemyController: {fileID: 1227086439}
+  _enemyController: {fileID: 1227086441}
   _enemyAgent: {fileID: 1227086437}
   _enemyAnimator: {fileID: 1227086436}
   _enemyVFXController: {fileID: 0}
@@ -1361,7 +1361,7 @@ GameObject:
   - component: {fileID: 1227086436}
   - component: {fileID: 1227086438}
   - component: {fileID: 1227086437}
-  - component: {fileID: 1227086439}
+  - component: {fileID: 1227086441}
   - component: {fileID: 1227086440}
   m_Layer: 0
   m_Name: Enemy
@@ -1455,22 +1455,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0.5}
---- !u!114 &1227086439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227086434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6982ab7090a4a9444b2ab689a676b6b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _waypointTransformList:
-  - {fileID: 1029398332}
-  - {fileID: 1660129999}
-  _playerDetectionCollider: {fileID: 652550344}
 --- !u!114 &1227086440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,6 +1468,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _footStepVFX: {fileID: 1520603001}
+--- !u!114 &1227086441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227086434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236553430361a844bb526159d35b849a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointTransformList:
+  - {fileID: 1029398332}
+  - {fileID: 1660129999}
+  playerDetectionCollider: {fileID: 652550344}
 --- !u!114 &1341509449
 MonoBehaviour:
   m_ObjectHideFlags: 0

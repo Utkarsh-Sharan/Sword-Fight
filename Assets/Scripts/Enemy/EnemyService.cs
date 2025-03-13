@@ -8,7 +8,7 @@ public class EnemyService
     public EnemyService(EnemyController enemyController, NavMeshAgent enemyAgent, Animator enemyAnimator)
     {
         _enemyController = enemyController;
-        _enemyController.Initialze(enemyAgent, enemyAnimator);
+        _enemyController.Initialize(enemyAgent, enemyAnimator);
     }
 
     public void Dependency(PlayerService playerService)
