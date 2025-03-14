@@ -18,11 +18,8 @@ public class EnemyChasingState<T> : IState<T> where T : EnemyController
     {
         MoveTowardsPlayer();
 
-        if (!Owner.IsPlayerInRange)
-        {
-            //Owner.GetEnemyAgent().isStopped = true;
+        if (!Owner.IsPlayerInDetectionZone)
             _stateMachine.ChangeState(States.Idle);
-        }
 
         if (ReachedPlayer())
             _stateMachine.ChangeState(States.Attack);
@@ -30,7 +27,7 @@ public class EnemyChasingState<T> : IState<T> where T : EnemyController
 
     public void OnStateExit()
     {
-        //Owner.GetEnemyAgent().isStopped = true;
+        
     }
 
     private void MoveTowardsPlayer()
@@ -39,5 +36,7 @@ public class EnemyChasingState<T> : IState<T> where T : EnemyController
         Owner.GetEnemyAgent().SetDestination(_destination);
     }
 
-    private bool ReachedPlayer() => Owner.GetEnemyAgent().remainingDistance <= Owner.GetEnemyAgent().stoppingDistance;
+    private bool ReachedPlayer() => GetDistanceFromPlayer() <= Owner.GetEnemyAgent().stoppingDistance;
+
+    private float GetDistanceFromPlayer() => Vector3.Distance(Owner.transform.position, Owner.GetPlayerPosition());
 }

@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     protected Animator enemyAnimator;
     protected Transform playerTransform;
 
-    public bool IsPlayerInRange { get; set; }
+    public bool IsPlayerInDetectionZone { get; set; }
 
     public virtual void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator)
     {

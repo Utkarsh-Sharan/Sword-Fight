@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class EnemyAttackState<T> : IState<T> where T : EnemyController
 {
     public T Owner { get; set; }
@@ -13,7 +15,7 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
 
     public void Update()
     {
-
+        
     }
 
     public void OnStateExit()

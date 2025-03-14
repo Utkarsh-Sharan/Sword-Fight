@@ -15,6 +15,7 @@ public class EnemyPatrollingState<T> : IState<T> where T : EnemyController
         SetNextWayPointIndex();
         _destination = GetDestination();
         MoveTowardsDestination(_destination);
+        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, 2);
     }
 
     public void Update()
@@ -22,7 +23,7 @@ public class EnemyPatrollingState<T> : IState<T> where T : EnemyController
         if (ReachedDestination())
             _stateMachine.ChangeState(States.Idle); 
         
-        if (Owner.IsPlayerInRange)
+        if (Owner.IsPlayerInDetectionZone)
             _stateMachine.ChangeState(States.Chasing);
     }
 
@@ -38,12 +39,7 @@ public class EnemyPatrollingState<T> : IState<T> where T : EnemyController
 
     private Vector3 GetDestination() => Owner.GetWayPointTransformList()[_currentPatrollingIndex].position;
 
-    private void MoveTowardsDestination(Vector3 destination)
-    {
-        Owner.GetEnemyAgent().isStopped = false;
-        Owner.GetEnemyAgent().SetDestination(destination);
-        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, 2);
-    }
+    private void MoveTowardsDestination(Vector3 destination) => Owner.GetEnemyAgent().SetDestination(destination);
 
     private bool ReachedDestination() => Owner.GetEnemyAgent().remainingDistance <= Owner.GetEnemyAgent().stoppingDistance;
 }

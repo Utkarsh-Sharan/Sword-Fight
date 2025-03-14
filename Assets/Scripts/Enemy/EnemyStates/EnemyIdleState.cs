@@ -20,16 +20,10 @@ public class EnemyIdleState<T> : IState<T> where T : EnemyController
     {
         _currentTime += Time.deltaTime;
         if(_currentTime >= _idleTime)
-        {
-            Owner.GetEnemyAgent().isStopped = false;
             _stateMachine.ChangeState(States.Patrolling);
-        }
 
-        if (Owner.IsPlayerInRange)
-        {
-            Owner.GetEnemyAgent().isStopped = false;
+        if (Owner.IsPlayerInDetectionZone)
             _stateMachine.ChangeState(States.Chasing);
-        }
     }
 
     public void OnStateExit()
