@@ -11,19 +11,26 @@ public class EnemyChasingState<T> : IState<T> where T : EnemyController
 
     public void OnStateEnter()
     {
-        
+        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, 2);
     }
 
     public void Update()
     {
         MoveTowardsPlayer();
+
+        if (!Owner.IsPlayerInRange)
+        {
+            //Owner.GetEnemyAgent().isStopped = true;
+            _stateMachine.ChangeState(States.Idle);
+        }
+
         if (ReachedPlayer())
             _stateMachine.ChangeState(States.Attack);
     }
 
     public void OnStateExit()
     {
-        
+        //Owner.GetEnemyAgent().isStopped = true;
     }
 
     private void MoveTowardsPlayer()

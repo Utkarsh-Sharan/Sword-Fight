@@ -12,6 +12,7 @@ public class EnemyIdleState<T> : IState<T> where T : EnemyController
 
     public void OnStateEnter()
     {
+        Owner.GetEnemyAgent().isStopped = true;
         Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, 0);
     }
 
@@ -19,14 +20,21 @@ public class EnemyIdleState<T> : IState<T> where T : EnemyController
     {
         _currentTime += Time.deltaTime;
         if(_currentTime >= _idleTime)
+        {
+            Owner.GetEnemyAgent().isStopped = false;
             _stateMachine.ChangeState(States.Patrolling);
+        }
 
         if (Owner.IsPlayerInRange)
+        {
+            Owner.GetEnemyAgent().isStopped = false;
             _stateMachine.ChangeState(States.Chasing);
+        }
     }
 
     public void OnStateExit()
     {
+        Owner.GetEnemyAgent().isStopped = false;
         _currentTime = 0f;
     }
 }
