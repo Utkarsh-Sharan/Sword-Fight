@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyScriptableObject", menuName = "ScriptableObject/EnemyScriptableObject")]
 public class EnemyScriptableObject : ScriptableObject
 {
-    public List<Transform> WayPoints;
-    public BoxCollider PlayerDetectionCollider;
+    public float MoveSpeed;
+    public float AttackTime;
+    public float ChaseDelay;
+    public float IdleTime;
 }

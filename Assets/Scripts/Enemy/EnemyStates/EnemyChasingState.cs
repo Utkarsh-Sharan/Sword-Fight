@@ -27,16 +27,16 @@ public class EnemyChasingState<T> : IState<T> where T : EnemyController
 
     public void OnStateExit()
     {
-        
+        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, 0);
     }
 
     private void MoveTowardsPlayer()
     {
-        _destination = Owner.GetPlayerPosition();
+        _destination = Owner.GetPlayerTransform().position;
         Owner.GetEnemyAgent().SetDestination(_destination);
     }
 
     private bool ReachedPlayer() => GetDistanceFromPlayer() <= Owner.GetEnemyAgent().stoppingDistance;
 
-    private float GetDistanceFromPlayer() => Vector3.Distance(Owner.transform.position, Owner.GetPlayerPosition());
+    private float GetDistanceFromPlayer() => Vector3.Distance(Owner.transform.position, Owner.GetPlayerTransform().position);
 }

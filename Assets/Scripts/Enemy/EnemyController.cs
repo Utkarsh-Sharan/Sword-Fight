@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] protected List<Transform> waypointTransformList;
-    [SerializeField] protected BoxCollider playerDetectionCollider;
 
     protected NavMeshAgent enemyAgent;
     protected Animator enemyAnimator;
@@ -27,5 +26,5 @@ public class EnemyController : MonoBehaviour
     public Animator GetEnemyAnimator() => enemyAnimator;
     public NavMeshAgent GetEnemyAgent() => enemyAgent;
     public List<Transform> GetWayPointTransformList() => waypointTransformList;
-    public Vector3 GetPlayerPosition() => playerTransform.position;
+    public Transform GetPlayerTransform() => playerTransform;
 }
