@@ -11,7 +11,7 @@ public class EnemyChasingState<T> : IState<T> where T : EnemyController
 
     public void OnStateEnter()
     {
-        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, 2);
+        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, Owner.GetEnemySO(Owner.GetEnemyType()).MoveSpeed);
     }
 
     public void Update()

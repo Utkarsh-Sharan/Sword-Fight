@@ -15,7 +15,7 @@ public class EnemyPatrollingState<T> : IState<T> where T : EnemyController
         SetNextWayPointIndex();
         _destination = GetDestination();
         MoveTowardsDestination(_destination);
-        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, 2);
+        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, Owner.GetEnemySO(Owner.GetEnemyType()).MoveSpeed);
     }
 
     public void Update()

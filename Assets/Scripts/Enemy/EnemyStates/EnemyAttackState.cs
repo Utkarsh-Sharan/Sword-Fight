@@ -5,8 +5,8 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
     public T Owner { get; set; }
 
     private readonly GenericStateMachine<T> _stateMachine;
-    private float _attackTime = 2.267f;
-    private float _chasingDelay = 2.5f;
+    private float _attackTime;
+    private float _chasingDelay;
     private float _currentTime;
     private float _outOfRangeTime;
 
@@ -14,6 +14,9 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
 
     public void OnStateEnter()
     {
+        _attackTime = Owner.GetEnemySO(Owner.GetEnemyType()).AttackTime;
+        _chasingDelay = Owner.GetEnemySO(Owner.GetEnemyType()).ChaseDelay;
+
         Owner.GetEnemyAgent().isStopped = true;
         Owner.GetEnemyAnimator().SetTrigger(ConstantStrings.PLAYER_ATTACK_PARAMETER);
     }

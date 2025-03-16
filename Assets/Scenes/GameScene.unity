@@ -1081,6 +1081,8 @@ MonoBehaviour:
   _enemyController: {fileID: 1227086441}
   _enemyAgent: {fileID: 1227086437}
   _enemyAnimator: {fileID: 1227086436}
+  _enemySOList:
+  - {fileID: 11400000, guid: 37acf9de45c6b914785887f45a2962f6, type: 2}
 --- !u!4 &927690048
 Transform:
   m_ObjectHideFlags: 0
@@ -1526,7 +1528,6 @@ MonoBehaviour:
   waypointTransformList:
   - {fileID: 1029398332}
   - {fileID: 1660129999}
-  playerDetectionCollider: {fileID: 652550344}
 --- !u!114 &1341509449
 MonoBehaviour:
   m_ObjectHideFlags: 0

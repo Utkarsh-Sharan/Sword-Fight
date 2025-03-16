@@ -1,18 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class TankEnemyController : EnemyController
 {
-    private float _moveSpeed = 2.3f;
     private TankEnemyStateMachine _stateMachine;
 
-    public override void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator)
+    public override void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator, List<EnemyScriptableObject> enemySOList)
     {
-        base.Initialize(enemyAgent, enemyAnimator);
+        base.Initialize(enemyAgent, enemyAnimator, enemySOList);
 
-        this.enemyAgent.speed = _moveSpeed;
+        this.enemyAgent.speed = GetEnemySO(EnemyType.Tank).MoveSpeed;
+
         _stateMachine = new TankEnemyStateMachine(this);
         _stateMachine.ChangeState(States.Idle);
     }

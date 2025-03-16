@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyScriptableObject", menuName = "ScriptableObject/EnemyScriptableObject")]
 public class EnemyScriptableObject : ScriptableObject
 {
+    public EnemyType EnemyType;
     public float MoveSpeed;
     public float AttackTime;
     public float ChaseDelay;
