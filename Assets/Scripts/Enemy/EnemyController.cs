@@ -6,8 +6,8 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] protected EnemyType enemyType;
     [SerializeField] protected List<Transform> waypointTransformList;
-    protected Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
 
+    protected Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary;
     protected NavMeshAgent enemyAgent;
     protected Animator enemyAnimator;
     protected Transform playerTransform;
@@ -19,7 +19,8 @@ public class EnemyController : MonoBehaviour
         this.enemyAgent = enemyAgent;
         this.enemyAnimator = enemyAnimator;
 
-        foreach(EnemyScriptableObject enemySO in enemySOList)
+        enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
+        foreach (EnemyScriptableObject enemySO in enemySOList)
             enemySODictionary[enemySO.EnemyType] = enemySO;
     }
 
