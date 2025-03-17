@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca05eea76e7fc374cb7dd3cd9bae00f1, type: 3}
   m_Name: TankEnemySO
   m_EditorClassIdentifier: 
+  EnemyType: 0
   MoveSpeed: 2.3
   AttackTime: 2.267
   ChaseDelay: 2.5
   IdleTime: 2.7
+  MaxHealth: 100
+  AttackDamage: 50

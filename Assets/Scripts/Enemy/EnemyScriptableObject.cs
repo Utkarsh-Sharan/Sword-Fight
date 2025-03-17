@@ -9,4 +9,6 @@ public class EnemyScriptableObject : ScriptableObject
     public float AttackTime;
     public float ChaseDelay;
     public float IdleTime;
+    public int MaxHealth;
+    public int AttackDamage;
 }
