@@ -12,8 +12,7 @@ public class EnemyService
         _enemyController.Initialize(enemyAgent, enemyAnimator, enemySOList);
     }
 
-    public void Dependency(PlayerService playerService)
-    {
-        _enemyController.Dependency(playerService);
-    }
+    public void Dependency(PlayerService playerService) => _enemyController.Dependency(playerService);
+
+    public EnemyScriptableObject GetEnemySO() => _enemyController.GetEnemySO(_enemyController.GetEnemyType());
 }

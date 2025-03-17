@@ -1142,10 +1142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90275a6dca9a9d448a3453450bd6f980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageApplier: {fileID: 630380239}
   _playerController: {fileID: 2003669892}
   _characterController: {fileID: 2003669891}
   _playerAnimator: {fileID: 2003669893}
-  _damageApplier: {fileID: 630380239}
+  _playerSO: {fileID: 11400000, guid: 8bf7546c21cdde64394ded38f795c6fc, type: 2}
   _enemyController: {fileID: 1227086441}
   _enemyAgent: {fileID: 1227086437}
   _enemyAnimator: {fileID: 1227086436}

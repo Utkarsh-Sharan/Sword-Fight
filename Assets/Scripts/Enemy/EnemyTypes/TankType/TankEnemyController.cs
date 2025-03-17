@@ -6,6 +6,7 @@ public class TankEnemyController : EnemyController
 {
     private TankEnemyStateMachine _stateMachine;
     private int _currentHealth;
+    private int _damageAmount;
 
     public override void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator, List<EnemyScriptableObject> enemySOList)
     {
@@ -23,10 +24,12 @@ public class TankEnemyController : EnemyController
         _stateMachine.Update();
     }
 
-    public override void OnDamage(int damageAmount)
+    public override void OnDamage()
     {
+        _damageAmount = playerSO.AttackDamage;
+
         if (_currentHealth > 0)
-            _currentHealth -= damageAmount;
+            _currentHealth -= _damageAmount;
         else
             EnemyDead();
     }

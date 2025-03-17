@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1357
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -246,8 +246,8 @@ MonoBehaviour:
     y: 0
     width: 400
     height: 653
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -298,8 +298,8 @@ MonoBehaviour:
     y: 0
     width: 596
     height: 1307
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -859,9 +859,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.6159995, y: 2.459979, z: 33.678352}
+    m_Target: {x: -8.849034, y: 4.485048, z: 32.181137}
     speed: 2
-    m_Value: {x: -2.6159995, y: 2.459979, z: 33.678352}
+    m_Value: {x: -8.849034, y: 4.485048, z: 32.181137}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -907,13 +907,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.18496652, y: -0.27193978, z: 0.05377491, w: 0.9429819}
+    m_Target: {x: 0.047078606, y: -0.7644844, z: 0.056773268, w: 0.6406251}
     speed: 2
-    m_Value: {x: 0.18635553, y: -0.27182204, z: 0.054175638, w: 0.942576}
+    m_Value: {x: 0.047072098, y: -0.7643787, z: 0.05676542, w: 0.64053655}
   m_Size:
-    m_Target: 5.3185735
+    m_Target: 2.4494898
     speed: 2
-    m_Value: 5.089544
+    m_Value: 2.4494898
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1014,6 +1014,8 @@ MonoBehaviour:
   m_BreadCrumbs:
   - m_Target: {fileID: 4400659718044310736, guid: 1259ef57b46a26d4ca7b0be3edddfb40, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
+  - m_Target: {fileID: 7325472727431645091, guid: 1259ef57b46a26d4ca7b0be3edddfb40, type: 2}
+    m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
   blendTreeGraph: {fileID: 0}
@@ -1095,7 +1097,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 107740
+  m_LastSelectedObjectID: 29036
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1176,9 +1178,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 624bffffd04dffff76f8ffff40f9ffff02fbffff12710000687100006c7100003472000082a40100
+      m_SelectedIDs: 6c710000
+      m_LastClickedID: 29036
+      m_ExpandedIDs: 0cfbffff0efbffff127100006871000052720000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1247,7 +1249,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/EnemyScriptableObjects
+    - Assets/ProjectLittleAdventurer/Mesh Asset/Character/MainCharacter
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1263,7 +1265,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b8770000
     m_LastClickedID: 30648
-    m_ExpandedIDs: 0000000026a3000028a300002aa300002ca300002ea3000030a3000032a3000034a3000036a3000038a300003aa30000
+    m_ExpandedIDs: 0000000040a3000042a3000044a3000046a3000048a300004aa300004ca300004ea3000050a3000052a3000054a3000056a3000058a30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1288,21 +1290,21 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 213}
+    scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff0000000026a3000028a300002aa300002ca300002ea3000030a3000032a3000034a3000036a3000038a300003aa3000086a500008ca50000
+    m_ExpandedIDs: ffffffff0000000040a3000042a3000044a3000046a3000048a300004ea3000050a3000052a3000054a3000056a3000058a30000a4a50000940f0100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: TankEnemyView
-      m_OriginalName: TankEnemyView
+      m_Name: IDamageable
+      m_OriginalName: IDamageable
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 42472
+      m_UserData: 69528
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0

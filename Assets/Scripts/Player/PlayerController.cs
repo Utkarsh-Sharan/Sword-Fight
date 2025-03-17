@@ -11,16 +11,25 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private PlayerStateMachine _playerStateMachine;
 
-    public void Init(CharacterController characterController, Animator playerAnimator, DamageApplier damageApplier)
+    private EnemyScriptableObject _enemySO;
+    private PlayerScriptableObject _playerSO;
+
+    public void Init(CharacterController characterController, Animator playerAnimator, DamageApplier damageApplier, PlayerScriptableObject playerSO)
     {
         _characterController = characterController;
         _playerAnimator = playerAnimator;
         _damageApplier = damageApplier;
+        _playerSO = playerSO;
+    }
+
+    public void Dependency(EnemyService enemyService)
+    {
+        _enemySO = enemyService.GetEnemySO();
     }
 
     private void Start()
     {
-        _playerModel = new PlayerModel();
+        _playerModel = new PlayerModel(_playerSO);
         _playerStateMachine = new PlayerStateMachine(this);
 
         _playerStateMachine.ChangeState(States.Idle);
@@ -50,9 +59,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     public Vector3 GetPlayerMovement() => _movement;
     public Animator GetPlayerAnimator() => _playerAnimator;
     public CharacterController GetCharacterController() => _characterController;
+    public PlayerScriptableObject GetPlayerSO() => _playerSO;
 
-    public void OnDamage(int damageAmount)
+    public void OnDamage()
     {
-        _playerModel.OnDamage(damageAmount);
+        _playerModel.OnDamage(_enemySO.AttackDamage);
     }
 }

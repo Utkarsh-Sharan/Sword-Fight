@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageApplier : MonoBehaviour
@@ -20,18 +18,7 @@ public class DamageApplier : MonoBehaviour
     {
         if(other.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            if(damageable is EnemyController)
-            {
-                PlayerController controller = damageable as PlayerController;
-                int damageAmount = 30;
-                controller.OnDamage(damageAmount);
-            }
-            if(damageable is PlayerController)
-            {
-                EnemyController controller = damageable as EnemyController;
-                int damageAmount = controller.GetEnemySO(controller.GetEnemyType()).AttackDamage;
-                damageable.OnDamage(damageAmount);
-            }
+            damageable.OnDamage();
         }
     }
 

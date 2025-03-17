@@ -10,7 +10,9 @@ public class EnemyController : MonoBehaviour, IDamageable
     protected Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary;
     protected NavMeshAgent enemyAgent;
     protected Animator enemyAnimator;
+
     protected Transform playerTransform;
+    protected PlayerScriptableObject playerSO;
 
     public bool IsPlayerInDetectionZone { get; set; }
 
@@ -27,6 +29,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void Dependency(PlayerService playerService)
     {
         playerTransform = playerService.GetPlayerTransform();
+        playerSO = playerService.GetPlayerSO();
     }
 
     public Animator GetEnemyAnimator() => enemyAnimator;
@@ -36,5 +39,5 @@ public class EnemyController : MonoBehaviour, IDamageable
     public EnemyType GetEnemyType() => enemyType;
     public Transform GetPlayerTransform() => playerTransform;
 
-    public virtual void OnDamage(int damageAmount) { }
+    public virtual void OnDamage() { }
 }

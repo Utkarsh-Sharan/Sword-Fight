@@ -3,19 +3,21 @@ using UnityEngine;
 
 public class PlayerModel
 {
-    private int _maxHealth = 50;
     private int _currentHealth;
-    private float _moveSpeed = 5f;
-    private float _gravity = -20f;
+    private float _moveSpeed;
+    private float _gravity;
     private float _verticalVelocity;
     private Vector3 _movementVelocity;
 
-    private float _turnSmoothTime = 0.1f;
+    private float _turnSmoothTime;
     private float _turnSmoothVelocity;
 
-    public PlayerModel()
+    public PlayerModel(PlayerScriptableObject playerSO)
     {
-        _currentHealth = _maxHealth;
+        _currentHealth = playerSO.MaxHealth;
+        _moveSpeed = playerSO.MoveSpeed;
+        _gravity = playerSO.Gravity;
+        _turnSmoothTime = playerSO.TurnSmoothTime;
     }
 
     public Vector3 CalculateMovement(Transform playerTransform, float horizontalInput, float verticalInput, bool isGrounded)
