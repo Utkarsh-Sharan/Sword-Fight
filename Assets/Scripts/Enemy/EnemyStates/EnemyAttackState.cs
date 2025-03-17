@@ -18,7 +18,7 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
         _chasingDelay = Owner.GetEnemySO(Owner.GetEnemyType()).ChaseDelay;
 
         Owner.GetEnemyAgent().isStopped = true;
-        Owner.GetEnemyAnimator().SetTrigger(ConstantStrings.PLAYER_ATTACK_PARAMETER);
+        Owner.GetEnemyAnimator().SetTrigger(ConstantStrings.ATTACK_PARAMETER);
     }
 
     public void Update()
@@ -31,7 +31,7 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
             _outOfRangeTime = 0;
             if(_currentTime >= _attackTime)
             {
-                Owner.GetEnemyAnimator().SetTrigger(ConstantStrings.PLAYER_ATTACK_PARAMETER);
+                Owner.GetEnemyAnimator().SetTrigger(ConstantStrings.ATTACK_PARAMETER);
                 _currentTime = 0f;
             }
         }

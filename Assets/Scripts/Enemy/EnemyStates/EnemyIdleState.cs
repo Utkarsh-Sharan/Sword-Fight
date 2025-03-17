@@ -14,7 +14,7 @@ public class EnemyIdleState<T> : IState<T> where T : EnemyController
     {
         _idleTime = Owner.GetEnemySO(Owner.GetEnemyType()).IdleTime;
         Owner.GetEnemyAgent().isStopped = true;
-        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, 0);
+        Owner.GetEnemyAnimator().SetFloat(ConstantStrings.SPEED_PARAMETER, 0);
     }
 
     public void Update()

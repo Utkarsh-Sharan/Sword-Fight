@@ -22,7 +22,7 @@ public class PlayerRunningState<T> : IState<T> where T : PlayerController
         if(Input.GetMouseButtonDown(0))
             _stateMachine.ChangeState(States.Attack);
 
-        Owner.GetPlayerAnimator().SetFloat(ConstantStrings.RUN_PARAMETER, Owner.GetPlayerMovement().magnitude);
+        Owner.GetPlayerAnimator().SetFloat(ConstantStrings.SPEED_PARAMETER, Owner.GetPlayerMovement().magnitude);
     }
 
     public void OnStateExit()

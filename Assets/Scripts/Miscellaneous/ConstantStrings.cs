@@ -1,6 +1,6 @@
 public class ConstantStrings
 {
-    public const string RUN_PARAMETER = "Speed";
-    public const string PLAYER_AIRBOURNE_PARAMETER = "AirBourne";
-    public const string PLAYER_ATTACK_PARAMETER = "Attack";
+    public const string SPEED_PARAMETER = "Speed";
+    public const string AIRBOURNE_PARAMETER = "AirBourne";
+    public const string ATTACK_PARAMETER = "Attack";
 }

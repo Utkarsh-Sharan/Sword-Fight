@@ -8,7 +8,7 @@ public class PlayerAirBourneState<T> : IState<T> where T : PlayerController
 
     public void OnStateEnter()
     {
-        Owner.GetPlayerAnimator().SetBool(ConstantStrings.PLAYER_AIRBOURNE_PARAMETER, !Owner.GetCharacterController().isGrounded);
+        Owner.GetPlayerAnimator().SetBool(ConstantStrings.AIRBOURNE_PARAMETER, !Owner.GetCharacterController().isGrounded);
     }
 
     public void Update()
@@ -19,6 +19,6 @@ public class PlayerAirBourneState<T> : IState<T> where T : PlayerController
 
     public void OnStateExit()
     {
-        Owner.GetPlayerAnimator().SetBool(ConstantStrings.PLAYER_AIRBOURNE_PARAMETER, false);
+        Owner.GetPlayerAnimator().SetBool(ConstantStrings.AIRBOURNE_PARAMETER, false);
     }
 }

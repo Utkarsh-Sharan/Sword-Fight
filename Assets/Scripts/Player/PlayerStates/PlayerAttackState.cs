@@ -8,7 +8,7 @@ public class PlayerAttackState<T> : IState<T> where T : PlayerController
 
     public void OnStateEnter()
     {
-        Owner.GetPlayerAnimator().SetTrigger(ConstantStrings.PLAYER_ATTACK_PARAMETER);
+        Owner.GetPlayerAnimator().SetTrigger(ConstantStrings.ATTACK_PARAMETER);
     }
 
     public void Update()
