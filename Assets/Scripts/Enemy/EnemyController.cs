@@ -1,42 +1,38 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    private NavMeshAgent _enemyAgent;
-    private Animator _enemyAnimator;
-    private Transform _playerTransform;
-    private float _moveSpeed = 2f;
+    [SerializeField] protected EnemyType enemyType;
+    [SerializeField] protected List<Transform> waypointTransformList;
 
-    public void Initialze(NavMeshAgent enemyAgent, Animator enemyAnimator)
+    protected Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary;
+    protected NavMeshAgent enemyAgent;
+    protected Animator enemyAnimator;
+    protected Transform playerTransform;
+
+    public bool IsPlayerInDetectionZone { get; set; }
+
+    public virtual void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator, List<EnemyScriptableObject> enemySOList)
     {
-        _enemyAgent = enemyAgent;
-        _enemyAnimator = enemyAnimator;
+        this.enemyAgent = enemyAgent;
+        this.enemyAnimator = enemyAnimator;
 
-        _enemyAgent.speed = _moveSpeed;
+        enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
+        foreach (EnemyScriptableObject enemySO in enemySOList)
+            enemySODictionary[enemySO.EnemyType] = enemySO;
     }
 
     public void Dependency(PlayerService playerService)
     {
-        _playerTransform = playerService.GetPlayerTransform();
+        playerTransform = playerService.GetPlayerTransform();
     }
 
-    private void FixedUpdate()
-    {
-        CalculateMovement();
-    }
-
-    private void CalculateMovement()
-    {
-        if(Vector3.Distance(this.transform.position, _playerTransform.position) >= _enemyAgent.stoppingDistance)
-        {
-            _enemyAgent.SetDestination(_playerTransform.position);
-            _enemyAnimator.SetFloat(ConstantStrings.RUN_PARAMETER, _moveSpeed);
-        }
-        else
-        {
-            _enemyAgent.SetDestination(this.transform.position);
-            _enemyAnimator.SetFloat(ConstantStrings.RUN_PARAMETER, 0);
-        }
-    }
+    public Animator GetEnemyAnimator() => enemyAnimator;
+    public NavMeshAgent GetEnemyAgent() => enemyAgent;
+    public List<Transform> GetWayPointTransformList() => waypointTransformList;
+    public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => enemySODictionary[enemyType];
+    public EnemyType GetEnemyType() => enemyType;
+    public Transform GetPlayerTransform() => playerTransform;
 }

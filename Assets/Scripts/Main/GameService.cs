@@ -16,15 +16,10 @@ public class GameService : MonoBehaviour
     [SerializeField] private EnemyController _enemyController;
     [SerializeField] private NavMeshAgent _enemyAgent;
     [SerializeField] private Animator _enemyAnimator;
-
-    [Header("VFX Properties")]
-    [SerializeField] private EnemyVFXController _enemyVFXController;
-    [SerializeField] private PlayerView _playerVFXController;
-    [SerializeField] private List<VFXScriptableObject> _vFXSOList;
+    [SerializeField] private List<EnemyScriptableObject> _enemySOList;
 
     private PlayerService _playerService;
     private EnemyService _enemyService;
-    private VFXService _vFXService;
 
     private void Start()
     {
@@ -35,7 +30,7 @@ public class GameService : MonoBehaviour
     private void CreateServices()
     {
         _playerService = new PlayerService(_playerController, _characterController, _playerAnimator);
-        _enemyService = new EnemyService(_enemyController, _enemyAgent, _enemyAnimator);
+        _enemyService = new EnemyService(_enemyController, _enemyAgent, _enemyAnimator, _enemySOList);
     }
 
     private void InjectDependencies()

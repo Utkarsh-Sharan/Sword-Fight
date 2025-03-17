@@ -2,5 +2,8 @@ public enum States
 {
     Idle,
     Running,
-    AirBourne
+    AirBourne,
+    Attack,
+    Chasing,
+    Patrolling
 }

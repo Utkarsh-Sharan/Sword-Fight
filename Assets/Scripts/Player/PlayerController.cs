@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _movement, _direction;
     private float _horizontalInput, _verticalInput;
 
-    //private PlayerStateMachine _playerStateMachine;
+    private PlayerStateMachine _playerStateMachine;
 
     public void Init(CharacterController characterController, Animator playerAnimator)
     {
@@ -21,13 +21,14 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _playerModel = new PlayerModel();
-        //_playerStateMachine = new PlayerStateMachine(this);
-        //_playerStateMachine.ChangeState(States.Idle);
+        _playerStateMachine = new PlayerStateMachine(this);
+
+        _playerStateMachine.ChangeState(States.Idle);
     }
 
     private void FixedUpdate()
     {
-        _movement = _playerModel.CalculateMovement(_horizontalInput, _verticalInput, _characterController.isGrounded);
+        _movement = _playerModel.CalculateMovement(this.transform, _horizontalInput, _verticalInput, _characterController.isGrounded);
         transform.rotation = _playerModel.CalculateRotation(_direction, transform.eulerAngles.y);
 
         _characterController.Move(_movement);
@@ -39,15 +40,15 @@ public class PlayerController : MonoBehaviour
         _verticalInput = Input.GetAxisRaw("Vertical");
 
         _direction = new Vector3(_horizontalInput, 0, _verticalInput).normalized;
-
-        _playerAnimator.SetFloat(ConstantStrings.RUN_PARAMETER, _movement.magnitude);
-        _playerAnimator.SetBool(ConstantStrings.PLAYER_AIRBOURNE_PARAMETER, !_characterController.isGrounded);
-
-        //_playerStateMachine.Update();
-        //_playerStateMachine.ChangeState(States.Running);
+        _playerStateMachine.Update();
     }
 
+    public void AttackSlideForward() => _playerModel.AttackSlideForward();
+
     public Transform GetPlayerTransform() => this.transform;
+    public Vector3 GetPlayerMovement() => _movement;
+    public Animator GetPlayerAnimator() => _playerAnimator;
+    public CharacterController GetCharacterController() => _characterController;
 
     private void OnDisable()
     {
