@@ -1,21 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     private CharacterController _characterController;
     private Animator _playerAnimator;
     private PlayerModel _playerModel;
+    private DamageApplier _damageApplier;
     private Vector3 _movement, _direction;
     private float _horizontalInput, _verticalInput;
 
     private PlayerStateMachine _playerStateMachine;
 
-    public void Init(CharacterController characterController, Animator playerAnimator)
+    public void Init(CharacterController characterController, Animator playerAnimator, DamageApplier damageApplier)
     {
         _characterController = characterController;
         _playerAnimator = playerAnimator;
+        _damageApplier = damageApplier;
     }
 
     private void Start()
@@ -43,16 +43,16 @@ public class PlayerController : MonoBehaviour
         _playerStateMachine.Update();
     }
 
-    public void AttackSlideForward() => _playerModel.AttackSlideForward();
+    public void PlayerAttackStart() => _damageApplier.enabled = true;
+    public void PlayerAttackEnd() => _damageApplier.enabled = false;
 
     public Transform GetPlayerTransform() => this.transform;
     public Vector3 GetPlayerMovement() => _movement;
     public Animator GetPlayerAnimator() => _playerAnimator;
     public CharacterController GetCharacterController() => _characterController;
 
-    private void OnDisable()
+    public void OnDamage(int damageAmount)
     {
-        _horizontalInput = 0f;
-        _verticalInput = 0f;
+        _playerModel.OnDamage(damageAmount);
     }
 }

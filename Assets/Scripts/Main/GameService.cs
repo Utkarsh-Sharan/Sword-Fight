@@ -7,6 +7,9 @@ using UnityEngine.VFX;
 
 public class GameService : MonoBehaviour
 {
+    [Header("Common Properties")]
+    [SerializeField] private DamageApplier _damageApplier;
+
     [Header("Player properties")]
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private CharacterController _characterController;
@@ -29,7 +32,7 @@ public class GameService : MonoBehaviour
 
     private void CreateServices()
     {
-        _playerService = new PlayerService(_playerController, _characterController, _playerAnimator);
+        _playerService = new PlayerService(_playerController, _characterController, _playerAnimator, _damageApplier);
         _enemyService = new EnemyService(_enemyController, _enemyAgent, _enemyAnimator, _enemySOList);
     }
 

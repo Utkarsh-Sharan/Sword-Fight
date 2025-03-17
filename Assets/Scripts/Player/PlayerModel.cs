@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerModel
 {
+    private int _maxHealth = 50;
+    private int _currentHealth;
     private float _moveSpeed = 5f;
     private float _gravity = -20f;
     private float _verticalVelocity;
@@ -10,28 +13,13 @@ public class PlayerModel
     private float _turnSmoothTime = 0.1f;
     private float _turnSmoothVelocity;
 
-    private float _attackStartTime;
-    private float _attackSlideDuration = 0.5f;
-    private float _attackSlideSpeed = 0.09f;
-    private bool _isAttacking;
+    public PlayerModel()
+    {
+        _currentHealth = _maxHealth;
+    }
 
     public Vector3 CalculateMovement(Transform playerTransform, float horizontalInput, float verticalInput, bool isGrounded)
     {
-        if (_isAttacking)
-        {
-            if (Time.time < _attackStartTime + _attackSlideDuration)
-            {
-                _movementVelocity = Vector3.zero;
-                float timePassed = Time.time - _attackStartTime;
-                float lerpTime = timePassed / _attackSlideDuration;
-
-                _movementVelocity = Vector3.Lerp(playerTransform.forward * _attackSlideSpeed, Vector3.zero, lerpTime);
-
-                _isAttacking = false;
-                return _movementVelocity;
-            }
-        }
-
         _movementVelocity.Set(horizontalInput, 0, verticalInput);
         _movementVelocity.Normalize();
         _movementVelocity *= _moveSpeed * Time.deltaTime;
@@ -54,9 +42,16 @@ public class PlayerModel
         return Quaternion.Euler(0, currentYRotation, 0);
     }
 
-    public void AttackSlideForward()
+    public void OnDamage(int damageAmount)
     {
-        _attackStartTime = Time.time;
-        _isAttacking = true;
+        if (_currentHealth > 0)
+            _currentHealth -= damageAmount;
+        else
+            PlayerDead();
+    }
+
+    private void PlayerDead()
+    {
+        Debug.Log("Player dead");
     }
 }

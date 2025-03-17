@@ -13,8 +13,6 @@ public class PlayerAttackState<T> : IState<T> where T : PlayerController
 
     public void Update()
     {
-        Owner.AttackSlideForward();
-
         _stateMachine.ChangeState(States.Idle);
     }
 

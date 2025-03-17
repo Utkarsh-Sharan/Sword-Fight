@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamageable
 {
     [SerializeField] protected EnemyType enemyType;
     [SerializeField] protected List<Transform> waypointTransformList;
@@ -35,4 +35,6 @@ public class EnemyController : MonoBehaviour
     public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => enemySODictionary[enemyType];
     public EnemyType GetEnemyType() => enemyType;
     public Transform GetPlayerTransform() => playerTransform;
+
+    public virtual void OnDamage(int damageAmount) { }
 }
