@@ -50,11 +50,13 @@ public class PlayerModel
 
     public void OnDamage(int damageAmount)
     {
-        if (_currentHealth <= 0)
-            PlayerDead();
-        else
-            _currentHealth -= damageAmount;
+        _currentHealth -= damageAmount;
+        CheckForPlayerDeath();
     }
 
-    private void PlayerDead() => _playerController.PlayerDead();
+    private void CheckForPlayerDeath()
+    {
+        if(_currentHealth <= 0)
+            _playerController.PlayerDead();
+    }
 }
