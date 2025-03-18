@@ -10,7 +10,7 @@ public class PlayerService
         playerController.Init(characterController, playerAnimator, playerSO);
     }
 
-    public void Dependency(EnemyService enemyService) => _playerController.Dependency(enemyService);
+    public void Dependency(EnemyService enemyService, EventService eventService) => _playerController.Dependency(enemyService, eventService);
 
     public Transform GetPlayerTransform() => _playerController.GetPlayerTransform();
 

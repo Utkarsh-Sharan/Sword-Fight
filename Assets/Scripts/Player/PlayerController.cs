@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     private EnemyScriptableObject _enemySO;
     private PlayerScriptableObject _playerSO;
 
+    private EventService _eventService;
+
     public void Init(CharacterController characterController, Animator playerAnimator, PlayerScriptableObject playerSO)
     {
         _characterController = characterController;
@@ -22,9 +24,10 @@ public class PlayerController : MonoBehaviour, IDamageable
         _playerSO = playerSO;
     }
 
-    public void Dependency(EnemyService enemyService)
+    public void Dependency(EnemyService enemyService, EventService eventService)
     {
         _enemySO = enemyService.GetEnemySO(enemyService.GetEnemyType());
+        _eventService = eventService;
     }
 
     private void Start()
@@ -65,6 +68,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void PlayerDead()
     {
+        _eventService.OnPlayerDeathEvent.InvokeEvent();
         _playerAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
         Destroy(this);
     }

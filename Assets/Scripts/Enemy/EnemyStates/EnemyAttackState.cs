@@ -41,7 +41,6 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
             if(_outOfRangeTime >= _chasingDelay)
                 _stateMachine.ChangeState(States.Chasing);
         }
-
     }
 
     public void OnStateExit()

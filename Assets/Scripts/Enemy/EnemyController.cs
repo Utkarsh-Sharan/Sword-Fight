@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,10 +16,14 @@ public class EnemyController : MonoBehaviour, IDamageable
     protected Transform playerTransform;
     protected PlayerScriptableObject playerSO;
 
+    protected EventService eventService;
+
+    private bool _isPlayerDead;
     public bool IsPlayerInDetectionZone { get; set; }
 
     public virtual void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator, List<EnemyScriptableObject> enemySOList)
     {
+        _isPlayerDead = false;
         this.enemyAgent = enemyAgent;
         this.enemyAnimator = enemyAnimator;
         damageApplier.enabled = false;
@@ -28,14 +33,25 @@ public class EnemyController : MonoBehaviour, IDamageable
             enemySODictionary[enemySO.EnemyType] = enemySO;
     }
 
-    public void Dependency(PlayerService playerService)
+    public void Dependency(PlayerService playerService, EventService eventService)
     {
         playerTransform = playerService.GetPlayerTransform();
         playerSO = playerService.GetPlayerSO();
+
+        this.eventService = eventService;
+        SubscribeToEvents(this.eventService);
+    }
+
+    private void SubscribeToEvents(EventService eventService)
+    {
+        eventService.OnPlayerDeathEvent.AddListener(OnPlayerDead);
     }
 
     public void EnemyAttackStart() => damageApplier.enabled = true;
     public void EnemyAttackEnd() => damageApplier.enabled = false;
+
+    public virtual void OnDamage() { }
+    private void OnPlayerDead() => _isPlayerDead = true;
 
     public Animator GetEnemyAnimator() => enemyAnimator;
     public NavMeshAgent GetEnemyAgent() => enemyAgent;
@@ -43,6 +59,10 @@ public class EnemyController : MonoBehaviour, IDamageable
     public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => enemySODictionary[enemyType];
     public EnemyType GetEnemyType() => enemyType;
     public Transform GetPlayerTransform() => playerTransform;
+    public bool IsPlayerDead() => _isPlayerDead;
 
-    public virtual void OnDamage() { }
+    protected void OnDestroy()
+    {
+        eventService.OnPlayerDeathEvent.RemoveListener(OnPlayerDead);
+    }
 }
