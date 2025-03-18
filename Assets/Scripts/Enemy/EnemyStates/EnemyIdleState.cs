@@ -19,6 +19,9 @@ public class EnemyIdleState<T> : IState<T> where T : EnemyController
 
     public void Update()
     {
+        if(Owner.IsPlayerDead()) 
+            return;
+
         _currentTime += Time.deltaTime;
         if(_currentTime >= _idleTime)
             _stateMachine.ChangeState(States.Patrolling);

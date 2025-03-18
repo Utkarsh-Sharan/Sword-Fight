@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 122
+  controlID: 28
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -192,8 +192,8 @@ MonoBehaviour:
     y: 656
     width: 1564
     height: 651
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -246,8 +246,8 @@ MonoBehaviour:
     y: 0
     width: 400
     height: 653
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -298,8 +298,8 @@ MonoBehaviour:
     y: 0
     width: 596
     height: 1307
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -859,9 +859,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -5.394973, y: 5.4463835, z: 33.41827}
+    m_Target: {x: 4.6604605, y: 6.480642, z: 32.45076}
     speed: 2
-    m_Value: {x: -5.394973, y: 5.4463835, z: 33.41827}
+    m_Value: {x: 4.6604605, y: 6.480642, z: 32.45076}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -907,9 +907,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.09116088, y: -0.6647137, z: 0.08259722, w: 0.73708004}
+    m_Target: {x: 0.078969456, y: -0.8329014, z: 0.12374747, w: 0.53384477}
     speed: 2
-    m_Value: {x: 0.09114885, y: -0.664626, z: 0.08258632, w: 0.73698276}
+    m_Value: {x: 0.07895901, y: -0.8327912, z: 0.1237311, w: 0.53377414}
   m_Size:
     m_Target: 1.3342133
     speed: 2
@@ -1095,7 +1095,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -35034
+  m_LastSelectedObjectID: 29026
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1176,9 +1176,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 7a700000
       m_LastClickedID: 0
-      m_ExpandedIDs: 08fbffff0efbffff1a710000787100007c71000062720000
+      m_ExpandedIDs: 08fbffff0efbffff2271000080710000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1247,7 +1247,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/ProjectLittleAdventurer/Mesh Asset/Character/NPC_01
+    - Assets/Resources/PlayerScriptableObject
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1263,7 +1263,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b8770000
     m_LastClickedID: 30648
-    m_ExpandedIDs: 0000000050a3000052a3000054a3000056a3000058a300005aa300005ca300005ea3000060a3000062a3000064a3000066a3000068a300006aa30000
+    m_ExpandedIDs: 0000000060a3000062a3000064a3000066a3000068a300006aa300006ca300006ea3000070a3000072a3000074a3000076a3000078a300007aa300007ca30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1291,7 +1291,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff0000000050a3000052a3000054a3000056a3000058a300005aa300005ca300005ea3000060a3000062a3000066a3000068a300006aa30000a8a50000aca50000
+    m_ExpandedIDs: ffffffff0000000060a3000062a3000064a3000066a300006ca300006ea3000072a3000074a3000076a3000078a30000dc380100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

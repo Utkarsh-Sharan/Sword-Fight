@@ -41,6 +41,8 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
             if(_outOfRangeTime >= _chasingDelay)
                 _stateMachine.ChangeState(States.Chasing);
         }
+        if (Owner.IsPlayerDead())
+            _stateMachine.ChangeState(States.Idle);
     }
 
     public void OnStateExit()
