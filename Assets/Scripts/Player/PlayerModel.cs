@@ -1,37 +1,31 @@
+using System;
 using UnityEngine;
 
 public class PlayerModel
 {
-    private float _moveSpeed = 5f;
-    private float _gravity = -20f;
+    private int _currentHealth;
+    private float _moveSpeed;
+    private float _gravity;
     private float _verticalVelocity;
     private Vector3 _movementVelocity;
 
-    private float _turnSmoothTime = 0.1f;
+    private float _turnSmoothTime;
     private float _turnSmoothVelocity;
 
-    private float _attackStartTime;
-    private float _attackSlideDuration = 0.5f;
-    private float _attackSlideSpeed = 0.09f;
-    private bool _isAttacking;
+    private PlayerController _playerController;
+
+    public PlayerModel(PlayerController playerController, PlayerScriptableObject playerSO)
+    {
+        _playerController = playerController;
+
+        _currentHealth = playerSO.MaxHealth;
+        _moveSpeed = playerSO.MoveSpeed;
+        _gravity = playerSO.Gravity;
+        _turnSmoothTime = playerSO.TurnSmoothTime;
+    }
 
     public Vector3 CalculateMovement(Transform playerTransform, float horizontalInput, float verticalInput, bool isGrounded)
     {
-        if (_isAttacking)
-        {
-            if (Time.time < _attackStartTime + _attackSlideDuration)
-            {
-                _movementVelocity = Vector3.zero;
-                float timePassed = Time.time - _attackStartTime;
-                float lerpTime = timePassed / _attackSlideDuration;
-
-                _movementVelocity = Vector3.Lerp(playerTransform.forward * _attackSlideSpeed, Vector3.zero, lerpTime);
-
-                _isAttacking = false;
-                return _movementVelocity;
-            }
-        }
-
         _movementVelocity.Set(horizontalInput, 0, verticalInput);
         _movementVelocity.Normalize();
         _movementVelocity *= _moveSpeed * Time.deltaTime;
@@ -54,9 +48,15 @@ public class PlayerModel
         return Quaternion.Euler(0, currentYRotation, 0);
     }
 
-    public void AttackSlideForward()
+    public void OnDamage(int damageAmount)
     {
-        _attackStartTime = Time.time;
-        _isAttacking = true;
+        _currentHealth -= damageAmount;
+        CheckForPlayerDeath();
+    }
+
+    private void CheckForPlayerDeath()
+    {
+        if(_currentHealth <= 0)
+            _playerController.PlayerDead();
     }
 }

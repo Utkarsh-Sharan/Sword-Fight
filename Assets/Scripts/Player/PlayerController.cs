@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
+    [SerializeField] private DamageApplier _damageApplier;
+
     private CharacterController _characterController;
     private Animator _playerAnimator;
     private PlayerModel _playerModel;
@@ -12,15 +12,27 @@ public class PlayerController : MonoBehaviour
 
     private PlayerStateMachine _playerStateMachine;
 
-    public void Init(CharacterController characterController, Animator playerAnimator)
+    private EnemyScriptableObject _enemySO;
+    private PlayerScriptableObject _playerSO;
+
+    private EventService _eventService;
+
+    public void Init(CharacterController characterController, Animator playerAnimator, PlayerScriptableObject playerSO)
     {
         _characterController = characterController;
         _playerAnimator = playerAnimator;
+        _playerSO = playerSO;
+    }
+
+    public void Dependency(EnemyService enemyService, EventService eventService)
+    {
+        _enemySO = enemyService.GetEnemySO(enemyService.GetEnemyType());
+        _eventService = eventService;
     }
 
     private void Start()
     {
-        _playerModel = new PlayerModel();
+        _playerModel = new PlayerModel(this, _playerSO);
         _playerStateMachine = new PlayerStateMachine(this);
 
         _playerStateMachine.ChangeState(States.Idle);
@@ -43,16 +55,21 @@ public class PlayerController : MonoBehaviour
         _playerStateMachine.Update();
     }
 
-    public void AttackSlideForward() => _playerModel.AttackSlideForward();
+    public void PlayerAttackStart() => _damageApplier.enabled = true;
+    public void PlayerAttackEnd() => _damageApplier.enabled = false;
 
     public Transform GetPlayerTransform() => this.transform;
     public Vector3 GetPlayerMovement() => _movement;
     public Animator GetPlayerAnimator() => _playerAnimator;
     public CharacterController GetCharacterController() => _characterController;
+    public PlayerScriptableObject GetPlayerSO() => _playerSO;
 
-    private void OnDisable()
+    public void OnDamage() => _playerModel.OnDamage(_enemySO.AttackDamage);
+
+    public void PlayerDead()
     {
-        _horizontalInput = 0f;
-        _verticalInput = 0f;
+        _eventService.OnPlayerDeathEvent.InvokeEvent();
+        _playerAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
+        Destroy(this);
     }
 }

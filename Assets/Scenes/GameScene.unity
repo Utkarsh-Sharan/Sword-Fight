@@ -293,6 +293,73 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &217106436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 217106437}
+  - component: {fileID: 217106439}
+  - component: {fileID: 217106438}
+  m_Layer: 0
+  m_Name: DamageApplier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &217106437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217106436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1227086435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &217106438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217106436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c936e0850c8ea4bbbed653553e78a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageCollider: {fileID: 217106439}
+--- !u!65 &217106439
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217106436}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6, y: 1, z: 2.39}
+  m_Center: {x: 0, y: 0.57, z: 2.58}
 --- !u!1001 &232819088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -799,6 +866,73 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &630380236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 630380237}
+  - component: {fileID: 630380238}
+  - component: {fileID: 630380239}
+  m_Layer: 0
+  m_Name: DamageApplier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &630380237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630380236}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2003669890}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &630380238
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630380236}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.37, y: 1, z: 1.39}
+  m_Center: {x: 0, y: 0.84, z: 1.26}
+--- !u!114 &630380239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630380236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c936e0850c8ea4bbbed653553e78a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageCollider: {fileID: 630380238}
 --- !u!114 &649483810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1078,6 +1212,7 @@ MonoBehaviour:
   _playerController: {fileID: 2003669892}
   _characterController: {fileID: 2003669891}
   _playerAnimator: {fileID: 2003669893}
+  _playerSO: {fileID: 11400000, guid: 8bf7546c21cdde64394ded38f795c6fc, type: 2}
   _enemyController: {fileID: 1227086441}
   _enemyAgent: {fileID: 1227086437}
   _enemyAnimator: {fileID: 1227086436}
@@ -1403,8 +1538,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1227086435}
-  - component: {fileID: 1227086436}
   - component: {fileID: 1227086438}
+  - component: {fileID: 1227086436}
   - component: {fileID: 1227086437}
   - component: {fileID: 1227086441}
   - component: {fileID: 1227086442}
@@ -1424,11 +1559,12 @@ Transform:
   m_GameObject: {fileID: 1227086434}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.06, y: 4, z: 31.54}
+  m_LocalPosition: {x: -3.36, y: 4, z: 31.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 232819089}
+  - {fileID: 217106437}
   m_Father: {fileID: 1177590496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1227086436
@@ -1494,7 +1630,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 4
-  m_Radius: 1
+  m_Radius: 0.72
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1516,6 +1652,7 @@ MonoBehaviour:
   waypointTransformList:
   - {fileID: 1029398332}
   - {fileID: 1660129999}
+  damageApplier: {fileID: 217106438}
 --- !u!114 &1227086442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3306,6 +3443,7 @@ Transform:
   m_Children:
   - {fileID: 1915612777}
   - {fileID: 1635220292}
+  - {fileID: 630380237}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &2003669891
@@ -3346,6 +3484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c855c9b5fccc5f4daaae30c303e3c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageApplier: {fileID: 630380239}
 --- !u!95 &2003669893
 Animator:
   serializedVersion: 5

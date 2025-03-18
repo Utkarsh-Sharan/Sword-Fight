@@ -11,6 +11,7 @@ public class GameService : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private CharacterController _characterController;
     [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private PlayerScriptableObject _playerSO;
 
     [Header("Enemy Properties")]
     [SerializeField] private EnemyController _enemyController;
@@ -20,6 +21,7 @@ public class GameService : MonoBehaviour
 
     private PlayerService _playerService;
     private EnemyService _enemyService;
+    private EventService _eventService;
 
     private void Start()
     {
@@ -29,12 +31,14 @@ public class GameService : MonoBehaviour
 
     private void CreateServices()
     {
-        _playerService = new PlayerService(_playerController, _characterController, _playerAnimator);
+        _eventService = new EventService();
+        _playerService = new PlayerService(_playerController, _characterController, _playerAnimator, _playerSO);
         _enemyService = new EnemyService(_enemyController, _enemyAgent, _enemyAnimator, _enemySOList);
     }
 
     private void InjectDependencies()
     {
-        _enemyService.Dependency(_playerService);
+        _enemyService.Dependency(_playerService, _eventService);
+        _playerService.Dependency(_enemyService, _eventService);
     }
 }
