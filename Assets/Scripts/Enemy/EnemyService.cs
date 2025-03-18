@@ -14,5 +14,6 @@ public class EnemyService
 
     public void Dependency(PlayerService playerService) => _enemyController.Dependency(playerService);
 
-    public EnemyScriptableObject GetEnemySO() => _enemyController.GetEnemySO(_enemyController.GetEnemyType());
+    public EnemyType GetEnemyType() => _enemyController.GetEnemyType();
+    public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => _enemyController.GetEnemySO(enemyType);
 }

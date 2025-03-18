@@ -4,10 +4,10 @@ public class PlayerService
 {
     private PlayerController _playerController;
 
-    public PlayerService(PlayerController playerController, CharacterController characterController, Animator playerAnimator, DamageApplier damageApplier, PlayerScriptableObject playerSO)
+    public PlayerService(PlayerController playerController, CharacterController characterController, Animator playerAnimator, PlayerScriptableObject playerSO)
     {
         _playerController = playerController;
-        playerController.Init(characterController, playerAnimator, damageApplier, playerSO);
+        playerController.Init(characterController, playerAnimator, playerSO);
     }
 
     public void Dependency(EnemyService enemyService) => _playerController.Dependency(enemyService);

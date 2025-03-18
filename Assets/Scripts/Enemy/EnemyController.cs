@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour, IDamageable
 {
     [SerializeField] protected EnemyType enemyType;
     [SerializeField] protected List<Transform> waypointTransformList;
+    [SerializeField] protected DamageApplier damageApplier;
 
     protected Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary;
     protected NavMeshAgent enemyAgent;
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         this.enemyAgent = enemyAgent;
         this.enemyAnimator = enemyAnimator;
+        damageApplier.enabled = false;
 
         enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
         foreach (EnemyScriptableObject enemySO in enemySOList)
@@ -31,6 +33,9 @@ public class EnemyController : MonoBehaviour, IDamageable
         playerTransform = playerService.GetPlayerTransform();
         playerSO = playerService.GetPlayerSO();
     }
+
+    public void EnemyAttackStart() => damageApplier.enabled = true;
+    public void EnemyAttackEnd() => damageApplier.enabled = false;
 
     public Animator GetEnemyAnimator() => enemyAnimator;
     public NavMeshAgent GetEnemyAgent() => enemyAgent;

@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
+    [SerializeField] private DamageApplier _damageApplier;
+
     private CharacterController _characterController;
     private Animator _playerAnimator;
     private PlayerModel _playerModel;
-    private DamageApplier _damageApplier;
     private Vector3 _movement, _direction;
     private float _horizontalInput, _verticalInput;
 
@@ -14,17 +15,16 @@ public class PlayerController : MonoBehaviour, IDamageable
     private EnemyScriptableObject _enemySO;
     private PlayerScriptableObject _playerSO;
 
-    public void Init(CharacterController characterController, Animator playerAnimator, DamageApplier damageApplier, PlayerScriptableObject playerSO)
+    public void Init(CharacterController characterController, Animator playerAnimator, PlayerScriptableObject playerSO)
     {
         _characterController = characterController;
         _playerAnimator = playerAnimator;
-        _damageApplier = damageApplier;
         _playerSO = playerSO;
     }
 
     public void Dependency(EnemyService enemyService)
     {
-        _enemySO = enemyService.GetEnemySO();
+        _enemySO = enemyService.GetEnemySO(enemyService.GetEnemyType());
     }
 
     private void Start()
@@ -63,6 +63,11 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void OnDamage()
     {
+        if(_enemySO == null)
+        {
+            Debug.Log("so is null");
+            return;
+        }
         _playerModel.OnDamage(_enemySO.AttackDamage);
     }
 }
