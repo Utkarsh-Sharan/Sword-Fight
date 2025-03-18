@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        _playerModel = new PlayerModel(_playerSO);
+        _playerModel = new PlayerModel(this, _playerSO);
         _playerStateMachine = new PlayerStateMachine(this);
 
         _playerStateMachine.ChangeState(States.Idle);
@@ -61,13 +61,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     public CharacterController GetCharacterController() => _characterController;
     public PlayerScriptableObject GetPlayerSO() => _playerSO;
 
-    public void OnDamage()
+    public void OnDamage() => _playerModel.OnDamage(_enemySO.AttackDamage);
+
+    public void PlayerDead()
     {
-        if(_enemySO == null)
-        {
-            Debug.Log("so is null");
-            return;
-        }
-        _playerModel.OnDamage(_enemySO.AttackDamage);
+        _playerAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
+        Destroy(this);
     }
 }

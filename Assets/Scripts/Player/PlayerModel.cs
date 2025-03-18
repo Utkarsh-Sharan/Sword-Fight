@@ -12,8 +12,12 @@ public class PlayerModel
     private float _turnSmoothTime;
     private float _turnSmoothVelocity;
 
-    public PlayerModel(PlayerScriptableObject playerSO)
+    private PlayerController _playerController;
+
+    public PlayerModel(PlayerController playerController, PlayerScriptableObject playerSO)
     {
+        _playerController = playerController;
+
         _currentHealth = playerSO.MaxHealth;
         _moveSpeed = playerSO.MoveSpeed;
         _gravity = playerSO.Gravity;
@@ -52,8 +56,5 @@ public class PlayerModel
             PlayerDead();
     }
 
-    private void PlayerDead()
-    {
-        Debug.Log("Player dead");
-    }
+    private void PlayerDead() => _playerController.PlayerDead();
 }
