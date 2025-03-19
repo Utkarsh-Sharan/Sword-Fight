@@ -19,6 +19,9 @@ public class GameService : MonoBehaviour
     [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private List<EnemyScriptableObject> _enemySOList;
 
+    [Header("UI Service")]
+    [SerializeField] private UIService _uIService;
+
     private PlayerService _playerService;
     private EnemyService _enemyService;
     private EventService _eventService;
@@ -40,5 +43,6 @@ public class GameService : MonoBehaviour
     {
         _enemyService.Dependency(_playerService, _eventService);
         _playerService.Dependency(_enemyService, _eventService);
+        _uIService.Dependency(_eventService);
     }
 }

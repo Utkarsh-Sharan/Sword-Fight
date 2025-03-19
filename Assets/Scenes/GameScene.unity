@@ -1286,6 +1286,7 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 1227086436}
   _enemySOList:
   - {fileID: 11400000, guid: 37acf9de45c6b914785887f45a2962f6, type: 2}
+  _uIService: {fileID: 2767669644414082972}
 --- !u!4 &927690048
 Transform:
   m_ObjectHideFlags: 0
@@ -4111,7 +4112,7 @@ RectTransform:
   m_GameObject: {fileID: 2767669643770634925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2767669645470919345}
@@ -4180,7 +4181,7 @@ RectTransform:
   m_GameObject: {fileID: 2767669643815009240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2767669645505593847}
@@ -4240,6 +4241,7 @@ GameObject:
   - component: {fileID: 2767669643917948147}
   - component: {fileID: 2767669643917948146}
   - component: {fileID: 2767669643917948145}
+  - component: {fileID: 2767669643917948148}
   m_Layer: 5
   m_Name: GameOverUI
   m_TagString: Untagged
@@ -4294,7 +4296,7 @@ RectTransform:
   m_GameObject: {fileID: 2767669643917948144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2767669643658149918}
@@ -4306,6 +4308,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 4, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2767669643917948148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2767669643917948144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659e20d4bf461694981ace4f153431ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _panelType: 0
 --- !u!224 &2767669643934498936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4492,7 +4507,7 @@ RectTransform:
   m_GameObject: {fileID: 2767669644043402308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2767669643492809050}
@@ -4797,7 +4812,7 @@ RectTransform:
   m_GameObject: {fileID: 2767669644222885719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2767669644802671909}
@@ -4820,13 +4835,27 @@ GameObject:
   - component: {fileID: 2767669644222885714}
   - component: {fileID: 2767669644222885713}
   - component: {fileID: 2767669644222885712}
+  - component: {fileID: 2767669644222885720}
   m_Layer: 5
-  m_Name: GameCompletedUI
+  m_Name: GameWinUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &2767669644222885720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2767669644222885719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659e20d4bf461694981ace4f153431ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _panelType: 1
 --- !u!224 &2767669644342167328
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4983,6 +5012,7 @@ GameObject:
   - component: {fileID: 2767669644414082965}
   - component: {fileID: 2767669644414082964}
   - component: {fileID: 2767669644414082971}
+  - component: {fileID: 2767669644414082972}
   m_Layer: 5
   m_Name: ' UIService'
   m_TagString: Untagged
@@ -5007,6 +5037,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2767669644414082972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2767669644414082969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bea1c1faba7e494c8e9e51f1b85914f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _panelList:
+  - {fileID: 2767669643917948148}
+  - {fileID: 2767669644222885720}
 --- !u!224 &2767669644580220504
 RectTransform:
   m_ObjectHideFlags: 0
