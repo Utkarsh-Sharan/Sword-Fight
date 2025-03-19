@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIService : MonoBehaviour
 {
@@ -8,7 +10,9 @@ public class UIService : MonoBehaviour
     private Dictionary<PanelType, Panel> _panelDictionary;
     private Panel _currentlyOpenPanel;
 
-    private void Start()
+    private EventService _eventService;
+
+    private void OnEnable()
     {
         _panelDictionary = new Dictionary<PanelType, Panel>();
         foreach(Panel panel in _panelList)
@@ -17,18 +21,24 @@ public class UIService : MonoBehaviour
 
     public void Dependency(EventService eventService)
     {
-        eventService.OnPlayerDeathEvent.AddListener(OnPlayerDeath);
+        _eventService = eventService;
+        _eventService.OnPlayerDeathEvent.AddListener(OnPlayerDeath);
     }
 
     private void OnPlayerDeath() => OpenNewPanel(PanelType.Game_Over);
 
-    public void OpenNewPanel(PanelType panelType)
+    private void OpenNewPanel(PanelType panelType)
     {
         if(_currentlyOpenPanel != null)
             _currentlyOpenPanel.gameObject.SetActive(false);
 
         _currentlyOpenPanel = _panelDictionary[panelType];
         _currentlyOpenPanel.gameObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        _eventService.OnPlayerDeathEvent.RemoveListener(OnPlayerDeath);
     }
 }
 
