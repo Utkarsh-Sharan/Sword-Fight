@@ -38,6 +38,16 @@ Attack: Click the Left Mouse Button to attack enemies.
 
 ---
 
+## Future Enhancements
+
+More Levels: Expanding the game world with additional challenges and environments.
+
+New Enemies: Introducing more enemy types with unique abilities and attack patterns.
+
+Combo System: Enhancing player combat with combo-based attacks for a more dynamic fighting experience.
+
+---
+
 ## Watch
 
 https://www.loom.com/share/bae7671eb1e145139f397e3837644871?sid=60c7451d-03d0-45d7-a88b-88750ac7b4ca
