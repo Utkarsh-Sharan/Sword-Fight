@@ -12,7 +12,7 @@ public class UIService : MonoBehaviour
 
     private EventService _eventService;
 
-    private void OnEnable()
+    private void Start()
     {
         _panelDictionary = new Dictionary<PanelType, Panel>();
         foreach(Panel panel in _panelList)
@@ -23,9 +23,11 @@ public class UIService : MonoBehaviour
     {
         _eventService = eventService;
         _eventService.OnPlayerDeathEvent.AddListener(OnPlayerDeath);
+        _eventService.OnLevelWinEvent.AddListener(OnLevelWin);
     }
 
     private void OnPlayerDeath() => OpenNewPanel(PanelType.Game_Over);
+    private void OnLevelWin() => OpenNewPanel(PanelType.Game_Win);      //currently only opening game win panel on winning level, will add new levels later.
 
     private void OpenNewPanel(PanelType panelType)
     {
@@ -39,6 +41,7 @@ public class UIService : MonoBehaviour
     private void OnDisable()
     {
         _eventService.OnPlayerDeathEvent.RemoveListener(OnPlayerDeath);
+        _eventService.OnLevelWinEvent.RemoveListener(OnLevelWin);
     }
 }
 

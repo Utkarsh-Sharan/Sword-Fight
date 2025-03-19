@@ -37,6 +37,7 @@ public class TankEnemyController : EnemyController
     private void EnemyDead()
     {
         this.enemyAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
+        eventService.OnEnemyDeathEvent.InvokeEvent();
         Destroy(this);
     }
 }
