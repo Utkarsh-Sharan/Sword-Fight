@@ -2,26 +2,36 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
-    [SerializeField] private DamageApplier _damageApplier;
-
+    //Scripts
+    private PlayerModel _playerModel;
+    private PlayerView _playerView;
+    private PlayerStateMachine _playerStateMachine;
+    private EventService _eventService;
+    //Components
     private CharacterController _characterController;
     private Animator _playerAnimator;
-    private PlayerModel _playerModel;
+    //Input & movement
     private Vector3 _movement, _direction;
     private float _horizontalInput, _verticalInput;
-
-    private PlayerStateMachine _playerStateMachine;
-
+    private float _verticalVelocity;
+    private float _turnSmoothVelocity;
+    private Vector3 _movementVelocity;
+    //SOs
     private EnemyScriptableObject _enemySO;
     private PlayerScriptableObject _playerSO;
-
-    private EventService _eventService;
 
     public void Init(CharacterController characterController, Animator playerAnimator, PlayerScriptableObject playerSO)
     {
         _characterController = characterController;
         _playerAnimator = playerAnimator;
         _playerSO = playerSO;
+
+        _playerModel = new PlayerModel(_playerSO);
+        _playerView = Object.Instantiate(_playerSO.PlayerView);
+        _playerView.SetController(this);
+
+        _playerStateMachine = new PlayerStateMachine(this);
+        _playerStateMachine.ChangeState(States.Idle);
     }
 
     public void Dependency(EnemyService enemyService, EventService eventService)
@@ -30,23 +40,15 @@ public class PlayerController : MonoBehaviour, IDamageable
         _eventService = eventService;
     }
 
-    private void Start()
+    public void FixedUpdatePlayer()
     {
-        _playerModel = new PlayerModel(this, _playerSO);
-        _playerStateMachine = new PlayerStateMachine(this);
-
-        _playerStateMachine.ChangeState(States.Idle);
-    }
-
-    private void FixedUpdate()
-    {
-        _movement = _playerModel.CalculateMovement(this.transform, _horizontalInput, _verticalInput, _characterController.isGrounded);
-        transform.rotation = _playerModel.CalculateRotation(_direction, transform.eulerAngles.y);
+        _movement = CalculateMovement(_playerView.transform, _characterController.isGrounded);//
+        _playerView.transform.rotation = CalculateRotation(_direction, _playerView.transform.eulerAngles.y);//
 
         _characterController.Move(_movement);
     }
 
-    private void Update()
+    public void UpdatePlayer()
     {
         _horizontalInput = Input.GetAxisRaw("Horizontal");
         _verticalInput = Input.GetAxisRaw("Vertical");
@@ -55,16 +57,48 @@ public class PlayerController : MonoBehaviour, IDamageable
         _playerStateMachine.Update();
     }
 
-    public void PlayerAttackStart() => _damageApplier.enabled = true;
-    public void PlayerAttackEnd() => _damageApplier.enabled = false;
+    #region Movement and Rotation Calculation
+    private Vector3 CalculateMovement(Transform playerTransform, bool isGrounded)
+    {
+        _movementVelocity.Set(_horizontalInput, 0, _verticalInput);
+        _movementVelocity.Normalize();
+        _movementVelocity *= _playerModel.GetMoveSpeed() * Time.deltaTime;
 
-    public Transform GetPlayerTransform() => this.transform;
-    public Vector3 GetPlayerMovement() => _movement;
-    public Animator GetPlayerAnimator() => _playerAnimator;
-    public CharacterController GetCharacterController() => _characterController;
-    public PlayerScriptableObject GetPlayerSO() => _playerSO;
+        _verticalVelocity = isGrounded ? _playerModel.GetGravity() * 0.3f : _playerModel.GetGravity();
+        _movementVelocity += _verticalVelocity * Vector3.up * Time.deltaTime;
 
-    public void OnDamage() => _playerModel.OnDamage(_enemySO.AttackDamage);
+        return _movementVelocity;
+    }
+
+    public Quaternion CalculateRotation(Vector3 direction, float currentYRotation)
+    {
+        if (direction.magnitude > 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(currentYRotation, targetAngle, ref _turnSmoothVelocity, _playerModel.GetTurnSmoothTime());
+            return Quaternion.Euler(0, angle, 0);
+        }
+
+        return Quaternion.Euler(0, currentYRotation, 0);
+    }
+    #endregion
+
+    #region Health and Damage Handling
+    public void OnDamage() => OnDamage(_enemySO.AttackDamage);
+
+    public void OnDamage(int damageAmount)
+    {
+        int currentHealth = _playerModel.CurrentHealth;
+        _playerModel.CurrentHealth -= damageAmount;
+
+        CheckForPlayerDeath();
+    }
+
+    private void CheckForPlayerDeath()
+    {
+        if (_playerModel.CurrentHealth <= 0)
+            PlayerDead();
+    }
 
     public void PlayerDead()
     {
@@ -72,4 +106,13 @@ public class PlayerController : MonoBehaviour, IDamageable
         _playerAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
         Destroy(this);
     }
+    #endregion
+
+    #region Getters
+    public Transform GetPlayerTransform() => _playerView.transform;//
+    public PlayerScriptableObject GetPlayerSO() => _playerSO;
+    public Vector3 GetPlayerMovement() => _movement;
+    public Animator GetPlayerAnimator() => _playerAnimator;
+    public CharacterController GetCharacterController() => _characterController;
+    #endregion
 }

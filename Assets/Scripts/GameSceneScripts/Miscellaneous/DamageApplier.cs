@@ -6,6 +6,7 @@ public class DamageApplier : MonoBehaviour
 
     private void Start()
     {
+        this.enabled = false;
         _damageCollider.enabled = false;
     }
 
