@@ -7,10 +7,16 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private VisualEffect _playerFootStep;
     [SerializeField] private ParticleSystem _playerSword01;
     [SerializeField] private CharacterController _characterController;
+    [SerializeField] private Animator _playerAnimator;
 
     private PlayerController _playerController;
+    private EventService _eventService;
 
-    public void SetController(PlayerController playerController) => _playerController = playerController;
+    public void Initialize(PlayerController playerController, EventService eventService)
+    {
+        _playerController = playerController;
+        _eventService = eventService;
+    }
 
     private void FixedUpdate() => _playerController?.FixedUpdatePlayer();
 
@@ -23,6 +29,18 @@ public class PlayerView : MonoBehaviour
         else
             _playerFootStep.Stop();
     }
+
+    public void PlayerDead()
+    {
+        _eventService.OnPlayerDeathEvent.InvokeEvent();
+        _playerAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
+        Destroy(this);
+    }
+
+    #region Getters
+    public Animator GetPlayerAnimator() => _playerAnimator;
+    public CharacterController GetCharacterController() => _characterController;
+    #endregion
 
     #region Animation Events
     public void PlayPlayerSword01VFX() => _playerSword01.Play();

@@ -8,13 +8,13 @@ public class PlayerDetectionCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerController>())
+        if (other.GetComponent<PlayerView>())
             this._enemyController.IsPlayerInDetectionZone = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerController>())
+        if (other.GetComponent<PlayerView>())
             this._enemyController.IsPlayerInDetectionZone = false;
     }
 }

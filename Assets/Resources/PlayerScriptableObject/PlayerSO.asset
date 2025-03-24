@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52dc02b67f2895d4b8717a20835a329a, type: 3}
   m_Name: PlayerSO
   m_EditorClassIdentifier: 
+  PlayerView: {fileID: 1059344372418409249, guid: b90c438bb8e986643a7b919eacf1df07, type: 3}
+  SpawnPosition: {x: 0, y: 0, z: 0}
+  SpawnRotation: {x: 0, y: 0, z: 0}
   MaxHealth: 50
   AttackDamage: 30
   MoveSpeed: 5

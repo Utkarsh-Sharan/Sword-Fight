@@ -111,7 +111,6 @@ GameObject:
   - component: {fileID: 7147805052785988053}
   - component: {fileID: 3100237230643604393}
   - component: {fileID: 1217257805605022198}
-  - component: {fileID: 5061280374167913058}
   - component: {fileID: 1059344372418409249}
   m_Layer: 0
   m_Name: Player
@@ -185,18 +184,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5061280374167913058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8799685344249111054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c855c9b5fccc5f4daaae30c303e3c82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1059344372418409249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +200,7 @@ MonoBehaviour:
   _playerFootStep: {fileID: 2598894070923109971}
   _playerSword01: {fileID: 3903424272150828825}
   _characterController: {fileID: 3100237230643604393}
+  _playerAnimator: {fileID: 1217257805605022198}
 --- !u!1001 &2223151059090451578
 PrefabInstance:
   m_ObjectHideFlags: 0

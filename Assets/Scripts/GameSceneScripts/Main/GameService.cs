@@ -1,16 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.VFX;
 
 public class GameService : MonoBehaviour
 {
     [Header("Player properties")]
-    [SerializeField] private PlayerController _playerController;
-    [SerializeField] private CharacterController _characterController;
-    [SerializeField] private Animator _playerAnimator;
     [SerializeField] private PlayerScriptableObject _playerSO;
 
     [Header("Enemy Properties")]
@@ -41,7 +35,7 @@ public class GameService : MonoBehaviour
     {
         _eventService = new EventService();
         _levelService = new LevelService(_levelController, _levelSOList);
-        _playerService = new PlayerService(_playerController, _characterController, _playerAnimator, _playerSO);
+        _playerService = new PlayerService(_playerSO, _eventService);
         _enemyService = new EnemyService(_enemyController, _enemyAgent, _enemyAnimator, _enemySOList);
     }
 
@@ -49,7 +43,7 @@ public class GameService : MonoBehaviour
     {
         _levelService.Dependency(_eventService);
         _enemyService.Dependency(_playerService, _eventService);
-        _playerService.Dependency(_enemyService, _eventService);
+        _playerService.Dependency(_enemyService);
         _uIService.Dependency(_eventService);
     }
 }

@@ -1,15 +1,11 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamageable
+public class PlayerController : IDamageable
 {
     //Scripts
     private PlayerModel _playerModel;
     private PlayerView _playerView;
     private PlayerStateMachine _playerStateMachine;
-    private EventService _eventService;
-    //Components
-    private CharacterController _characterController;
-    private Animator _playerAnimator;
     //Input & movement
     private Vector3 _movement, _direction;
     private float _horizontalInput, _verticalInput;
@@ -20,32 +16,29 @@ public class PlayerController : MonoBehaviour, IDamageable
     private EnemyScriptableObject _enemySO;
     private PlayerScriptableObject _playerSO;
 
-    public void Init(CharacterController characterController, Animator playerAnimator, PlayerScriptableObject playerSO)
+    public PlayerController(PlayerScriptableObject playerSO, EventService eventService)
     {
-        _characterController = characterController;
-        _playerAnimator = playerAnimator;
         _playerSO = playerSO;
 
         _playerModel = new PlayerModel(_playerSO);
         _playerView = Object.Instantiate(_playerSO.PlayerView);
-        _playerView.SetController(this);
+        _playerView.Initialize(this, eventService);
 
         _playerStateMachine = new PlayerStateMachine(this);
         _playerStateMachine.ChangeState(States.Idle);
     }
 
-    public void Dependency(EnemyService enemyService, EventService eventService)
+    public void Dependency(EnemyService enemyService)
     {
         _enemySO = enemyService.GetEnemySO(enemyService.GetEnemyType());
-        _eventService = eventService;
     }
 
     public void FixedUpdatePlayer()
     {
-        _movement = CalculateMovement(_playerView.transform, _characterController.isGrounded);//
-        _playerView.transform.rotation = CalculateRotation(_direction, _playerView.transform.eulerAngles.y);//
+        _movement = CalculateMovement(_playerView.transform, GetCharacterController().isGrounded);
+        _playerView.transform.rotation = CalculateRotation(_direction, _playerView.transform.eulerAngles.y);
 
-        _characterController.Move(_movement);
+        GetCharacterController().Move(_movement);
     }
 
     public void UpdatePlayer()
@@ -88,31 +81,22 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void OnDamage(int damageAmount)
     {
-        int currentHealth = _playerModel.CurrentHealth;
         _playerModel.CurrentHealth -= damageAmount;
-
         CheckForPlayerDeath();
     }
 
     private void CheckForPlayerDeath()
     {
         if (_playerModel.CurrentHealth <= 0)
-            PlayerDead();
-    }
-
-    public void PlayerDead()
-    {
-        _eventService.OnPlayerDeathEvent.InvokeEvent();
-        _playerAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
-        Destroy(this);
+            _playerView.PlayerDead();
     }
     #endregion
 
     #region Getters
-    public Transform GetPlayerTransform() => _playerView.transform;//
+    public Transform GetPlayerTransform() => _playerView.transform;
     public PlayerScriptableObject GetPlayerSO() => _playerSO;
     public Vector3 GetPlayerMovement() => _movement;
-    public Animator GetPlayerAnimator() => _playerAnimator;
-    public CharacterController GetCharacterController() => _characterController;
+    public Animator GetPlayerAnimator() => _playerView.GetPlayerAnimator();
+    public CharacterController GetCharacterController() => _playerView.GetCharacterController();
     #endregion
 }
