@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : IDamageable
 {
@@ -15,15 +16,36 @@ public class PlayerController : IDamageable
     //SOs
     private EnemyScriptableObject _enemySO;
     private PlayerScriptableObject _playerSO;
+    //Virtual camera
+    private CinemachineVirtualCamera _playerFollowVCam;
 
     public PlayerController(PlayerScriptableObject playerSO, EventService eventService)
     {
         _playerSO = playerSO;
 
+        SetModelAndView(_playerSO, eventService);
+        SetPlayerFollowVirtualCamera();
+        SetStateMachine();
+    }
+
+    private void SetModelAndView(PlayerScriptableObject playerSO, EventService eventService)
+    {
         _playerModel = new PlayerModel(_playerSO);
         _playerView = Object.Instantiate(_playerSO.PlayerView);
         _playerView.Initialize(this, eventService);
+    }
 
+    private void SetPlayerFollowVirtualCamera()
+    {
+        _playerFollowVCam = Object.Instantiate(_playerSO.VCamStats.VirtualCamera);
+        _playerFollowVCam.transform.position = _playerSO.VCamStats.VCamPosition;
+        _playerFollowVCam.transform.rotation = _playerSO.VCamStats.VCamRotation;
+        _playerFollowVCam.Follow = _playerView.transform;
+        _playerFollowVCam.LookAt = _playerView.transform;
+    }
+
+    private void SetStateMachine()
+    {
         _playerStateMachine = new PlayerStateMachine(this);
         _playerStateMachine.ChangeState(States.Idle);
     }
