@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class PlayerView : MonoBehaviour
+public class PlayerView : MonoBehaviour, IDamageable
 {
     [SerializeField] private DamageApplier _damageApplier;
     [SerializeField] private VisualEffect _playerFootStep;
@@ -29,6 +29,8 @@ public class PlayerView : MonoBehaviour
         else
             _playerFootStep.Stop();
     }
+
+    public void OnDamage() => _playerController.OnDamage();
 
     public void PlayerDead()
     {

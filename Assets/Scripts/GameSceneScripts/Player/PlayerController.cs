@@ -1,7 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 
-public class PlayerController : IDamageable
+public class PlayerController
 {
     //Scripts
     private PlayerModel _playerModel;
