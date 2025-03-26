@@ -51,9 +51,9 @@ public class EnemyController : MonoBehaviour
     #region Animation Events
     public void EnemyAttackStart() => damageApplier.enabled = true;
     public void EnemyAttackEnd() => damageApplier.enabled = false;
+    #endregion
 
     private void OnPlayerDead() => _isPlayerDead = true;
-    #endregion
 
     #region Getters
     public Animator GetEnemyAnimator() => enemyAnimator;

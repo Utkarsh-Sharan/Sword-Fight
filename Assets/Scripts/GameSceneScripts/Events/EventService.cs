@@ -14,7 +14,7 @@ public class EventService : MonoBehaviour
         if (Instance == null)
             Instance = this;
         else
-            Destroy(this);
+            Destroy(this.gameObject);
 
         InitializeEvents();
     }

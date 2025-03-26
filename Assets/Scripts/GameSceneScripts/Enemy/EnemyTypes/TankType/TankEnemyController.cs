@@ -23,11 +23,4 @@ public class TankEnemyController : EnemyController
     {
         _stateMachine.Update();
     }
-
-    private void EnemyDead()
-    {
-        this.enemyAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
-        EventService.Instance.OnEnemyDeathEvent.InvokeEvent();
-        Destroy(this);
-    }
 }
