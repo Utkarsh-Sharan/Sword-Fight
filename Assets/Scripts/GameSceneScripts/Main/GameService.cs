@@ -23,7 +23,6 @@ public class GameService : MonoBehaviour
     private LevelService _levelService;
     private PlayerService _playerService;
     private EnemyService _enemyService;
-    private EventService _eventService;
 
     private void Start()
     {
@@ -33,17 +32,14 @@ public class GameService : MonoBehaviour
 
     private void CreateServices()
     {
-        _eventService = new EventService();
         _levelService = new LevelService(_levelController, _levelSOList);
-        _playerService = new PlayerService(_playerSO, _eventService);
+        _playerService = new PlayerService(_playerSO);
         _enemyService = new EnemyService(_enemyController, _enemyAgent, _enemyAnimator, _enemySOList);
     }
 
     private void InjectDependencies()
     {
-        _levelService.Dependency(_eventService);
-        _enemyService.Dependency(_playerService, _eventService);
+        _enemyService.Dependency(_playerService);
         _playerService.Dependency(_enemyService);
-        _uIService.Dependency(_eventService);
     }
 }

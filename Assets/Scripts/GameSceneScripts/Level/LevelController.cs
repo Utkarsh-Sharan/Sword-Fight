@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MPE;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
@@ -9,7 +10,10 @@ public class LevelController : MonoBehaviour
     private Level _currentLevel;
     private int _numberOfEnemiesInThisLevel;
 
-    private EventService _eventService;
+    private void OnEnable()
+    {
+        EventService.Instance.OnEnemyDeathEvent.AddListener(OnEnemyDeath);
+    }
 
     public void Initialize(List<LevelScriptableObject> levelSOList)
     {
@@ -23,21 +27,15 @@ public class LevelController : MonoBehaviour
         _numberOfEnemiesInThisLevel = _levelSODictionary[_currentLevel];
     }
 
-    public void Dependency(EventService eventService)
-    {
-        _eventService = eventService;
-        _eventService.OnEnemyDeathEvent.AddListener(OnEnemyDeath);
-    }
-
     private void OnEnemyDeath()
     {
         --_numberOfEnemiesInThisLevel;
         if (_numberOfEnemiesInThisLevel == 0)
-            _eventService.OnLevelWinEvent.InvokeEvent();
+            EventService.Instance.OnLevelWinEvent.InvokeEvent();
     }
 
     private void OnDisable()
     {
-        _eventService.OnEnemyDeathEvent.RemoveListener(OnEnemyDeath);
+        EventService.Instance.OnEnemyDeathEvent.RemoveListener(OnEnemyDeath);
     }
 }

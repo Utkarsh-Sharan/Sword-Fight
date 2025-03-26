@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyScriptableObject : ScriptableObject
 {
     public EnemyType EnemyType;
+    public EnemyView EnemyView;
+    public Vector3 SpawnPosition;
+    public Vector3 SpawnRotation;
     public float MoveSpeed;
     public float AttackTime;
     public float ChaseDelay;

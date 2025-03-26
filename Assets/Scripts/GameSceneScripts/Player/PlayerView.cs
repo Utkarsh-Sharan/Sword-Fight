@@ -10,12 +10,10 @@ public class PlayerView : MonoBehaviour, IDamageable
     [SerializeField] private Animator _playerAnimator;
 
     private PlayerController _playerController;
-    private EventService _eventService;
 
-    public void Initialize(PlayerController playerController, EventService eventService)
+    public void Initialize(PlayerController playerController)
     {
         _playerController = playerController;
-        _eventService = eventService;
     }
 
     private void FixedUpdate() => _playerController?.FixedUpdatePlayer();
@@ -30,11 +28,27 @@ public class PlayerView : MonoBehaviour, IDamageable
             _playerFootStep.Stop();
     }
 
-    public void OnDamage() => _playerController.OnDamage();
+    #region Animation Events
+    public void PlayPlayerSword01VFX() => _playerSword01.Play();
+    public void PlayerAttackStart()
+    {
+        EventService.Instance.OnDamageEvent.AddListener(OnAttack);
+        _damageApplier.enabled = true;
+    }
+    public void PlayerAttackEnd()
+    {
+        EventService.Instance.OnDamageEvent.RemoveListener(OnAttack);
+        _damageApplier.enabled = false;
+    }
+    #endregion
+
+    private int OnAttack() => _playerController.GetPlayerSO().AttackDamage;
+
+    public void OnDamage(int damageAmount) => _playerController.OnDamage(damageAmount);
 
     public void PlayerDead()
     {
-        _eventService.OnPlayerDeathEvent.InvokeEvent();
+        EventService.Instance.OnPlayerDeathEvent.InvokeEvent();
         _playerAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
         Destroy(this);
     }
@@ -42,11 +56,5 @@ public class PlayerView : MonoBehaviour, IDamageable
     #region Getters
     public Animator GetPlayerAnimator() => _playerAnimator;
     public CharacterController GetCharacterController() => _characterController;
-    #endregion
-
-    #region Animation Events
-    public void PlayPlayerSword01VFX() => _playerSword01.Play();
-    public void PlayerAttackStart() => _damageApplier.enabled = true;
-    public void PlayerAttackEnd() => _damageApplier.enabled = false;
     #endregion
 }

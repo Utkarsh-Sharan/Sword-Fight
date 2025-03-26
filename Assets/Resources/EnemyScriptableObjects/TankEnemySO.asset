@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: TankEnemySO
   m_EditorClassIdentifier: 
   EnemyType: 0
+  EnemyView: {fileID: 0}
+  SpawnPosition: {x: 0, y: 4, z: 31.54}
+  SpawnRotation: {x: 0, y: 0, z: 0}
   MoveSpeed: 2.3
   AttackTime: 2.267
   ChaseDelay: 2.5

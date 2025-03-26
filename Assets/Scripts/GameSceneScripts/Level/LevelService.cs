@@ -9,6 +9,4 @@ public class LevelService
         _levelController = levelController;
         _levelController.Initialize(levelSOList);
     }
-
-    public void Dependency(EventService eventService) => _levelController.Dependency(eventService);
 }

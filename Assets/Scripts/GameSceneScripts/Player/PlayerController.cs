@@ -19,20 +19,20 @@ public class PlayerController
     //Virtual camera
     private CinemachineVirtualCamera _playerFollowVCam;
 
-    public PlayerController(PlayerScriptableObject playerSO, EventService eventService)
+    public PlayerController(PlayerScriptableObject playerSO)
     {
         _playerSO = playerSO;
 
-        SetModelAndView(_playerSO, eventService);
+        SetModelAndView(_playerSO);
         SetPlayerFollowVirtualCamera();
         SetStateMachine();
     }
 
-    private void SetModelAndView(PlayerScriptableObject playerSO, EventService eventService)
+    private void SetModelAndView(PlayerScriptableObject playerSO)
     {
         _playerModel = new PlayerModel(_playerSO);
         _playerView = Object.Instantiate(_playerSO.PlayerView);
-        _playerView.Initialize(this, eventService);
+        _playerView.Initialize(this);
     }
 
     private void SetPlayerFollowVirtualCamera()
@@ -99,8 +99,6 @@ public class PlayerController
     #endregion
 
     #region Health and Damage Handling
-    public void OnDamage() => OnDamage(_enemySO.AttackDamage);
-
     public void OnDamage(int damageAmount)
     {
         _playerModel.CurrentHealth -= damageAmount;

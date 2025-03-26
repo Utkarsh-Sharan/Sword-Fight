@@ -17,9 +17,10 @@ public class DamageApplier : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<IDamageable>(out IDamageable damageable))
+        if(other.TryGetComponent<IDamageable>(out IDamageable damageableTarget))
         {
-            damageable.OnDamage();
+            int damageAmount = EventService.Instance.OnDamageEvent.InvokeEvent();
+            damageableTarget.OnDamage(damageAmount);
         }
     }
 

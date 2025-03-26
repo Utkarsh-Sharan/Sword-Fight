@@ -4,9 +4,9 @@ public class PlayerService
 {
     private PlayerController _playerController;
 
-    public PlayerService(PlayerScriptableObject playerSO, EventService eventService)
+    public PlayerService(PlayerScriptableObject playerSO)
     {
-        _playerController = new PlayerController(playerSO, eventService);
+        _playerController = new PlayerController(playerSO);
     }
 
     public void Dependency(EnemyService enemyService) => _playerController.Dependency(enemyService);

@@ -24,20 +24,10 @@ public class TankEnemyController : EnemyController
         _stateMachine.Update();
     }
 
-    public override void OnDamage()
-    {
-        _damageAmount = playerSO.AttackDamage;
-
-        if (_currentHealth > 0)
-            _currentHealth -= _damageAmount;
-        else
-            EnemyDead();
-    }
-
     private void EnemyDead()
     {
         this.enemyAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
-        eventService.OnEnemyDeathEvent.InvokeEvent();
+        EventService.Instance.OnEnemyDeathEvent.InvokeEvent();
         Destroy(this);
     }
 }

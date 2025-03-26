@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour, IDamageable
+public class EnemyController : MonoBehaviour
 {
     [SerializeField] protected EnemyType enemyType;
     [SerializeField] protected List<Transform> waypointTransformList;
@@ -14,8 +14,6 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     protected Transform playerTransform;
     protected PlayerScriptableObject playerSO;
-
-    protected EventService eventService;
 
     private bool _isPlayerDead;
     public bool IsPlayerInDetectionZone { get; set; }
@@ -30,28 +28,34 @@ public class EnemyController : MonoBehaviour, IDamageable
         enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
         foreach (EnemyScriptableObject enemySO in enemySOList)
             enemySODictionary[enemySO.EnemyType] = enemySO;
+
+        EventService.Instance.OnPlayerDeathEvent.AddListener(OnPlayerDead);
     }
 
-    public void Dependency(PlayerService playerService, EventService eventService)
+    public void Dependency(PlayerService playerService)
     {
         playerTransform = playerService.GetPlayerTransform();
         playerSO = playerService.GetPlayerSO();
-
-        this.eventService = eventService;
-        SubscribeToEvents(this.eventService);
     }
 
-    private void SubscribeToEvents(EventService eventService)
-    {
-        eventService.OnPlayerDeathEvent.AddListener(OnPlayerDead);
-    }
+    //public void OnDamage()
+    //{
+    //    int damageAmount = playerSO.AttackDamage;
 
+    //    if (_currentHealth > 0)
+    //        _currentHealth -= damageAmount;
+    //    else
+    //        EnemyDead();
+    //}
+
+    #region Animation Events
     public void EnemyAttackStart() => damageApplier.enabled = true;
     public void EnemyAttackEnd() => damageApplier.enabled = false;
 
-    public virtual void OnDamage() { }
     private void OnPlayerDead() => _isPlayerDead = true;
+    #endregion
 
+    #region Getters
     public Animator GetEnemyAnimator() => enemyAnimator;
     public NavMeshAgent GetEnemyAgent() => enemyAgent;
     public List<Transform> GetWayPointTransformList() => waypointTransformList;
@@ -59,9 +63,10 @@ public class EnemyController : MonoBehaviour, IDamageable
     public EnemyType GetEnemyType() => enemyType;
     public Transform GetPlayerTransform() => playerTransform;
     public bool IsPlayerDead() => _isPlayerDead;
+    #endregion
 
     protected void OnDestroy()
     {
-        eventService.OnPlayerDeathEvent.RemoveListener(OnPlayerDead);
+        EventService.Instance.OnPlayerDeathEvent.RemoveListener(OnPlayerDead);
     }
 }
