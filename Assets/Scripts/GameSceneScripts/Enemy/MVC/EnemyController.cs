@@ -18,6 +18,11 @@ public class EnemyController : MonoBehaviour
     private bool _isPlayerDead;
     public bool IsPlayerInDetectionZone { get; set; }
 
+    public EnemyController()
+    {
+        EventService.Instance.OnPlayerDeathEvent.AddListener(OnPlayerDead);
+    }
+
     public virtual void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator, List<EnemyScriptableObject> enemySOList)
     {
         _isPlayerDead = false;
@@ -25,11 +30,9 @@ public class EnemyController : MonoBehaviour
         this.enemyAnimator = enemyAnimator;
         damageApplier.enabled = false;
 
-        enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
-        foreach (EnemyScriptableObject enemySO in enemySOList)
-            enemySODictionary[enemySO.EnemyType] = enemySO;
-
-        EventService.Instance.OnPlayerDeathEvent.AddListener(OnPlayerDead);
+        //enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
+        //foreach (EnemyScriptableObject enemySO in enemySOList)
+        //    enemySODictionary[enemySO.EnemyType] = enemySO;
     }
 
     public void Dependency(PlayerService playerService)
@@ -62,10 +65,11 @@ public class EnemyController : MonoBehaviour
     public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => enemySODictionary[enemyType];
     public EnemyType GetEnemyType() => enemyType;
     public Transform GetPlayerTransform() => playerTransform;
+    //public Transform GetEnemyTransform() => 
     public bool IsPlayerDead() => _isPlayerDead;
     #endregion
 
-    protected void OnDestroy()
+    public void CleanUp()
     {
         EventService.Instance.OnPlayerDeathEvent.RemoveListener(OnPlayerDead);
     }
