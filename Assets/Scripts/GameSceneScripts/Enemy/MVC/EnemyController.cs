@@ -2,14 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController
 {
-    [SerializeField] protected EnemyType enemyType;
-    [SerializeField] protected List<Transform> waypointTransformList;
-
-    protected Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary;
-    protected NavMeshAgent enemyAgent;
-    protected Animator enemyAnimator;
+    private EnemyType _enemyType;
+    private Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary;
+    protected EnemyView enemyView;
 
     protected Transform playerTransform;
     protected PlayerScriptableObject playerSO;
@@ -17,24 +14,17 @@ public class EnemyController : MonoBehaviour
     private bool _isPlayerDead;
     public bool IsPlayerInDetectionZone { get; set; }
 
-    public EnemyController()
+    public EnemyController(EnemyScriptableObject enemySO)
     {
+        _isPlayerDead = false;
+
+        enemySODictionary[enemySO.EnemyType] = enemySO;
+        _enemyType = enemySO.EnemyType;
+
         EventService.Instance.OnPlayerDeathEvent.AddListener(OnPlayerDead);
     }
 
-    //public virtual void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator, List<EnemyScriptableObject> enemySOList)
-    //{
-    //    _isPlayerDead = false;
-    //    this.enemyAgent = enemyAgent;
-    //    this.enemyAnimator = enemyAnimator;
-    //    damageApplier.enabled = false;
-
-    //    //enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
-    //    //foreach (EnemyScriptableObject enemySO in enemySOList)
-    //    //    enemySODictionary[enemySO.EnemyType] = enemySO;
-    //}
-
-    public void Dependency(PlayerService playerService)
+    public void InjectDependency(PlayerService playerService)
     {
         playerTransform = playerService.GetPlayerTransform();
         playerSO = playerService.GetPlayerSO();
@@ -43,13 +33,13 @@ public class EnemyController : MonoBehaviour
     private void OnPlayerDead() => _isPlayerDead = true;
 
     #region Getters
-    public Animator GetEnemyAnimator() => enemyAnimator;
-    public NavMeshAgent GetEnemyAgent() => enemyAgent;
-    public List<Transform> GetWayPointTransformList() => waypointTransformList;
+    public Animator GetEnemyAnimator() => enemyView.GetEnemyAnimator();
+    public NavMeshAgent GetEnemyAgent() => enemyView.GetEnemyAgent();
+    public List<Transform> GetWayPointTransformList() => enemyView.GetWayPointTransformList();
     public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => enemySODictionary[enemyType];
-    public EnemyType GetEnemyType() => enemyType;
+    public EnemyType GetEnemyType() => _enemyType;
     public Transform GetPlayerTransform() => playerTransform;
-    //public Transform GetEnemyTransform() => 
+    public Transform GetEnemyTransform() => enemyView.transform;
     public bool IsPlayerDead() => _isPlayerDead;
     #endregion
 

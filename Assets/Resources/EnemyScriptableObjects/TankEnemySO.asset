@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TankEnemySO
   m_EditorClassIdentifier: 
   EnemyType: 0
-  EnemyView: {fileID: 0}
+  EnemyView: {fileID: 9186228478617161356, guid: b27cc465613ba1c449ca16346e0bbb60, type: 3}
   SpawnPosition: {x: 0, y: 4, z: 31.54}
   SpawnRotation: {x: 0, y: 0, z: 0}
   MoveSpeed: 2.3

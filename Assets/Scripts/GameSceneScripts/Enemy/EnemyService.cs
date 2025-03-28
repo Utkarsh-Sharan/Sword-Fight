@@ -24,7 +24,7 @@ public class EnemyService
         TankEnemyController tankEnemyController = new TankEnemyController(_enemySODictionary[EnemyType.Tank]);
     }
 
-    public void Dependency(PlayerService playerService) => _enemyController.Dependency(playerService);
+    public void Dependency(PlayerService playerService) => _enemyController.InjectDependency(playerService);
 
     public EnemyType GetEnemyType() => _enemyController.GetEnemyType();
     public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => _enemyController.GetEnemySO(enemyType);

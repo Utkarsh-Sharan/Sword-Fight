@@ -6,12 +6,22 @@ public class TankEnemyController : EnemyController
     private TankEnemyView _tankEnemyView;
     private TankEnemyStateMachine _stateMachine;
 
-    public TankEnemyController(EnemyScriptableObject tankEnemySO) : base()
+    public TankEnemyController(EnemyScriptableObject tankEnemySO) : base(tankEnemySO)
+    {
+        SetModelAndView(tankEnemySO);
+        SetStateMachine();
+    }
+
+    private void SetModelAndView(EnemyScriptableObject tankEnemySO)
     {
         _tankEnemyModel = new TankEnemyModel(tankEnemySO);
         _tankEnemyView = (TankEnemyView)Object.Instantiate(tankEnemySO.EnemyView);
         _tankEnemyView.Initialize(this);
-        
+        enemyView = _tankEnemyView;
+    }
+
+    private void SetStateMachine()
+    {
         _stateMachine = new TankEnemyStateMachine(this);
         _stateMachine.ChangeState(States.Idle);
     }
@@ -31,8 +41,5 @@ public class TankEnemyController : EnemyController
 
     #region Getters
     public float GetTankEnemyAgentSpeed() => _tankEnemyModel.MoveSpeed;
-    public float GetTankEnemyAttackTime() => _tankEnemyModel.AttackTime;
-    public float GetTankEnemyChaseDelay() => _tankEnemyModel.ChaseDelay;
-    public float GetTankEnemyIdleTime() => _tankEnemyModel.IdleTime;
     #endregion
 }

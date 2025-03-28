@@ -38,5 +38,5 @@ public class EnemyChasingState<T> : IState<T> where T : EnemyController
 
     private bool ReachedPlayer() => GetDistanceFromPlayer() <= Owner.GetEnemyAgent().stoppingDistance;
 
-    private float GetDistanceFromPlayer() => Vector3.Distance(Owner.transform.position, Owner.GetPlayerTransform().position);
+    private float GetDistanceFromPlayer() => Vector3.Distance(Owner.GetEnemyTransform().position, Owner.GetPlayerTransform().position);
 }
