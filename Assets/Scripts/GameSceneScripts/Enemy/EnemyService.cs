@@ -5,24 +5,23 @@ using UnityEngine.AI;
 public class EnemyService
 {
     private EnemyController _enemyController;
-    private Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary;
+    private Dictionary<EnemyType, EnemyScriptableObject> _enemySODictionary;
 
-    public EnemyService(EnemyController enemyController, NavMeshAgent enemyAgent, Animator enemyAnimator, List<EnemyScriptableObject> enemySOList)
+    public EnemyService(EnemyController enemyController, List<EnemyScriptableObject> enemySOList)
     {
-        enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
+        _enemyController = enemyController;
+
+        _enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
 
         foreach (EnemyScriptableObject enemySO in enemySOList)
-            enemySODictionary[enemySO.EnemyType] = enemySO;
+            _enemySODictionary[enemySO.EnemyType] = enemySO;
 
         CreateEnemyControllers();
-
-        _enemyController = enemyController;
-        _enemyController.Initialize(enemyAgent, enemyAnimator, enemySOList);
     }
 
     private void CreateEnemyControllers()
     {
-        TankEnemyController tankEnemyController = new TankEnemyController(enemySODictionary[EnemyType.Tank]);
+        TankEnemyController tankEnemyController = new TankEnemyController(_enemySODictionary[EnemyType.Tank]);
     }
 
     public void Dependency(PlayerService playerService) => _enemyController.Dependency(playerService);

@@ -6,13 +6,14 @@ public class TankEnemyModel : EnemyModel
     public float ChaseDelay { get; }
     public float IdleTime { get; }
 
-    protected int damageAmount;
+    private int damageAmount;
     public int AttackDamage;
-
-    private TankEnemyController _tankEnemyController;
 
     public TankEnemyModel(EnemyScriptableObject tankEnemySO) : base()
     {
         CurrentHealth = tankEnemySO.MaxHealth;
+        AttackTime = tankEnemySO.AttackTime;
+        ChaseDelay = tankEnemySO.ChaseDelay;
+        IdleTime = tankEnemySO.IdleTime;
     }
 }

@@ -1091,8 +1091,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerSO: {fileID: 11400000, guid: 8bf7546c21cdde64394ded38f795c6fc, type: 2}
   _enemyController: {fileID: 1227086441}
-  _enemyAgent: {fileID: 1227086437}
-  _enemyAnimator: {fileID: 1227086436}
   _enemySOList:
   - {fileID: 11400000, guid: 37acf9de45c6b914785887f45a2962f6, type: 2}
   _levelController: {fileID: 1805295816}
@@ -1461,7 +1459,6 @@ MonoBehaviour:
   waypointTransformList:
   - {fileID: 1029398332}
   - {fileID: 1660129999}
-  damageApplier: {fileID: 217106438}
 --- !u!114 &1227086442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,6 +1471,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dddb450633c914642b89743e2a5452d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
+  waypointTransformList:
+  - {fileID: 1029398332}
+  - {fileID: 1660129999}
+  enemyAgent: {fileID: 1227086437}
+  enemyAnimator: {fileID: 1227086436}
+  damageApplier: {fileID: 217106438}
   footStepVFX: {fileID: 1520603001}
   attackVFX: {fileID: 1844386809}
 --- !u!114 &1341509449

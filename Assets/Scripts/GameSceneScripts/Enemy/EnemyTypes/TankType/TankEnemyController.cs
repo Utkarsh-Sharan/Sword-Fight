@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class TankEnemyController : EnemyController
 {
@@ -18,17 +16,6 @@ public class TankEnemyController : EnemyController
         _stateMachine.ChangeState(States.Idle);
     }
 
-    public override void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator, List<EnemyScriptableObject> enemySOList)
-    {
-        base.Initialize(enemyAgent, enemyAnimator, enemySOList);
-
-        //this.enemyAgent.speed = GetEnemySO(EnemyType.Tank).MoveSpeed;
-        //_currentHealth = GetEnemySO(EnemyType.Tank).MaxHealth;
-
-        //_stateMachine = new TankEnemyStateMachine(this);
-        //_stateMachine.ChangeState(States.Idle);
-    }
-
     public void UpdateEnemy()
     {
         _stateMachine.Update();
@@ -42,5 +29,10 @@ public class TankEnemyController : EnemyController
             _tankEnemyView.EnemyDead();
     }
 
+    #region Getters
     public float GetTankEnemyAgentSpeed() => _tankEnemyModel.MoveSpeed;
+    public float GetTankEnemyAttackTime() => _tankEnemyModel.AttackTime;
+    public float GetTankEnemyChaseDelay() => _tankEnemyModel.ChaseDelay;
+    public float GetTankEnemyIdleTime() => _tankEnemyModel.IdleTime;
+    #endregion
 }

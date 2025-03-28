@@ -6,7 +6,6 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] protected EnemyType enemyType;
     [SerializeField] protected List<Transform> waypointTransformList;
-    [SerializeField] protected DamageApplier damageApplier;
 
     protected Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary;
     protected NavMeshAgent enemyAgent;
@@ -23,38 +22,23 @@ public class EnemyController : MonoBehaviour
         EventService.Instance.OnPlayerDeathEvent.AddListener(OnPlayerDead);
     }
 
-    public virtual void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator, List<EnemyScriptableObject> enemySOList)
-    {
-        _isPlayerDead = false;
-        this.enemyAgent = enemyAgent;
-        this.enemyAnimator = enemyAnimator;
-        damageApplier.enabled = false;
+    //public virtual void Initialize(NavMeshAgent enemyAgent, Animator enemyAnimator, List<EnemyScriptableObject> enemySOList)
+    //{
+    //    _isPlayerDead = false;
+    //    this.enemyAgent = enemyAgent;
+    //    this.enemyAnimator = enemyAnimator;
+    //    damageApplier.enabled = false;
 
-        //enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
-        //foreach (EnemyScriptableObject enemySO in enemySOList)
-        //    enemySODictionary[enemySO.EnemyType] = enemySO;
-    }
+    //    //enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
+    //    //foreach (EnemyScriptableObject enemySO in enemySOList)
+    //    //    enemySODictionary[enemySO.EnemyType] = enemySO;
+    //}
 
     public void Dependency(PlayerService playerService)
     {
         playerTransform = playerService.GetPlayerTransform();
         playerSO = playerService.GetPlayerSO();
     }
-
-    //public void OnDamage()
-    //{
-    //    int damageAmount = playerSO.AttackDamage;
-
-    //    if (_currentHealth > 0)
-    //        _currentHealth -= damageAmount;
-    //    else
-    //        EnemyDead();
-    //}
-
-    #region Animation Events
-    public void EnemyAttackStart() => damageApplier.enabled = true;
-    public void EnemyAttackEnd() => damageApplier.enabled = false;
-    #endregion
 
     private void OnPlayerDead() => _isPlayerDead = true;
 
@@ -69,7 +53,7 @@ public class EnemyController : MonoBehaviour
     public bool IsPlayerDead() => _isPlayerDead;
     #endregion
 
-    public void CleanUp()
+    public void RemoveListeners()
     {
         EventService.Instance.OnPlayerDeathEvent.RemoveListener(OnPlayerDead);
     }

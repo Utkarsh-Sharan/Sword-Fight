@@ -9,8 +9,6 @@ public class GameService : MonoBehaviour
 
     [Header("Enemy Properties")]
     [SerializeField] private EnemyController _enemyController;
-    [SerializeField] private NavMeshAgent _enemyAgent;
-    [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private List<EnemyScriptableObject> _enemySOList;
 
     [Header("Level Properties")]
@@ -34,7 +32,7 @@ public class GameService : MonoBehaviour
     {
         _levelService = new LevelService(_levelController, _levelSOList);
         _playerService = new PlayerService(_playerSO);
-        _enemyService = new EnemyService(_enemyController, _enemyAgent, _enemyAnimator, _enemySOList);
+        _enemyService = new EnemyService(_enemyController, _enemySOList);
     }
 
     private void InjectDependencies()
