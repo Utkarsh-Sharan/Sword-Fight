@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    private LevelScriptableObject _levelSO;
-    private Dictionary<Levels, int> _levelSODictionary;
+    private Dictionary<LevelNumber, Levels> _levelDictionary;
     private LevelNumber _currentLevel;
-    private int _totalEnemiesInThisLevel;
+    private int _totalEnemiesInThisLevel = 0;
 
     private void OnEnable()
     {
@@ -15,22 +14,21 @@ public class LevelController : MonoBehaviour
 
     public void Initialize(LevelScriptableObject levelSO)
     {
-        _levelSO = levelSO;
-        _levelSODictionary = new Dictionary<Levels, int>();
-        //foreach (Levels level in _levelSO)
-        //    _levelSODictionary[levelSO.Level] = levelSO.NumberOfEnemies;
+        _levelDictionary = new Dictionary<LevelNumber, Levels>();
 
-        //_currentLevel = _levelSO.LevelList;
-        
-        CalculateTotalEnemiesInThisLevel(_currentLevel);
+        foreach (Levels level in levelSO.LevelList)
+            _levelDictionary[level.LevelNumber] = level;
+
+        _currentLevel = LevelNumber.Level_1;
+        CalculateTotalEnemiesInThisLevel();
     }
 
-    private void CalculateTotalEnemiesInThisLevel(LevelNumber currentLevel)
+    private void CalculateTotalEnemiesInThisLevel()
     {
-        //foreach (int numberOfEnemiesOfThisType in currentLevel)
-        //{
-        //    _totalEnemiesInThisLevel += numberOfEnemiesOfThisType;
-        //}
+        Levels levelData = _levelDictionary[_currentLevel];
+
+        foreach (TypesAndNumberOfEnemies enemyData in levelData.EnemyList)
+            _totalEnemiesInThisLevel += enemyData.NumberOfEnemiesOfThisType;
     }
 
     private void OnEnemyDeath()

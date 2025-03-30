@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelSO
   m_EditorClassIdentifier: 
   LevelList:
-  - Level: 0
+  - LevelNumber: 0
     EnemyList:
     - EnemyType: 0
       NumberOfEnemiesOfThisType: 2
