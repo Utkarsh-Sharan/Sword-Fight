@@ -13,7 +13,7 @@ public class GameService : MonoBehaviour
 
     [Header("Level Properties")]
     [SerializeField] private LevelController _levelController;
-    [SerializeField] private List<LevelScriptableObject> _levelSOList;
+    [SerializeField] private LevelScriptableObject _levelSO;
 
     [Header("UI Service")]
     [SerializeField] private UIService _uIService;
@@ -30,7 +30,7 @@ public class GameService : MonoBehaviour
 
     private void CreateServices()
     {
-        _levelService = new LevelService(_levelController, _levelSOList);
+        _levelService = new LevelService(_levelController, _levelSO);
         _playerService = new PlayerService(_playerSO);
         _enemyService = new EnemyService(_enemyController, _enemySOList);
     }

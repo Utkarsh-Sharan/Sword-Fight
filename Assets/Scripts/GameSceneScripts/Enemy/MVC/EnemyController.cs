@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class EnemyController
 {
     private EnemyType _enemyType;
-    private Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary;
+    private Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
     protected EnemyView enemyView;
 
     protected Transform playerTransform;

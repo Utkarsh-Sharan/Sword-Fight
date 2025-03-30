@@ -15,8 +15,11 @@ public class TankEnemyController : EnemyController
     private void SetModelAndView(EnemyScriptableObject tankEnemySO)
     {
         _tankEnemyModel = new TankEnemyModel(tankEnemySO);
+
         _tankEnemyView = (TankEnemyView)Object.Instantiate(tankEnemySO.EnemyView);
         _tankEnemyView.Initialize(this);
+        _tankEnemyView.transform.position = tankEnemySO.SpawnPosition;
+        _tankEnemyView.transform.rotation = tankEnemySO.SpawnRotation;
         enemyView = _tankEnemyView;
     }
 

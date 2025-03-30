@@ -1,36 +1,42 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.MPE;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    private List<LevelScriptableObject> _levelSOList;
-    private Dictionary<Level, int> _levelSODictionary;
-    private Level _currentLevel;
-    private int _numberOfEnemiesInThisLevel;
+    private LevelScriptableObject _levelSO;
+    private Dictionary<Levels, int> _levelSODictionary;
+    private LevelNumber _currentLevel;
+    private int _totalEnemiesInThisLevel;
 
     private void OnEnable()
     {
         EventService.Instance.OnEnemyDeathEvent.AddListener(OnEnemyDeath);
     }
 
-    public void Initialize(List<LevelScriptableObject> levelSOList)
+    public void Initialize(LevelScriptableObject levelSO)
     {
-        _levelSOList = levelSOList;
+        _levelSO = levelSO;
+        _levelSODictionary = new Dictionary<Levels, int>();
+        //foreach (Levels level in _levelSO)
+        //    _levelSODictionary[levelSO.Level] = levelSO.NumberOfEnemies;
 
-        _levelSODictionary= new Dictionary<Level, int>();
-        foreach(LevelScriptableObject levelSO in levelSOList)
-            _levelSODictionary[levelSO.Level] = levelSO.NumberOfEnemies;
+        //_currentLevel = _levelSO.LevelList;
+        
+        CalculateTotalEnemiesInThisLevel(_currentLevel);
+    }
 
-        _currentLevel = Level.Level_1;      //only one level as of now.
-        _numberOfEnemiesInThisLevel = _levelSODictionary[_currentLevel];
+    private void CalculateTotalEnemiesInThisLevel(LevelNumber currentLevel)
+    {
+        //foreach (int numberOfEnemiesOfThisType in currentLevel)
+        //{
+        //    _totalEnemiesInThisLevel += numberOfEnemiesOfThisType;
+        //}
     }
 
     private void OnEnemyDeath()
     {
-        --_numberOfEnemiesInThisLevel;
-        if (_numberOfEnemiesInThisLevel == 0)
+        --_totalEnemiesInThisLevel;
+        if (_totalEnemiesInThisLevel == 0)
             EventService.Instance.OnLevelWinEvent.InvokeEvent();
     }
 
