@@ -28,7 +28,7 @@ public class LevelController : MonoBehaviour
         Levels levelData = _levelDictionary[_currentLevel];
 
         foreach (TypesAndNumberOfEnemies enemyData in levelData.EnemyList)
-            _totalEnemiesInThisLevel += enemyData.NumberOfEnemiesOfThisType;
+            _totalEnemiesInThisLevel += enemyData.NumberOfEnemies;
     }
 
     private void OnEnemyDeath()

@@ -18,7 +18,7 @@ public struct Levels
 public struct TypesAndNumberOfEnemies
 {
     public EnemyType EnemyType;
-    public int NumberOfEnemiesOfThisType;
+    public int NumberOfEnemies;
 }
 
 public enum LevelNumber

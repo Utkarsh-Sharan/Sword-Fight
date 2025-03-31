@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class GameService : MonoBehaviour
 {
-    [Header("Player properties")]
-    [SerializeField] private PlayerScriptableObject _playerSO;
-
     [Header("Enemy Properties")]
     [SerializeField] private EnemyController _enemyController;
-    [SerializeField] private List<EnemyScriptableObject> _enemySOList;
 
     [Header("Level Properties")]
     [SerializeField] private LevelController _levelController;
-    [SerializeField] private LevelScriptableObject _levelSO;
 
     [Header("UI Service")]
     [SerializeField] private UIService _uIService;
+
+    [Header("Scriptable Objects")]
+    [SerializeField] private LevelScriptableObject _levelSO;
+    [SerializeField] private EnemySpawnDataScriptableObject _enemySpawnDataSO;
+    [SerializeField] private List<EnemyScriptableObject> _enemySOList;
+    [SerializeField] private PlayerScriptableObject _playerSO;
 
     private LevelService _levelService;
     private PlayerService _playerService;

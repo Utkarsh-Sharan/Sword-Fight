@@ -16,4 +16,4 @@ MonoBehaviour:
   - LevelNumber: 0
     EnemyList:
     - EnemyType: 0
-      NumberOfEnemiesOfThisType: 2
+      NumberOfEnemies: 2
