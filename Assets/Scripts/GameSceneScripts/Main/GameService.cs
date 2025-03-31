@@ -19,6 +19,7 @@ public class GameService : MonoBehaviour
     [SerializeField] private PlayerScriptableObject _playerSO;
 
     private LevelService _levelService;
+    private SpawnService _spawnService;
     private PlayerService _playerService;
     private EnemyService _enemyService;
 
@@ -31,13 +32,14 @@ public class GameService : MonoBehaviour
     private void CreateServices()
     {
         _levelService = new LevelService(_levelController, _levelSO);
+        _spawnService = new SpawnService(_enemySpawnDataSO);
         _playerService = new PlayerService(_playerSO);
         _enemyService = new EnemyService(_enemyController, _enemySOList);
     }
 
     private void InjectDependencies()
     {
-        _enemyService.Dependency(_playerService);
+        _enemyService.InjectDependency(_playerService);
         _playerService.Dependency(_enemyService);
     }
 }

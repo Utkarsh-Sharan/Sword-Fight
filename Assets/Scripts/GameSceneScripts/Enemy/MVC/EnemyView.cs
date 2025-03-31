@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class EnemyView : MonoBehaviour, IDamageable
 {
     [SerializeField] protected EnemyType enemyType;
-    [SerializeField] protected List<Transform> waypointTransformList;
 
     [SerializeField] protected Animator enemyAnimator;
     [SerializeField] protected NavMeshAgent enemyAgent;
@@ -14,10 +13,11 @@ public class EnemyView : MonoBehaviour, IDamageable
 
     [SerializeField] protected VisualEffect footStepVFX;
     [SerializeField] protected VisualEffect attackVFX;
+    protected List<Vector3> waypointsList;
 
     public virtual void OnDamage(int damageAmount) { }
 
     public Animator GetEnemyAnimator() => this.enemyAnimator;
     public NavMeshAgent GetEnemyAgent() => this.enemyAgent;
-    public List<Transform> GetWayPointTransformList() => this.waypointTransformList;
+    public List<Vector3> GetWaypointsList() => this.waypointsList;
 }

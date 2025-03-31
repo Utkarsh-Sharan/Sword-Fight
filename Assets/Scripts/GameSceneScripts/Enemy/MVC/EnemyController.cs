@@ -35,7 +35,7 @@ public class EnemyController
     #region Getters
     public Animator GetEnemyAnimator() => enemyView.GetEnemyAnimator();
     public NavMeshAgent GetEnemyAgent() => enemyView.GetEnemyAgent();
-    public List<Transform> GetWayPointTransformList() => enemyView.GetWayPointTransformList();
+    public List<Vector3> GetWaypointsList() => enemyView.GetWaypointsList();
     public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => enemySODictionary[enemyType];
     public EnemyType GetEnemyType() => _enemyType;
     public Transform GetPlayerTransform() => playerTransform;

@@ -31,13 +31,13 @@ public class EnemyPatrollingState<T> : IState<T> where T : EnemyController
 
     private void SetNextWayPointIndex()
     {
-        if (_currentPatrollingIndex == Owner.GetWayPointTransformList().Count - 1)
+        if (_currentPatrollingIndex == Owner.GetWaypointsList().Count - 1)
             _currentPatrollingIndex = 0;
         else
             ++_currentPatrollingIndex;
     }
 
-    private Vector3 GetDestination() => Owner.GetWayPointTransformList()[_currentPatrollingIndex].position;
+    private Vector3 GetDestination() => Owner.GetWaypointsList()[_currentPatrollingIndex];
 
     private void MoveTowardsDestination(Vector3 destination) => Owner.GetEnemyAgent().SetDestination(destination);
 

@@ -1,12 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TankEnemyView : EnemyView
 {
     private TankEnemyController _tankEnemyController;
 
-    public void Initialize(TankEnemyController tankEnemyController)
+    public void Initialize(TankEnemyController tankEnemyController, Vector3 spawnPosition, List<Vector3> waypointsList)
     {
         _tankEnemyController = tankEnemyController;
+
+        this.transform.position = spawnPosition;
+        this.waypointsList = waypointsList;
 
         enemyAgent.speed = _tankEnemyController.GetTankEnemyAgentSpeed();
         damageApplier.enabled = false;

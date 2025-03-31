@@ -1,18 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class SpawnService : MonoBehaviour
+public class SpawnService
 {
-    // Start is called before the first frame update
-    void Start()
+    private LevelNumber _currentLevel;
+    private List<SpawnDataAndWaypoints> _spawnDataAndWaypoints;
+
+    public SpawnService(EnemySpawnDataScriptableObject enemySpawnDataSO)
     {
-        
+        EventService.Instance.OnSpawnDataInitialized.AddListener(OnSpawnDataInitialized);
+
+        _currentLevel = EventService.Instance.OnCurrentLevelSelectedEvent.InvokeEvent();
+
+        foreach (LevelSpawnData levelData in enemySpawnDataSO.LevelSpawnData)
+        {
+            if (levelData.LevelNumber == _currentLevel)
+            {
+                _spawnDataAndWaypoints = levelData.SpawnDataAndWaypoints;
+                break;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private List<SpawnDataAndWaypoints> OnSpawnDataInitialized() => _spawnDataAndWaypoints;
+
+    ~SpawnService()
     {
-        
+        EventService.Instance.OnSpawnDataInitialized.RemoveListener(OnSpawnDataInitialized);
     }
 }

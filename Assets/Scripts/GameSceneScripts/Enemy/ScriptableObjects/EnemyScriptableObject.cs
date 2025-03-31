@@ -6,8 +6,6 @@ public class EnemyScriptableObject : ScriptableObject
 {
     public EnemyType EnemyType;
     public EnemyView EnemyView;
-    public Vector3 SpawnPosition;
-    public Quaternion SpawnRotation;
     public float MoveSpeed;
     public float AttackTime;
     public float ChaseDelay;

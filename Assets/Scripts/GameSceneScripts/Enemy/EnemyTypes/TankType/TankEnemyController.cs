@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TankEnemyController : EnemyController
@@ -6,20 +7,18 @@ public class TankEnemyController : EnemyController
     private TankEnemyView _tankEnemyView;
     private TankEnemyStateMachine _stateMachine;
 
-    public TankEnemyController(EnemyScriptableObject tankEnemySO) : base(tankEnemySO)
+    public TankEnemyController(EnemyScriptableObject tankEnemySO, Vector3 spawnPosition, List<Vector3> waypointsList) : base(tankEnemySO)
     {
-        SetModelAndView(tankEnemySO);
+        SetModelAndView(tankEnemySO, spawnPosition, waypointsList);
         SetStateMachine();
     }
 
-    private void SetModelAndView(EnemyScriptableObject tankEnemySO)
+    private void SetModelAndView(EnemyScriptableObject tankEnemySO, Vector3 spawnPosition, List<Vector3> waypointsList)
     {
         _tankEnemyModel = new TankEnemyModel(tankEnemySO);
 
         _tankEnemyView = (TankEnemyView)Object.Instantiate(tankEnemySO.EnemyView);
-        _tankEnemyView.Initialize(this);
-        _tankEnemyView.transform.position = tankEnemySO.SpawnPosition;
-        _tankEnemyView.transform.rotation = tankEnemySO.SpawnRotation;
+        _tankEnemyView.Initialize(this, spawnPosition, waypointsList);
         enemyView = _tankEnemyView;
     }
 
