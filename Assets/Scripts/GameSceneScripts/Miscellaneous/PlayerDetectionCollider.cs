@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerDetectionCollider : MonoBehaviour
 {
-    [SerializeField] private EnemyController _enemyController;
+    private EnemyView _enemyView;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerView>())
-            this._enemyController.IsPlayerInDetectionZone = true;
+        if(other.TryGetComponent(out EnemyView enemyView))
+            _enemyView = enemyView;
+
+        if (other.GetComponent<PlayerView>()) { }
+            //_enemyView.IsPlayerInDetectionZone = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerView>())
-            this._enemyController.IsPlayerInDetectionZone = false;
+        if (other.GetComponent<PlayerView>()) { }
+            //_enemyView.IsPlayerInDetectionZone = false;
     }
 }

@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class EnemyService
 {
-    private EnemyController _enemyController;
     private List<SpawnDataAndWaypoints> _spawnDataAndWaypoints;
     private Dictionary<EnemyType, EnemyScriptableObject> _enemySODictionary;
 
-    public EnemyService(EnemyController enemyController, List<EnemyScriptableObject> enemySOList)
-    {
-        _enemyController = enemyController;
+    private EnemyController _enemyController;
 
+    public EnemyService(List<EnemyScriptableObject> enemySOList)
+    {
         _spawnDataAndWaypoints = new List<SpawnDataAndWaypoints>();
         _enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
 
@@ -26,18 +25,29 @@ public class EnemyService
     {
         for(int i = 0; i < spawnDataAndWaypoints.Count; ++i)
         {
-            if(spawnDataAndWaypoints[i].EnemyType == EnemyType.Tank)
-                CreateTankEnemy(spawnDataAndWaypoints[i].SpawnPosition, spawnDataAndWaypoints[i].Waypoints);
+            switch (spawnDataAndWaypoints[i].EnemyType)
+            {
+                case EnemyType.Tank:
+                    CreateTankEnemy(spawnDataAndWaypoints[i].SpawnPosition, spawnDataAndWaypoints[i].Waypoints);
+                    break;
+
+                default:
+                    Debug.LogError("No enemy of this type exists!");
+                    break;
+            }
         }
     }
 
     private void CreateTankEnemy(Vector3 spawnPosition, List<Vector3> waypointsList)
     {
-        TankEnemyController tankEnemyController = new TankEnemyController(_enemySODictionary[EnemyType.Tank], spawnPosition, waypointsList);
+        _enemyController = new TankEnemyController(_enemySODictionary[EnemyType.Tank], spawnPosition, waypointsList);
     }
 
-    public void InjectDependency(PlayerService playerService) => _enemyController.InjectDependency(playerService);
-
+    public void InjectDependency(PlayerService playerService)
+    { 
+        _enemyController.InjectDependency(playerService);
+    } 
+    
     public EnemyType GetEnemyType() => _enemyController.GetEnemyType();
     public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => _enemyController.GetEnemySO(enemyType);
 }

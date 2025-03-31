@@ -1,4 +1,4 @@
-public class TankEnemyModel : EnemyModel
+public class TankEnemyModel
 {
     public int CurrentHealth { get; set; }
     public float MoveSpeed { get; }
@@ -9,11 +9,13 @@ public class TankEnemyModel : EnemyModel
     private int damageAmount;
     public int AttackDamage;
 
-    public TankEnemyModel(EnemyScriptableObject tankEnemySO) : base()
+    public TankEnemyModel(EnemyScriptableObject tankEnemySO)
     {
         CurrentHealth = tankEnemySO.MaxHealth;
+        MoveSpeed = tankEnemySO.MoveSpeed;
         AttackTime = tankEnemySO.AttackTime;
         ChaseDelay = tankEnemySO.ChaseDelay;
         IdleTime = tankEnemySO.IdleTime;
+        AttackDamage = tankEnemySO.AttackDamage;
     }
 }

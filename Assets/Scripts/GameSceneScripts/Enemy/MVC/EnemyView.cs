@@ -13,6 +13,7 @@ public class EnemyView : MonoBehaviour, IDamageable
 
     [SerializeField] protected VisualEffect footStepVFX;
     [SerializeField] protected VisualEffect attackVFX;
+
     protected List<Vector3> waypointsList;
 
     public virtual void OnDamage(int damageAmount) { }
