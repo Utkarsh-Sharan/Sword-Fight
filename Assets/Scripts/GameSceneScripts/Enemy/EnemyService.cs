@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class EnemyService
 
     private EnemyController _enemyController;
 
-    public EnemyService(List<EnemyScriptableObject> enemySOList)
+    public EnemyService(List<EnemyScriptableObject> enemySOList, PlayerService playerService)
     {
         _spawnDataAndWaypoints = new List<SpawnDataAndWaypoints>();
         _enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
@@ -18,10 +19,17 @@ public class EnemyService
         foreach (EnemyScriptableObject enemySO in enemySOList)
             _enemySODictionary[enemySO.EnemyType] = enemySO;
 
-        CreateEnemyControllers(_spawnDataAndWaypoints);
+        CoroutineController.Instance.StartCoroutine(WaitForNavMeshInitialization(playerService));
     }
 
-    private void CreateEnemyControllers(List<SpawnDataAndWaypoints> spawnDataAndWaypoints)
+    private IEnumerator WaitForNavMeshInitialization(PlayerService playerService)
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        CreateEnemyControllers(_spawnDataAndWaypoints, playerService);
+    }
+
+    private void CreateEnemyControllers(List<SpawnDataAndWaypoints> spawnDataAndWaypoints, PlayerService playerService)
     {
         for(int i = 0; i < spawnDataAndWaypoints.Count; ++i)
         {
@@ -36,6 +44,8 @@ public class EnemyService
                     break;
             }
         }
+
+        _enemyController.InjectDependency(playerService);
     }
 
     private void CreateTankEnemy(Vector3 spawnPosition, List<Vector3> waypointsList)
@@ -43,10 +53,10 @@ public class EnemyService
         _enemyController = new TankEnemyController(_enemySODictionary[EnemyType.Tank], spawnPosition, waypointsList);
     }
 
-    public void InjectDependency(PlayerService playerService)
-    { 
-        _enemyController.InjectDependency(playerService);
-    } 
+    //public void InjectDependency(PlayerService playerService)
+    //{ 
+    //    _enemyController.InjectDependency(playerService);
+    //} 
     
     public EnemyType GetEnemyType() => _enemyController.GetEnemyType();
     public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => _enemyController.GetEnemySO(enemyType);

@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventService : MonoBehaviour
+public class EventService : GenericMonoSingleton<EventService>
 {
-    public static EventService Instance { get; private set; }
-
     public EventController<LevelNumber> OnCurrentLevelSelectedEvent { get; private set; }
     public EventController<List<SpawnDataAndWaypoints>> OnSpawnDataInitialized { get; private set; }
     public EventController<int> OnDamageEvent { get; private set; }
@@ -12,15 +10,9 @@ public class EventService : MonoBehaviour
     public EventController OnEnemyDeathEvent { get; private set; }
     public EventController OnLevelWinEvent { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-        {
-            Destroy(this.gameObject);
-            return;
-        }
+        base.Awake();
 
         InitializeEvents();
     }

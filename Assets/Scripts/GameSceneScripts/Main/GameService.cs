@@ -30,13 +30,12 @@ public class GameService : MonoBehaviour
     {
         _levelService = new LevelService(_levelController, _levelSO);
         _spawnService = new SpawnService(_enemySpawnDataSO);
-        _enemyService = new EnemyService(_enemySOList);
         _playerService = new PlayerService(_playerSO);
+        _enemyService = new EnemyService(_enemySOList, _playerService);
     }
 
     private void InjectDependencies()
     {
-        _enemyService.InjectDependency(_playerService);
         _playerService.Dependency(_enemyService);
     }
 }

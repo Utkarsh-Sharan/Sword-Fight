@@ -13,8 +13,6 @@ public class TankEnemyView : EnemyView
         transform.position = spawnPosition;
         this.waypointsList = waypointsList;
 
-        StartCoroutine(WaitSomeTimeBeforeEnablingAgent());
-
         enemyAgent.speed = _tankEnemyController.GetTankEnemyAgentSpeed();
         damageApplier.enabled = false;
     }
@@ -37,12 +35,5 @@ public class TankEnemyView : EnemyView
         _tankEnemyController.RemoveListeners();
 
         Destroy(this);
-    }
-
-    private IEnumerator WaitSomeTimeBeforeEnablingAgent()
-    {
-        enemyAgent.enabled = false;
-        yield return new WaitForSeconds(0.2f);
-        enemyAgent.enabled = true;
     }
 }
