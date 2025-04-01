@@ -16,12 +16,12 @@ MonoBehaviour:
   - LevelNumber: 0
     SpawnDataAndWaypoints:
     - EnemyType: 0
-      SpawnPosition: {x: 0, y: 4, z: 31.54}
-      Waypoints:
-      - {x: -8.4, y: 4, z: 31.54}
-      - {x: -6, y: 4, z: 31.54}
-    - EnemyType: 0
       SpawnPosition: {x: -9, y: 6, z: 50}
       Waypoints:
       - {x: -3.61, y: 6, z: 55}
       - {x: -12, y: 6, z: 47.68}
+    - EnemyType: 0
+      SpawnPosition: {x: 0, y: 4, z: 31.54}
+      Waypoints:
+      - {x: -8.4, y: 4, z: 31.54}
+      - {x: 6, y: 4, z: 31.54}

@@ -10,8 +10,10 @@ public class TankEnemyView : EnemyView
     {
         _tankEnemyController = tankEnemyController;
 
+        enemyAgent.enabled = false;
         transform.position = spawnPosition;
         this.waypointsList = waypointsList;
+        enemyAgent.enabled = true;
 
         enemyAgent.speed = _tankEnemyController.GetTankEnemyAgentSpeed();
         damageApplier.enabled = false;

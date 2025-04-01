@@ -9,27 +9,19 @@ public class EnemyService
 
     private EnemyController _enemyController;
 
-    public EnemyService(List<EnemyScriptableObject> enemySOList, PlayerService playerService)
+    public EnemyService(List<EnemyScriptableObject> enemySOList)
     {
         _spawnDataAndWaypoints = new List<SpawnDataAndWaypoints>();
-        _enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
-
         _spawnDataAndWaypoints = EventService.Instance.OnSpawnDataInitialized.InvokeEvent();
 
+        _enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
         foreach (EnemyScriptableObject enemySO in enemySOList)
             _enemySODictionary[enemySO.EnemyType] = enemySO;
 
-        CoroutineController.Instance.StartCoroutine(WaitForNavMeshInitialization(playerService));
+        CreateEnemyControllers(_spawnDataAndWaypoints);
     }
 
-    private IEnumerator WaitForNavMeshInitialization(PlayerService playerService)
-    {
-        yield return new WaitForSeconds(0.2f);
-
-        CreateEnemyControllers(_spawnDataAndWaypoints, playerService);
-    }
-
-    private void CreateEnemyControllers(List<SpawnDataAndWaypoints> spawnDataAndWaypoints, PlayerService playerService)
+    private void CreateEnemyControllers(List<SpawnDataAndWaypoints> spawnDataAndWaypoints)
     {
         for(int i = 0; i < spawnDataAndWaypoints.Count; ++i)
         {
@@ -45,6 +37,7 @@ public class EnemyService
             }
         }
 
+        PlayerService playerService = EventService.Instance.OnPlayerServiceInitialized.InvokeEvent();
         _enemyController.InjectDependency(playerService);
     }
 
@@ -53,11 +46,6 @@ public class EnemyService
         _enemyController = new TankEnemyController(_enemySODictionary[EnemyType.Tank], spawnPosition, waypointsList);
     }
 
-    //public void InjectDependency(PlayerService playerService)
-    //{ 
-    //    _enemyController.InjectDependency(playerService);
-    //} 
-    
     public EnemyType GetEnemyType() => _enemyController.GetEnemyType();
     public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => _enemyController.GetEnemySO(enemyType);
 }
