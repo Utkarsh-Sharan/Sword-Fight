@@ -10,12 +10,12 @@ public class PlayerDetectionCollider : MonoBehaviour
             _enemyView = enemyView;
 
         if (other.GetComponent<PlayerView>()) { }
-            //_enemyView.IsPlayerInDetectionZone = true;
+            _enemyView.IsPlayerInDetectionZone = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<PlayerView>()) { }
-            //_enemyView.IsPlayerInDetectionZone = false;
+            _enemyView.IsPlayerInDetectionZone = false;
     }
 }

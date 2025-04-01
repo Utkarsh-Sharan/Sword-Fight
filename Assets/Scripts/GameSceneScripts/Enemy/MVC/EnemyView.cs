@@ -15,6 +15,7 @@ public class EnemyView : MonoBehaviour, IDamageable
     [SerializeField] protected VisualEffect attackVFX;
 
     protected List<Vector3> waypointsList;
+    public bool IsPlayerInDetectionZone { get; set; }
 
     public virtual void OnDamage(int damageAmount) { }
 

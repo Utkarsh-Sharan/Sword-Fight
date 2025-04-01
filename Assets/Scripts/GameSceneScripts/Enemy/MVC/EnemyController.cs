@@ -12,7 +12,7 @@ public class EnemyController
     protected PlayerScriptableObject playerSO;
 
     private bool _isPlayerDead;
-    public bool IsPlayerInDetectionZone { get; set; }
+    public bool IsPlayerInDetectionZone { get { return enemyView.IsPlayerInDetectionZone; } set { enemyView.IsPlayerInDetectionZone = value; } }
 
     public EnemyController(EnemyScriptableObject enemySO)
     {
