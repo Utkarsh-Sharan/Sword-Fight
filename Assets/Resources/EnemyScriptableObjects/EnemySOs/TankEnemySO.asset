@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca05eea76e7fc374cb7dd3cd9bae00f1, type: 3}
+  m_Name: TankEnemySO
+  m_EditorClassIdentifier: 
+  EnemyType: 0
+  EnemyView: {fileID: 9186228478617161356, guid: b27cc465613ba1c449ca16346e0bbb60, type: 3}
+  SpawnPosition: {x: 0, y: 4, z: 31.54}
+  SpawnRotation: {x: 0, y: 0, z: 0}
+  MoveSpeed: 2.3
+  AttackTime: 2.267
+  ChaseDelay: 2.5
+  IdleTime: 2.7
+  MaxHealth: 100
+  AttackDamage: 50

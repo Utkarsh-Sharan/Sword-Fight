@@ -6,11 +6,13 @@ public class EnemyChasingState<T> : IState<T> where T : EnemyController
 
     private readonly GenericStateMachine<T> _stateMachine;
     private Vector3 _destination;
+    private Transform _playerTransform;
 
     public EnemyChasingState(GenericStateMachine<T> stateMachine) => _stateMachine = stateMachine;
 
     public void OnStateEnter()
     {
+        _playerTransform = EventService.Instance.OnGetPlayerTransformEvent.InvokeEvent();
         Owner.GetEnemyAnimator().SetFloat(ConstantStrings.SPEED_PARAMETER, Owner.GetEnemySO(Owner.GetEnemyType()).MoveSpeed);
     }
 
@@ -32,11 +34,11 @@ public class EnemyChasingState<T> : IState<T> where T : EnemyController
 
     private void MoveTowardsPlayer()
     {
-        _destination = Owner.GetPlayerTransform().position;
+        _destination = _playerTransform.position;
         Owner.GetEnemyAgent().SetDestination(_destination);
     }
 
     private bool ReachedPlayer() => GetDistanceFromPlayer() <= Owner.GetEnemyAgent().stoppingDistance;
 
-    private float GetDistanceFromPlayer() => Vector3.Distance(Owner.transform.position, Owner.GetPlayerTransform().position);
+    private float GetDistanceFromPlayer() => Vector3.Distance(Owner.GetEnemyTransform().position, _playerTransform.position);
 }

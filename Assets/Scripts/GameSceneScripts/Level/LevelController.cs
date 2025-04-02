@@ -1,43 +1,50 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    private List<LevelScriptableObject> _levelSOList;
-    private Dictionary<Level, int> _levelSODictionary;
-    private Level _currentLevel;
-    private int _numberOfEnemiesInThisLevel;
+    private Dictionary<LevelNumber, Levels> _levelDictionary;
+    private LevelNumber _currentLevel;
+    private Levels _levelData;
+    private int _totalEnemiesInThisLevel = 0;
 
-    private EventService _eventService;
-
-    public void Initialize(List<LevelScriptableObject> levelSOList)
+    private void OnEnable()
     {
-        _levelSOList = levelSOList;
-
-        _levelSODictionary= new Dictionary<Level, int>();
-        foreach(LevelScriptableObject levelSO in levelSOList)
-            _levelSODictionary[levelSO.Level] = levelSO.NumberOfEnemies;
-
-        _currentLevel = Level.Level_1;      //only one level as of now.
-        _numberOfEnemiesInThisLevel = _levelSODictionary[_currentLevel];
+        EventService.Instance.OnEnemyDeathEvent.AddListener(OnEnemyDeath);
+        EventService.Instance.OnCurrentLevelSelectedEvent.AddListener(OnCurrentLevelSelected);
     }
 
-    public void Dependency(EventService eventService)
+    public void Initialize(LevelScriptableObject levelSO)
     {
-        _eventService = eventService;
-        _eventService.OnEnemyDeathEvent.AddListener(OnEnemyDeath);
+        _levelDictionary = new Dictionary<LevelNumber, Levels>();
+
+        foreach (Levels level in levelSO.LevelList)
+            _levelDictionary[level.LevelNumber] = level;
+
+        _currentLevel = LevelNumber.Level_1;
+        CalculateTotalEnemiesInThisLevel();
     }
+
+    private void CalculateTotalEnemiesInThisLevel()
+    {
+        _levelData = _levelDictionary[_currentLevel];
+
+        foreach (TypesAndNumberOfEnemies enemyData in _levelData.EnemyList)
+            _totalEnemiesInThisLevel += enemyData.NumberOfEnemies;
+    }
+
+    private LevelNumber OnCurrentLevelSelected() => _currentLevel;
 
     private void OnEnemyDeath()
     {
-        --_numberOfEnemiesInThisLevel;
-        if (_numberOfEnemiesInThisLevel == 0)
-            _eventService.OnLevelWinEvent.InvokeEvent();
+        --_totalEnemiesInThisLevel;
+        if (_totalEnemiesInThisLevel == 0)
+            EventService.Instance.OnLevelWinEvent.InvokeEvent();
     }
 
     private void OnDisable()
     {
-        _eventService.OnEnemyDeathEvent.RemoveListener(OnEnemyDeath);
+        EventService.Instance.OnEnemyDeathEvent.RemoveListener(OnEnemyDeath);
+        EventService.Instance.OnCurrentLevelSelectedEvent.RemoveListener(OnCurrentLevelSelected);
     }
 }

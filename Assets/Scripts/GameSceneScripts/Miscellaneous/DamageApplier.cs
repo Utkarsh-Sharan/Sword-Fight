@@ -4,11 +4,6 @@ public class DamageApplier : MonoBehaviour
 {
     [SerializeField] private BoxCollider _damageCollider;
 
-    private void Start()
-    {
-        _damageCollider.enabled = false;
-    }
-
     private void OnEnable()
     {
         _damageCollider.enabled = true;
@@ -16,9 +11,10 @@ public class DamageApplier : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent<IDamageable>(out IDamageable damageable))
+        if(other.TryGetComponent(out IDamageable damageableTarget))
         {
-            damageable.OnDamage();
+            int damageAmount = EventService.Instance.OnDamageEvent.InvokeEvent();
+            damageableTarget.OnDamage(damageAmount);
         }
     }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.MPE;
 using UnityEngine;
 
 public class UIService : MonoBehaviour
@@ -8,20 +9,17 @@ public class UIService : MonoBehaviour
     private Dictionary<PanelType, Panel> _panelDictionary;
     private Panel _currentlyOpenPanel;
 
-    private EventService _eventService;
+    private void OnEnable()
+    {
+        EventService.Instance.OnPlayerDeathEvent.AddListener(OnPlayerDeath);
+        EventService.Instance.OnLevelWinEvent.AddListener(OnLevelWin);
+    }
 
     private void Start()
     {
         _panelDictionary = new Dictionary<PanelType, Panel>();
         foreach(Panel panel in _panelList)
             _panelDictionary[panel.GetPanelType()] = panel;
-    }
-
-    public void Dependency(EventService eventService)
-    {
-        _eventService = eventService;
-        _eventService.OnPlayerDeathEvent.AddListener(OnPlayerDeath);
-        _eventService.OnLevelWinEvent.AddListener(OnLevelWin);
     }
 
     private void OnPlayerDeath() => OpenNewPanel(PanelType.Game_Over);
@@ -38,8 +36,8 @@ public class UIService : MonoBehaviour
 
     private void OnDisable()
     {
-        _eventService.OnPlayerDeathEvent.RemoveListener(OnPlayerDeath);
-        _eventService.OnLevelWinEvent.RemoveListener(OnLevelWin);
+        EventService.Instance.OnPlayerDeathEvent.RemoveListener(OnPlayerDeath);
+        EventService.Instance.OnLevelWinEvent.RemoveListener(OnLevelWin);
     }
 }
 

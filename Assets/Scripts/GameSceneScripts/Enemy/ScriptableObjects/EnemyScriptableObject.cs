@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyScriptableObject : ScriptableObject
 {
     public EnemyType EnemyType;
+    public EnemyView EnemyView;
     public float MoveSpeed;
     public float AttackTime;
     public float ChaseDelay;
