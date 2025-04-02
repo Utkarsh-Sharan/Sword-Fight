@@ -33,6 +33,8 @@ public class TankEnemyController : EnemyController
         _stateMachine.Update();
     }
 
+    public int OnAttack() => _tankEnemyModel.AttackDamage;
+
     public void OnDamage(int damageAmount)
     {
         if (_tankEnemyModel.CurrentHealth > 0)

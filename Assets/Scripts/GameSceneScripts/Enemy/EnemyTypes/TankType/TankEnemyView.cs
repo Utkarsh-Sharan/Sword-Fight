@@ -21,8 +21,16 @@ public class TankEnemyView : EnemyView
     private void Update() => _tankEnemyController.UpdateEnemy();
 
     #region Animation Events
-    public void EnemyAttackStart() => damageApplier.enabled = true;
-    public void EnemyAttackEnd() => damageApplier.enabled = false;
+    public void EnemyAttackStart() 
+    {
+        damageApplier.enabled = true;
+        EventService.Instance.OnDamageEvent.AddListener(_tankEnemyController.OnAttack);
+    } 
+    public void EnemyAttackEnd()
+    {
+        damageApplier.enabled = false;
+        EventService.Instance.OnDamageEvent.RemoveListener(_tankEnemyController.OnAttack);
+    }
     public void BurstFootStep() => footStepVFX.Play();
     public void PlayAttackVFX() => attackVFX.Play();
     #endregion

@@ -6,8 +6,6 @@ public class PlayerService
 
     public PlayerService(PlayerScriptableObject playerSO)
     {
-        EventService.Instance.OnPlayerServiceInitialized.AddListener(GetPlayerService);
-
         _playerController = new PlayerController(playerSO);
     }
 
@@ -16,9 +14,4 @@ public class PlayerService
     public Transform GetPlayerTransform() => _playerController.GetPlayerTransform();
     public PlayerScriptableObject GetPlayerSO() => _playerController.GetPlayerSO();
     private PlayerService GetPlayerService() => this;
-
-    ~PlayerService()
-    {
-        EventService.Instance.OnPlayerServiceInitialized.RemoveListener(GetPlayerService);
-    }
 }

@@ -8,8 +8,6 @@ public class EnemyController
     private Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
     protected EnemyView enemyView;
 
-    protected PlayerScriptableObject playerSO;
-
     private bool _isPlayerDead;
     public bool IsPlayerInDetectionZone { get { return enemyView.IsPlayerInDetectionZone; } set { enemyView.IsPlayerInDetectionZone = value; } }
 
@@ -21,11 +19,6 @@ public class EnemyController
         _enemyType = enemySO.EnemyType;
 
         EventService.Instance.OnPlayerDeathEvent.AddListener(OnPlayerDead);
-    }
-
-    public void InjectDependency(PlayerService playerService)
-    {
-        playerSO = playerService.GetPlayerSO();
     }
 
     private void OnPlayerDead() => _isPlayerDead = true;

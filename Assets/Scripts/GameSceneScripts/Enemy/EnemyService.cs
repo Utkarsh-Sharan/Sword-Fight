@@ -35,9 +35,6 @@ public class EnemyService
                     break;
             }
         }
-
-        PlayerService playerService = EventService.Instance.OnPlayerServiceInitialized.InvokeEvent();
-        _enemyController.InjectDependency(playerService);
     }
 
     private void CreateTankEnemy(Vector3 spawnPosition, List<Vector3> waypointsList)
