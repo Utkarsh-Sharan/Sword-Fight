@@ -8,7 +8,6 @@ public class EnemyController
     private Dictionary<EnemyType, EnemyScriptableObject> enemySODictionary = new Dictionary<EnemyType, EnemyScriptableObject>();
     protected EnemyView enemyView;
 
-    protected Transform playerTransform;
     protected PlayerScriptableObject playerSO;
 
     private bool _isPlayerDead;
@@ -26,7 +25,6 @@ public class EnemyController
 
     public void InjectDependency(PlayerService playerService)
     {
-        playerTransform = playerService.GetPlayerTransform();
         playerSO = playerService.GetPlayerSO();
     }
 
@@ -38,7 +36,6 @@ public class EnemyController
     public List<Vector3> GetWaypointsList() => enemyView.GetWaypointsList();
     public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => enemySODictionary[enemyType];
     public EnemyType GetEnemyType() => _enemyType;
-    public Transform GetPlayerTransform() => playerTransform;
     public Transform GetEnemyTransform() => enemyView.transform;
     public bool IsPlayerDead() => _isPlayerDead;
     #endregion

@@ -9,13 +9,13 @@ public class PlayerDetectionCollider : MonoBehaviour
         if(other.TryGetComponent(out EnemyView enemyView))
             _enemyView = enemyView;
 
-        if (other.GetComponent<PlayerView>()) { }
+        if (other.GetComponent<PlayerView>())
             _enemyView.IsPlayerInDetectionZone = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PlayerView>()) { }
+        if (other.GetComponent<PlayerView>())
             _enemyView.IsPlayerInDetectionZone = false;
     }
 }

@@ -5,9 +5,7 @@ public class TankEnemyModel
     public float AttackTime { get; }
     public float ChaseDelay { get; }
     public float IdleTime { get; }
-
-    private int damageAmount;
-    public int AttackDamage;
+    public int AttackDamage { get; }
 
     public TankEnemyModel(EnemyScriptableObject tankEnemySO)
     {

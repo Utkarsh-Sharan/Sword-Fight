@@ -50,6 +50,8 @@ public class PlayerView : MonoBehaviour, IDamageable
     {
         EventService.Instance.OnPlayerDeathEvent.InvokeEvent();
         _playerAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
+        _playerController.RemoveListeners();
+
         Destroy(this);
     }
 

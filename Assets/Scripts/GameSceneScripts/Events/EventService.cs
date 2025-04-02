@@ -4,6 +4,7 @@ using UnityEngine;
 public class EventService : GenericMonoSingleton<EventService>
 {
     public EventController<PlayerService> OnPlayerServiceInitialized { get; private set; }
+    public EventController<Transform> OnGetPlayerTransformEvent { get; private set; }
     public EventController<LevelNumber> OnCurrentLevelSelectedEvent { get; private set; }
     public EventController<List<SpawnDataAndWaypoints>> OnSpawnDataInitialized { get; private set; }
     public EventController<int> OnDamageEvent { get; private set; }
@@ -21,6 +22,7 @@ public class EventService : GenericMonoSingleton<EventService>
     private void InitializeEvents()
     {
         OnPlayerServiceInitialized = new EventController<PlayerService>();
+        OnGetPlayerTransformEvent = new EventController<Transform>();
         OnCurrentLevelSelectedEvent = new EventController<LevelNumber>();
         OnSpawnDataInitialized = new EventController<List<SpawnDataAndWaypoints>>();
         OnDamageEvent = new EventController<int>();

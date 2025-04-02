@@ -26,6 +26,8 @@ public class PlayerController
         SetModelAndView(_playerSO);
         SetPlayerFollowVirtualCamera();
         SetStateMachine();
+
+        EventService.Instance.OnGetPlayerTransformEvent.AddListener(GetPlayerTransform);
     }
 
     private void SetModelAndView(PlayerScriptableObject playerSO)
@@ -119,4 +121,9 @@ public class PlayerController
     public Animator GetPlayerAnimator() => _playerView.GetPlayerAnimator();
     public CharacterController GetCharacterController() => _playerView.GetCharacterController();
     #endregion
+
+    public void RemoveListeners()
+    {
+        EventService.Instance.OnGetPlayerTransformEvent.RemoveListener(GetPlayerTransform);
+    }
 }

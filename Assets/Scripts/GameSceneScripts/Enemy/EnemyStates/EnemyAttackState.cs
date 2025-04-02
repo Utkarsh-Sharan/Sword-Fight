@@ -10,10 +10,14 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
     private float _currentTime;
     private float _outOfRangeTime;
 
+    private Transform _playerTransform;
+
     public EnemyAttackState(GenericStateMachine<T> stateMachine) => _stateMachine = stateMachine;
 
     public void OnStateEnter()
     {
+        _playerTransform = EventService.Instance.OnGetPlayerTransformEvent.InvokeEvent();
+
         _attackTime = Owner.GetEnemySO(Owner.GetEnemyType()).AttackTime;
         _chasingDelay = Owner.GetEnemySO(Owner.GetEnemyType()).ChaseDelay;
 
@@ -24,7 +28,7 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
     public void Update()
     {
         _currentTime += Time.deltaTime;
-        Owner.GetEnemyTransform().rotation = Quaternion.Slerp(Owner.GetEnemyTransform().rotation, Quaternion.LookRotation(Owner.GetPlayerTransform().position - Owner.GetEnemyTransform().position), 0.1f);
+        Owner.GetEnemyTransform().rotation = Quaternion.Slerp(Owner.GetEnemyTransform().rotation, Quaternion.LookRotation(_playerTransform.position - Owner.GetEnemyTransform().position), 0.1f);
         
         if (IsPlayerWithinStoppingDistance())
         {
@@ -52,5 +56,5 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
         Owner.GetEnemyAgent().isStopped = false;
     }
 
-    private bool IsPlayerWithinStoppingDistance() => Vector3.Distance(Owner.GetPlayerTransform().position, Owner.GetEnemyTransform().position) <= Owner.GetEnemyAgent().stoppingDistance;
+    private bool IsPlayerWithinStoppingDistance() => Vector3.Distance(_playerTransform.position, Owner.GetEnemyTransform().position) <= Owner.GetEnemyAgent().stoppingDistance;
 }
