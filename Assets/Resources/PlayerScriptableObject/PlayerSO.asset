@@ -21,6 +21,7 @@ MonoBehaviour:
     VCamRotation: {x: 0.3535534, y: -0.3535534, z: 0.14644663, w: 0.85355335}
   MaxHealth: 50
   AttackDamage: 30
+  AttackTime: 0.6
   MoveSpeed: 5
   Gravity: -20
   TurnSmoothTime: 0.1

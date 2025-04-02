@@ -13,8 +13,7 @@ public class PlayerController
     private float _verticalVelocity;
     private float _turnSmoothVelocity;
     private Vector3 _movementVelocity;
-    //SOs
-    private EnemyScriptableObject _enemySO;
+    //SO
     private PlayerScriptableObject _playerSO;
     //Virtual camera
     private CinemachineVirtualCamera _playerFollowVCam;
@@ -50,11 +49,6 @@ public class PlayerController
     {
         _playerStateMachine = new PlayerStateMachine(this);
         _playerStateMachine.ChangeState(States.Idle);
-    }
-
-    public void Dependency(EnemyService enemyService)
-    {
-        _enemySO = enemyService.GetEnemySO(enemyService.GetEnemyType());
     }
 
     public void FixedUpdatePlayer()

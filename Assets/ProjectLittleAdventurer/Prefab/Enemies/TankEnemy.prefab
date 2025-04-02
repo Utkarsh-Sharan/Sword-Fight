@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 8438467318566776153}
   - component: {fileID: 2796517396585740822}
   - component: {fileID: 4696756659698407061}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DamageApplier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,8 +176,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.6, y: 1, z: 2.39}
-  m_Center: {x: 0, y: 0.57, z: 2.58}
+  m_Size: {x: 2.6, y: 1, z: 1.94}
+  m_Center: {x: 0, y: 0.57, z: 2.4}
 --- !u!114 &4696756659698407061
 MonoBehaviour:
   m_ObjectHideFlags: 0

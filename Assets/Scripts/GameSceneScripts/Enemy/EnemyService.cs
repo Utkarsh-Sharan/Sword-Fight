@@ -6,8 +6,6 @@ public class EnemyService
     private List<SpawnDataAndWaypoints> _spawnDataAndWaypoints;
     private Dictionary<EnemyType, EnemyScriptableObject> _enemySODictionary;
 
-    private EnemyController _enemyController;
-
     public EnemyService(List<EnemyScriptableObject> enemySOList)
     {
         _spawnDataAndWaypoints = new List<SpawnDataAndWaypoints>();
@@ -39,9 +37,6 @@ public class EnemyService
 
     private void CreateTankEnemy(Vector3 spawnPosition, List<Vector3> waypointsList)
     {
-        _enemyController = new TankEnemyController(_enemySODictionary[EnemyType.Tank], spawnPosition, waypointsList);
+        new TankEnemyController(_enemySODictionary[EnemyType.Tank], spawnPosition, waypointsList);
     }
-
-    public EnemyType GetEnemyType() => _enemyController.GetEnemyType();
-    public EnemyScriptableObject GetEnemySO(EnemyType enemyType) => _enemyController.GetEnemySO(enemyType);
 }

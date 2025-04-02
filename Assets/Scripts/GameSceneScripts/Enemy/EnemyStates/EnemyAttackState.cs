@@ -52,7 +52,7 @@ public class EnemyAttackState<T> : IState<T> where T : EnemyController
     public void OnStateExit()
     {
         _currentTime = 0f;
-        _outOfRangeTime = 0;
+        _outOfRangeTime = 0f;
         Owner.GetEnemyAgent().isStopped = false;
     }
 

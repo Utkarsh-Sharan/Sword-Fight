@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6303742680063818651}
   - component: {fileID: 4528415811194728586}
   - component: {fileID: 132155008759369989}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DamageApplier
   m_TagString: Untagged
   m_Icon: {fileID: 0}

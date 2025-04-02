@@ -10,6 +10,7 @@ public class PlayerScriptableObject : ScriptableObject
     public PlayerFollowVCamStats VCamStats;
     public int MaxHealth;
     public int AttackDamage;
+    public float AttackTime;
     public float MoveSpeed;
     public float Gravity;
     public float TurnSmoothTime;

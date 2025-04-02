@@ -1,4 +1,4 @@
-public class ConstantStrings
+public static class ConstantStrings
 {
     public const string SPEED_PARAMETER = "Speed";
     public const string AIRBOURNE_PARAMETER = "AirBourne";

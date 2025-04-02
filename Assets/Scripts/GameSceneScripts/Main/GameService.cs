@@ -23,7 +23,6 @@ public class GameService : MonoBehaviour
     private void Start()
     {
         CreateServices();
-        InjectDependencies();
     }
 
     private void CreateServices()
@@ -32,10 +31,5 @@ public class GameService : MonoBehaviour
         _spawnService = new SpawnService(_enemySpawnDataSO);
         _playerService = new PlayerService(_playerSO);
         _enemyService = new EnemyService(_enemySOList);
-    }
-
-    private void InjectDependencies()
-    {
-        _playerService.Dependency(_enemyService);
     }
 }

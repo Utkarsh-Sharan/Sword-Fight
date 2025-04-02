@@ -17,8 +17,8 @@ public class TankEnemyController : EnemyController
     {
         _tankEnemyModel = new TankEnemyModel(tankEnemySO);
 
-        _tankEnemyView = (TankEnemyView)Object.Instantiate(tankEnemySO.EnemyView);
-        _tankEnemyView.Initialize(this, spawnPosition, waypointsList);
+        _tankEnemyView = (TankEnemyView)Object.Instantiate(tankEnemySO.EnemyView, spawnPosition, Quaternion.identity);
+        _tankEnemyView.Initialize(this, waypointsList);
         enemyView = _tankEnemyView;
     }
 
@@ -35,13 +35,19 @@ public class TankEnemyController : EnemyController
 
     public int OnAttack() => _tankEnemyModel.AttackDamage;
 
+    #region Health and Damage Handling
     public void OnDamage(int damageAmount)
     {
-        if (_tankEnemyModel.CurrentHealth > 0)
-            _tankEnemyModel.CurrentHealth -= damageAmount;
-        else
+        _tankEnemyModel.CurrentHealth -= damageAmount;
+        CheckForEnemyDeath();
+    }
+
+    private void CheckForEnemyDeath()
+    {
+        if (_tankEnemyModel.CurrentHealth <= 0)
             _tankEnemyView.EnemyDead();
     }
+    #endregion
 
     #region Getters
     public float GetTankEnemyAgentSpeed() => _tankEnemyModel.MoveSpeed;

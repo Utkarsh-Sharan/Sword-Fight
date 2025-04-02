@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerDetectionCollider : MonoBehaviour
+public class PlayerDetectionTrigger : MonoBehaviour
 {
     private EnemyView _enemyView;
 

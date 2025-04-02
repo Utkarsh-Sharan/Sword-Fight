@@ -5,12 +5,11 @@ public class TankEnemyView : EnemyView
 {
     private TankEnemyController _tankEnemyController;
 
-    public void Initialize(TankEnemyController tankEnemyController, Vector3 spawnPosition, List<Vector3> waypointsList)
+    public void Initialize(TankEnemyController tankEnemyController, List<Vector3> waypointsList)
     {
         _tankEnemyController = tankEnemyController;
 
         enemyAgent.enabled = false;
-        transform.position = spawnPosition;
         this.waypointsList = waypointsList;
         enemyAgent.enabled = true;
 
@@ -39,8 +38,8 @@ public class TankEnemyView : EnemyView
 
     public void EnemyDead()
     {
-        enemyAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
         EventService.Instance.OnEnemyDeathEvent.InvokeEvent();
+        enemyAnimator.SetTrigger(ConstantStrings.DEATH_PARAMETER);
         _tankEnemyController.RemoveListeners();
 
         Destroy(this);

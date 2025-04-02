@@ -20,10 +20,10 @@ public class EventService : GenericMonoSingleton<EventService>
 
     private void InitializeEvents()
     {
-        OnDamageEvent = new EventController<int>();
-        OnGetPlayerTransformEvent = new EventController<Transform>();
         OnCurrentLevelSelectedEvent = new EventController<LevelNumber>();
         OnSpawnDataInitialized = new EventController<List<SpawnDataAndWaypoints>>();
+        OnDamageEvent = new EventController<int>();
+        OnGetPlayerTransformEvent = new EventController<Transform>();
 
         OnPlayerDeathEvent = new EventController();
         OnEnemyDeathEvent = new EventController();
