@@ -1,6 +1,10 @@
 # Sword-Fight
 This is an action-adventure 3D game, featuring an engaging combat system and AI-driven enemies. The game utilizes a generic state machine to manage player and enemy behaviors dynamically and employs the observer pattern for efficient event handling, such as tracking player status and AI responses.
 
+## ⚠️ **Archived Project Notice**  
+This Unity project is no longer maintained and may contain unpatched binaries affected by CVE-2025-59489.  
+Please do not use or distribute without applying Unity’s official security patch.
+
 ---
 
 ## Features
